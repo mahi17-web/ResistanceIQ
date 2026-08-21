@@ -102,10 +102,28 @@ class ModelLoader:
         # Validate estimator and feature dimension for v2.0
         if canonical_ver == self.DEFAULT_MODEL_VERSION:
             model = artifact.get("model")
+            estimator_type = type(model).__name__
+            if estimator_type != "RandomForestRegressor":
+                raise ModelIntegrityError(
+                    f"MODEL_INTEGRITY_FAILURE: Estimator type mismatch: expected 'RandomForestRegressor', got '{estimator_type}'."
+                )
+            
             n_features = getattr(model, "n_features_in_", None)
             if n_features is not None and n_features != self.EXPECTED_FEATURE_COUNT:
                 raise ModelIntegrityError(
                     f"MODEL_INTEGRITY_FAILURE: Feature count mismatch in estimator: expected {self.EXPECTED_FEATURE_COUNT}, found {n_features}."
+                )
+            
+            n_est = getattr(model, "n_estimators", None)
+            if n_est is not None and n_est != 60:
+                raise ModelIntegrityError(
+                    f"MODEL_INTEGRITY_FAILURE: n_estimators mismatch: expected 60, found {n_est}."
+                )
+            
+            max_d = getattr(model, "max_depth", None)
+            if max_d is not None and max_d != 6:
+                raise ModelIntegrityError(
+                    f"MODEL_INTEGRITY_FAILURE: max_depth mismatch: expected 6, found {max_d}."
                 )
 
         # Cache in memory

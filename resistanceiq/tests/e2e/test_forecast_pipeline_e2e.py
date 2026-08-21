@@ -47,9 +47,9 @@ def auth_headers(db_session):
         db_session.add(org)
         db_session.commit()
 
+    from app.core.security import get_password_hash
     user = db_session.query(User).filter(User.email == "priya@bindwell.bio").first()
     if not user:
-        from app.auth.security import get_password_hash
         user = User(
             id="usr_priya_01",
             organization_id=org.id,
@@ -60,7 +60,10 @@ def auth_headers(db_session):
             is_active=True,
         )
         db_session.add(user)
-        db_session.commit()
+    else:
+        user.hashed_password = get_password_hash("ResistanceIQ2026!")
+        user.is_active = True
+    db_session.commit()
 
     resp = client.post("/api/v1/auth/login", json={"email": "priya@bindwell.bio", "password": "ResistanceIQ2026!"})
     assert resp.status_code == 200, f"Login failed: {resp.text}"

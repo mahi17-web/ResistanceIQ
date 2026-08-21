@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # ─── 1. PostgreSQL Database Service ──────────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    container_name: resistanceiq-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-resistanceiq}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-resistanceiq}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── 2. Backend FastAPI Application Service ──────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: resistanceiq-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      PORT: 8000
+      HOST: 0.0.0.0
+      DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-resistanceiq}
+      JWT_SECRET: ${JWT_SECRET:-super-secret-resistanceiq-jwt-key-minimum-32-chars}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-super-secret-resistanceiq-jwt-refresh-key-32-chars}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5173}
+      CORS_ORIGINS: '["http://localhost:5173","http://localhost:3000"]'
+      EMAIL_PROVIDER: ${EMAIL_PROVIDER:-smtp}
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-resistanceiq69@gmail.com}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL:-resistanceiq69@gmail.com}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-ResistanceIQ}
+      MODEL_ARTIFACT_PATH: resistanceiq/storage/models/v2.0.0-gbrt-ecfp4.joblib
+      MODEL_ARTIFACT_SHA256: 6fc915fa26716dc4a06bad71f586af95ee071acf11e9a5b8acdc5171fed55622
+      ALLOW_SQLITE_IN_PROD: "false"
+      ALLOW_DEV_SEEDING: "false"
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  postgres_data:
+    driver: local

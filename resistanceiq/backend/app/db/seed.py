@@ -28,11 +28,16 @@ from app.models import (
     ReportFormat,
     ApiKey,
 )
+from app.core.config import settings
 from sqlalchemy import text
 
 
 def ensure_schema_upgrades():
-    """Ensures newly added columns to existing tables are migrated safely."""
+    """Ensures newly added columns to existing SQLite dev tables are migrated safely."""
+    if engine.dialect.name != "sqlite":
+        # In production PostgreSQL, Alembic migrations manage all schema upgrades
+        return
+
     Base.metadata.create_all(bind=engine)
     with engine.connect() as conn:
         # Check molecules columns
@@ -94,6 +99,9 @@ def ensure_schema_upgrades():
 
 
 def seed_development_data():
+    if not settings.ALLOW_DEV_SEEDING or settings.APP_ENV.lower() == "production":
+        return
+
     ensure_schema_upgrades()
     db = SessionLocal()
 

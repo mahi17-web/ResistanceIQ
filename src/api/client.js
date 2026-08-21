@@ -4,7 +4,9 @@
  * error handling, and zero mock fallback data.
  */
 
-const API_BASE = '/api/v1';
+const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL)
+  ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}/api/v1`
+  : '/api/v1';
 
 function getAuthHeader() {
   const token = localStorage.getItem('riq_auth_token') || localStorage.getItem('riq_token');

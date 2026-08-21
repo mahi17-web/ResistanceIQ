@@ -63,8 +63,8 @@ def readiness_check(response: Response, db: Session = Depends(get_db)) -> Dict[s
         if not art:
             checks["model"] = "error"
             checks["status"] = "degraded"
-    except Exception as me:
-        checks["model"] = f"error: {str(me)}"
+    except Exception:
+        checks["model"] = "model_integrity_error"
         checks["status"] = "degraded"
 
     # 3. Check Email Configuration
