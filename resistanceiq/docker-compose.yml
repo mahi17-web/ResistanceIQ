@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # ─── 1. PostgreSQL Database ──────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: resistanceiq-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-resistanceiq_prod}
+      POSTGRES_USER: ${POSTGRES_USER:-resistanceiq_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-resistanceiq_secret_pw_2026}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-resistanceiq_app} -d ${POSTGRES_DB:-resistanceiq_prod}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - resistanceiq-network
+
+  # ─── 2. FastAPI Backend & ML Inference Engine ────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: resistanceiq-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      DEBUG: "false"
+      DATABASE_URL: postgresql://${POSTGRES_USER:-resistanceiq_app}:${POSTGRES_PASSWORD:-resistanceiq_secret_pw_2026}@postgres:5432/${POSTGRES_DB:-resistanceiq_prod}
+      JWT_SECRET: ${JWT_SECRET:-resistanceiq_super_secret_jwt_key_prod_64_chars_min}
+      BACKEND_CORS_ORIGINS: '["http://localhost", "http://localhost:80", "http://localhost:5173"]'
+      ALLOW_DEV_SEEDING: "false"
+      ALLOW_DEV_FALLBACK_AUTH: "false"
+      MODEL_REGISTRY_PATH: /app/storage/models
+    volumes:
+      - report_storage:/app/storage/reports
+    ports:
+      - "8000:8000"
+    networks:
+      - resistanceiq-network
+
+  # ─── 3. React Frontend & Nginx Reverse Proxy ─────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: resistanceiq-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - resistanceiq-network
+
+networks:
+  resistanceiq-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  report_storage:

@@ -1,0 +1,62 @@
+{
+  "dataset_version": "aprd-resistance-v2",
+  "created_at": "2026-08-21T06:38:16.124803+00:00",
+  "train_cutoff": 2012,
+  "val_cutoff": 2017,
+  "train_records": 22,
+  "val_records": 12,
+  "test_records": 10,
+  "total_records": 44,
+  "splits": {
+    "train": [
+      "REC-V2-0001",
+      "REC-V2-0003",
+      "REC-V2-0006",
+      "REC-V2-0007",
+      "REC-V2-0010",
+      "REC-V2-0011",
+      "REC-V2-0016",
+      "REC-V2-0019",
+      "REC-V2-0021",
+      "REC-V2-0022",
+      "REC-V2-0023",
+      "REC-V2-0024",
+      "REC-V2-0026",
+      "REC-V2-0028",
+      "REC-V2-0030",
+      "REC-V2-0032",
+      "REC-V2-0036",
+      "REC-V2-0037",
+      "REC-V2-0040",
+      "REC-V2-0041",
+      "REC-V2-0042",
+      "REC-V2-0044"
+    ],
+    "val": [
+      "REC-V2-0002",
+      "REC-V2-0004",
+      "REC-V2-0005",
+      "REC-V2-0009",
+      "REC-V2-0017",
+      "REC-V2-0020",
+      "REC-V2-0027",
+      "REC-V2-0033",
+      "REC-V2-0034",
+      "REC-V2-0035",
+      "REC-V2-0038",
+      "REC-V2-0043"
+    ],
+    "test": [
+      "REC-V2-0008",
+      "REC-V2-0012",
+      "REC-V2-0013",
+      "REC-V2-0014",
+      "REC-V2-0015",
+      "REC-V2-0018",
+      "REC-V2-0025",
+      "REC-V2-0029",
+      "REC-V2-0031",
+      "REC-V2-0039"
+    ]
+  }
+}

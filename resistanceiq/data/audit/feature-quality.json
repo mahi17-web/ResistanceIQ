@@ -1,0 +1,45 @@
+{
+  "feature_version": "v1.0-ecfp4-irac",
+  "source_dataset_version": "v1.0-aprd-canonical",
+  "feature_generation_code_version": "v1.0.0",
+  "created_at": "2026-08-18T17:01:55.301543+00:00",
+  "total_records_processed": 10,
+  "feature_dimensions": {
+    "total_features": 1043,
+    "numerical_descriptors": 6,
+    "chemical_fingerprint_bits": 1024,
+    "irac_moa_categories": 2,
+    "pest_order_categories": 2,
+    "assay_method_categories": 1,
+    "temporal_features": 2,
+    "genetic_features": 3
+  },
+  "quality_audit": {
+    "constant_feature_count": 969,
+    "near_constant_feature_count": 0,
+    "high_cardinality_feature_count": 0,
+    "invalid_value_count": 0,
+    "missing_rate_max": 0.0,
+    "constant_features": [
+      "irac_moa_UNKNOWN",
+      "pest_order_UNKNOWN",
+      "bioassay_method_Leaf-Dip",
+      "bioassay_method_UNKNOWN",
+      "has_sequenced_mutation",
+      "target_site_delta_delta_g",
+      "mutation_count",
+      "ecfp4_bit_0",
+      "ecfp4_bit_1",
+      "ecfp4_bit_2"
+    ],
+    "near_constant_features": []
+  },
+  "target_distribution_log10_rr": {
+    "min": 1.1613680124282837,
+    "max": 1.8129132986068726,
+    "mean": 1.4871406555175781,
+    "median": 1.4871406555175781,
+    "std": 0.32577264308929443
+  },
+  "leakage_audit_status": "PASSED_STRICT_PRE_EVENT_ISOLATION"
+}

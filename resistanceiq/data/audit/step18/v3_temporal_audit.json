@@ -1,0 +1,65 @@
+{
+  "dataset_version": "aprd-resistance-v3",
+  "total_records": 74,
+  "splits": {
+    "train": {
+      "name": "Train (<= 2012)",
+      "count": 37,
+      "pct": 50.0,
+      "studies": 37,
+      "species": 12,
+      "compounds": 23,
+      "countries": 19,
+      "rr_min": 9.0,
+      "rr_max": 530.0,
+      "rr_median": 90.0
+    },
+    "validation": {
+      "name": "Validation (2013-2018)",
+      "count": 23,
+      "pct": 31.08108108108108,
+      "studies": 23,
+      "species": 11,
+      "compounds": 15,
+      "countries": 15,
+      "rr_min": 8.0,
+      "rr_max": 450.0,
+      "rr_median": 80.0
+    },
+    "test": {
+      "name": "Held-Out Test (2019-2024)",
+      "count": 14,
+      "pct": 18.91891891891892,
+      "studies": 14,
+      "species": 8,
+      "compounds": 11,
+      "countries": 7,
+      "rr_min": 3.0,
+      "rr_max": 110.0,
+      "rr_median": 8.5
+    }
+  },
+  "longitudinal_series_count": 14,
+  "longitudinal_species": [
+    "Bemisia tabaci",
+    "Helicoverpa armigera",
+    "Leptinotarsa decemlineata",
+    "Myzus persicae",
+    "Nilaparvata lugens",
+    "Plutella xylostella",
+    "Spodoptera frugiperda",
+    "Tetranychus urticae"
+  ],
+  "longitudinal_compounds": [
+    "Abamectin",
+    "Chlorantraniliprole",
+    "Cypermethrin",
+    "Imidacloprid",
+    "Indoxacarb",
+    "Permethrin",
+    "Pyriproxyfen",
+    "Spinosad",
+    "Spiromesifen",
+    "Triflumezopyrim"
+  ]
+}

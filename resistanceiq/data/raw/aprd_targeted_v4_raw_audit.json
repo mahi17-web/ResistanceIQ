@@ -1,0 +1,20 @@
+{
+  "ingestion_id": "INGEST-STEP20-TARGETED-20260820",
+  "dataset_version": "aprd-resistance-v4",
+  "raw_file": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\data\\raw\\aprd_targeted_v4_raw.json",
+  "sha256": "466259447189c49deea6a5799329596ddbe5d6bfa177f9d1d97e936f5fad31b6",
+  "records_seen": 15,
+  "records_accepted": 15,
+  "records_rejected": 0,
+  "target_gaps_addressed": [
+    "IRAC_30",
+    "IRAC_9D",
+    "IRAC_4E",
+    "IRAC_29",
+    "IRAC_23",
+    "HRAC_10",
+    "Amaranthus_palmeri",
+    "Longitudinal_Diamides"
+  ],
+  "retrieved_at": "2026-08-20T06:41:55.047470+00:00"
+}

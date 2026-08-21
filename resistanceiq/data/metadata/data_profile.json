@@ -1,0 +1,81 @@
+{
+  "dataset_name": "APRD Arthropod Resistance Registry",
+  "version": "2026.1",
+  "profiled_at": "2026-08-18T16:40:49.160705+00:00",
+  "summary": {
+    "records_seen": 15,
+    "records_accepted": 15,
+    "records_rejected": 0,
+    "acceptance_rate_pct": 100.0,
+    "exact_duplicates_skipped": 0,
+    "duplicate_candidates_flagged": 0
+  },
+  "temporal_coverage": {
+    "min_year": 1946,
+    "max_year": 2016,
+    "span_years": 70
+  },
+  "null_rates": {
+    "scientific_name": 0.0,
+    "common_name": 0.0,
+    "active_ingredient": 0.0,
+    "irac_moa_group": 0.0,
+    "country": 0.0,
+    "location": 0.0,
+    "resistance_year": 0.0,
+    "publication_year": 0.0,
+    "resistance_type": 0.0,
+    "resistance_ratio": 0.0,
+    "bioassay_method": 0.0,
+    "reference": 0.0
+  },
+  "distributions": {
+    "top_organisms": {
+      "Musca domestica": 3,
+      "Myzus persicae": 3,
+      "Plutella xylostella": 3,
+      "Tetranychus urticae": 3,
+      "Helicoverpa armigera": 2,
+      "Spodoptera frugiperda": 1
+    },
+    "top_active_ingredients": {
+      "Cypermethrin": 2,
+      "Chlorantraniliprole": 2,
+      "DDT": 1,
+      "Diazinon": 1,
+      "Pirimicarb": 1,
+      "Permethrin": 1,
+      "Abamectin": 1,
+      "Imidacloprid": 1,
+      "Spiromesifen": 1,
+      "Chlorpyrifos": 1
+    },
+    "irac_moa_groups": {
+      "3A": 4,
+      "1B": 2,
+      "1A": 2,
+      "4A": 2,
+      "28": 2,
+      "3B": 1,
+      "6": 1,
+      "23": 1
+    },
+    "top_countries": {
+      "United States": 3,
+      "United Kingdom": 2,
+      "India": 2,
+      "Sweden": 1,
+      "Taiwan": 1,
+      "Spain": 1,
+      "China": 1,
+      "Germany": 1,
+      "Brazil": 1,
+      "Greece": 1
+    },
+    "resistance_types": {
+      "Field Documented Resistance": 10,
+      "Field Control Failure": 5
+    }
+  },
+  "rejections": []
+}

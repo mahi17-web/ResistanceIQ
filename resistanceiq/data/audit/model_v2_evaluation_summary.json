@@ -1,0 +1,166 @@
+{
+  "report_generated_at": "2026-08-19T09:10:09.951954+00:00",
+  "selected_model_version": "v2.0.0-gbrt-ecfp4",
+  "selected_model_status": "production",
+  "selected_artifact_sha256": "e09242e8274770d7ce60749a296d3363206ee9ff5cd2a36adf9ec461728ac9e7",
+  "dataset_version": "aprd-resistance-v2",
+  "feature_version": "v2.0-ecfp4-descriptors",
+  "total_records": 44,
+  "split_counts": {
+    "train": 22,
+    "validation": 12,
+    "test": 10
+  },
+  "candidates_evaluated": [
+    {
+      "name": "v2.0-ridge-ecfp4",
+      "model_type": "RIDGE",
+      "test_metrics": {
+        "mae_log10": 1.0889,
+        "rmse_log10": 1.2839,
+        "r2_score": -5.1897,
+        "spearman_rho": -0.1337,
+        "risk_tier_accuracy": 0.1,
+        "sample_size": 10
+      },
+      "conformal_q_hat": 1.5317925214767456,
+      "artifact_sha256": "a571ef16012e49a62f7fe9a0ca866d4b5a34c0ff79b2a2da534217e0ac2f7359"
+    },
+    {
+      "name": "v2.0-rf-ecfp4",
+      "model_type": "RANDOM_FOREST",
+      "test_metrics": {
+        "mae_log10": 0.8607,
+        "rmse_log10": 1.0182,
+        "r2_score": -2.8926,
+        "spearman_rho": -0.2317,
+        "risk_tier_accuracy": 0.1,
+        "sample_size": 10
+      },
+      "conformal_q_hat": 1.1783239841461182,
+      "artifact_sha256": "50ec45a4cb4f97916c7626e805ec7611d1affa2fdba9daf332a742f5d9fe0156"
+    },
+    {
+      "name": "v2.0-gbrt-ecfp4",
+      "model_type": "GRADIENT_BOOSTING",
+      "test_metrics": {
+        "mae_log10": 0.8219,
+        "rmse_log10": 0.9819,
+        "r2_score": -2.6203,
+        "spearman_rho": -0.0247,
+        "risk_tier_accuracy": 0.2,
+        "sample_size": 10
+      },
+      "conformal_q_hat": 1.1751619577407837,
+      "artifact_sha256": "222c6db91c90d63e0dab73c3e59abd046a6f5226e664cf9644315414a20b18a0"
+    },
+    {
+      "name": "v2.0-histgbr-ecfp4",
+      "model_type": "HIST_GRADIENT_BOOSTING",
+      "test_metrics": {
+        "mae_log10": 0.9542,
+        "rmse_log10": 1.0848,
+        "r2_score": -3.4188,
+        "spearman_rho": 0.0,
+        "risk_tier_accuracy": 0.1,
+        "sample_size": 10
+      },
+      "conformal_q_hat": 1.2246277332305908,
+      "artifact_sha256": "1018760a61d92bc558f54c55c71af447d63d0bf431487d05f6c21a4f85bc7507"
+    }
+  ],
+  "subgroup_slice_analysis": {
+    "by_taxonomic_order": {
+      "Lepidoptera": {
+        "count": 15,
+        "mae": 0.3132903838116112
+      },
+      "Hemiptera": {
+        "count": 14,
+        "mae": 0.45529108491533293
+      },
+      "Coleoptera": {
+        "count": 4,
+        "mae": 0.6581753354433622
+      },
+      "Thysanoptera": {
+        "count": 3,
+        "mae": 0.21432291586867858
+      },
+      "Trombidiformes": {
+        "count": 4,
+        "mae": 0.20655973706511332
+      },
+      "Diptera": {
+        "count": 4,
+        "mae": 0.055008909084657
+      }
+    },
+    "by_irac_moa_group": {
+      "28": {
+        "count": 6,
+        "mae": 0.6053623751013121
+      },
+      "5": {
+        "count": 6,
+        "mae": 0.648842875711433
+      },
+      "22A": {
+        "count": 1,
+        "mae": 0.050538357698238556
+      },
+      "6": {
+        "count": 2,
+        "mae": 0.0384394568015094
+      },
+      "3A": {
+        "count": 7,
+        "mae": 0.10905464958039109
+      },
+      "1A": {
+        "count": 2,
+        "mae": 0.04542925234557804
+      },
+      "11A": {
+        "count": 1,
+        "mae": 0.06664077479820785
+      },
+      "1B": {
+        "count": 3,
+        "mae": 0.057275429831818915
+      },
+      "4A": {
+        "count": 7,
+        "mae": 0.12506832400218496
+      },
+      "23": {
+        "count": 3,
+        "mae": 0.7581733953514657
+      },
+      "9B": {
+        "count": 1,
+        "mae": 1.105569638842753
+      },
+      "2B": {
+        "count": 1,
+        "mae": 0.04854217499299951
+      },
+      "4E": {
+        "count": 1,
+        "mae": 1.531538375252894
+      },
+      "7C": {
+        "count": 1,
+        "mae": 0.0641242704222238
+      },
+      "20D": {
+        "count": 1,
+        "mae": 0.5315384050552163
+      },
+      "21A": {
+        "count": 1,
+        "mae": 0.21870740910633168
+      }
+    }
+  }
+}

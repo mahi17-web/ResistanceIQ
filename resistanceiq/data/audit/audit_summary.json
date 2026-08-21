@@ -1,0 +1,166 @@
+{
+  "audit_timestamp": "2026-08-18T22:15:00Z",
+  "inventory": {
+    "total_observations": 15,
+    "data_sources_count": 5,
+    "dataset_versions_count": 1,
+    "ingestion_runs_count": 1,
+    "organisms_count": 6,
+    "pesticides_count": 13,
+    "molecules_count": 4,
+    "targets_count": 4,
+    "data_quality_rejections_count": 0
+  },
+  "sample_independence": {
+    "total_rows": 15,
+    "unique_org_pesticide_combinations": 15,
+    "unique_studies_citations": 15,
+    "unique_countries": 11,
+    "unique_years": 15,
+    "unique_locations": 15,
+    "estimated_independent_observations": 15
+  },
+  "temporal_range": {
+    "min_year": 1946,
+    "max_year": 2016,
+    "span_years": 70
+  },
+  "missingness": {
+    "resistance_year": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "publication_year": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "country": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "location": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "resistance_ratio": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "susceptible_baseline": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "bioassay_method": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "reference": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "irac_moa_group": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "cas_number": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    },
+    "ncbi_taxid": {
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "completeness_pct": 100.0
+    }
+  },
+  "label_quality": {
+    "HIGH_QUALITY_DIRECT_RR": 15,
+    "MEDIUM_QUALITY_RR_ONLY": 0,
+    "QUALITATIVE_PHENOTYPE_ONLY": 0,
+    "LOW_QUALITY_UNCONFIRMED": 0
+  },
+  "feature_feasibility": {
+    "chemical_smiles_coverage_pct": 100.0,
+    "pesticide_cas_coverage_pct": 100.0,
+    "pesticide_irac_moa_coverage_pct": 100.0,
+    "target_residue_pocket_coverage_pct": 100.0,
+    "genotype_mutation_record_count": 0
+  },
+  "distributions": {
+    "organisms": {
+      "Musca domestica": 3,
+      "Myzus persicae": 3,
+      "Plutella xylostella": 3,
+      "Tetranychus urticae": 3,
+      "Helicoverpa armigera": 2,
+      "Spodoptera frugiperda": 1
+    },
+    "pesticides": {
+      "Cypermethrin": 2,
+      "Chlorantraniliprole": 2,
+      "DDT": 1,
+      "Diazinon": 1,
+      "Pirimicarb": 1,
+      "Permethrin": 1,
+      "Abamectin": 1,
+      "Imidacloprid": 1,
+      "Spiromesifen": 1,
+      "Chlorpyrifos": 1
+    },
+    "irac_moa_groups": {
+      "3A": 4,
+      "1B": 2,
+      "1A": 2,
+      "4A": 2,
+      "28": 2,
+      "3B": 1,
+      "6": 1,
+      "23": 1
+    },
+    "countries": {
+      "United States": 3,
+      "United Kingdom": 2,
+      "India": 2,
+      "Sweden": 1,
+      "Taiwan": 1,
+      "Spain": 1,
+      "China": 1,
+      "Germany": 1,
+      "Brazil": 1,
+      "Greece": 1
+    },
+    "resistance_types": {
+      "Field Documented Resistance": 10,
+      "Field Control Failure": 5
+    },
+    "sources": {
+      "APRD": 15
+    },
+    "years": {
+      "1946": 1,
+      "1956": 1,
+      "1974": 1,
+      "1978": 1,
+      "1980": 1,
+      "1987": 1,
+      "1988": 1,
+      "1990": 1,
+      "1992": 1,
+      "1998": 1,
+      "2003": 1,
+      "2006": 1,
+      "2010": 1,
+      "2011": 1,
+      "2016": 1
+    }
+  }
+}

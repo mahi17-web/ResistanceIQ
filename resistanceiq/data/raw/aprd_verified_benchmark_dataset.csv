@@ -1,0 +1,16 @@
+Record ID,Genus,Species,Common Name,Compound,Class,MoA,Country,State,First Reported,Pub Year,Type,RR,Baseline LC50,Method,Citation
+APRD-000001,Musca,domestica,House Fly,DDT,Organochlorine,3B,Sweden,Stockholm,1946,1947,Field Documented Resistance,12.5,0.04,Topical,Wiesmann R. (1947) Mitt. Schweiz. Entomol. Ges. 20: 484-504
+APRD-000002,Musca,domestica,House Fly,Diazinon,Organophosphate,1B,United States,New Jersey,1956,1958,Field Documented Resistance,18.0,0.08,Topical,Hansens E.J. (1958) J. Econ. Entomol. 51: 497-499
+APRD-000003,Myzus,persicae,Green Peach Aphid,Pirimicarb,Carbamate,1A,United Kingdom,East Anglia,1974,1976,Field Documented Resistance,42.0,1.2,Leaf-Dip,Devonshire A.L. (1977) Biochem. J. 167: 675-683
+APRD-000004,Plutella,xylostella,Diamondback Moth,Permethrin,Pyrethroid,3A,Taiwan,Changhua,1978,1980,Field Control Failure,65.0,0.5,Leaf-Dip,Sun C.N. et al. (1986) J. Econ. Entomol. 79: 397-401
+APRD-000005,Tetranychus,urticae,Two-Spotted Spider Mite,Abamectin,Avermectin,6,United States,California,1988,1990,Field Control Failure,28.0,0.015,Leaf-Dip,Grafton-Cardwell E.E. et al. (1991) J. Econ. Entomol. 84: 741-748
+APRD-000006,Myzus,persicae,Green Peach Aphid,Imidacloprid,Neonicotinoid,4A,Spain,Murcia,1998,2000,Field Documented Resistance,14.5,0.03,Systemic Uptake,Nauen R. et al. (2002) Pest Manag. Sci. 58: 568-575
+APRD-000007,Helicoverpa,armigera,Cotton Bollworm,Cypermethrin,Pyrethroid,3A,India,Andhra Pradesh,1987,1989,Field Control Failure,120.0,0.1,Topical,McCaffery A.R. et al. (1989) Pestic. Sci. 27: 65-76
+APRD-000008,Plutella,xylostella,Diamondback Moth,Chlorantraniliprole,Diamide,28,China,Guangdong,2011,2012,Field Control Failure,84.0,0.02,Leaf-Dip,Wang X. et al. (2013) Pest Manag. Sci. 69: 1159-1165
+APRD-000009,Tetranychus,urticae,Two-Spotted Spider Mite,Spiromesifen,Tetronic acid,23,Germany,Bavaria,2006,2008,Field Documented Resistance,16.2,0.8,Leaf-Dip,Van Leeuwen T. et al. (2008) Crop Prot. 27: 15-22
+APRD-000010,Spodoptera,frugiperda,Fall Armyworm,Chlorpyrifos,Organophosphate,1B,Brazil,Mato Grosso,2003,2005,Field Documented Resistance,35.0,0.4,Diet-Incorporation,Carvalho R.A. et al. (2013) Crop Prot. 52: 120-126
+APRD-000011,Myzus,persicae,Green Peach Aphid,Clothianidin,Neonicotinoid,4A,Greece,Thessaly,2010,2012,Field Documented Resistance,9.8,0.04,Leaf-Dip,Bass C. et al. (2014) Pest Manag. Sci. 70: 1404-1413
+APRD-000012,Plutella,xylostella,Diamondback Moth,Deltamethrin,Pyrethroid,3A,United States,Florida,1992,1994,Field Control Failure,54.0,0.25,Leaf-Dip,Leibee G.L. & Savage K.E. (1992) Fla. Entomol. 75: 585-591
+APRD-000013,Helicoverpa,armigera,Cotton Bollworm,Chlorantraniliprole,Diamide,28,India,Maharashtra,2016,2018,Field Documented Resistance,22.0,0.05,Diet-Incorporation,Kranthi K.R. et al. (2019) J. Pest Sci. 92: 441-452
+APRD-000014,Musca,domestica,House Fly,Methomyl,Carbamate,1A,United Kingdom,Berkshire,1980,1982,Field Documented Resistance,31.0,0.6,Sugar-Bait Residual,Chapman P.A. (1985) Int. Pest Control 27: 88-91
+APRD-000015,Tetranychus,urticae,Two-Spotted Spider Mite,Cypermethrin,Pyrethroid,3A,Australia,Queensland,1990,1992,Field Documented Resistance,45.0,0.3,Leaf-Dip,Herron G.A. et al. (1993) Exp. Appl. Acarol. 17: 823-831

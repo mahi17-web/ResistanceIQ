@@ -1,0 +1,94 @@
+{
+  "model_version": "v0.1-ridge-ecfp4",
+  "model_type": "RIDGE",
+  "target": "log10_rr",
+  "dataset_version": "v1.0-aprd-canonical",
+  "feature_version": "v1.0-ecfp4-irac",
+  "dataset_split": {
+    "train_count": 10,
+    "val_count": 0,
+    "test_count": 0,
+    "evaluation_set": "TRAIN_RESIDUALS"
+  },
+  "metrics": {
+    "global_mean_baseline": {
+      "mae_log10": 0.3258,
+      "rmse_log10": 0.3258,
+      "r2_score": 0.0,
+      "spearman_rho": 0.0,
+      "risk_tier_accuracy": 0.5,
+      "sample_size": 10
+    },
+    "species_moa_baseline": {
+      "mae_log10": 0.0,
+      "rmse_log10": 0.0,
+      "r2_score": 1.0,
+      "spearman_rho": 1.0,
+      "risk_tier_accuracy": 1.0,
+      "sample_size": 10
+    },
+    "model_metrics": {
+      "mae_log10": 0.0001,
+      "rmse_log10": 0.0001,
+      "r2_score": 1.0,
+      "spearman_rho": 0.9285,
+      "risk_tier_accuracy": 1.0,
+      "sample_size": 10
+    },
+    "improvement_vs_global_baseline_pct": 99.97
+  },
+  "top_features": [
+    {
+      "feature_name": "years_since_1946_baseline",
+      "weight": -0.0146,
+      "abs_importance": 0.0146
+    },
+    {
+      "feature_name": "observation_year",
+      "weight": -0.0146,
+      "abs_importance": 0.0146
+    },
+    {
+      "feature_name": "rotatable_scaled",
+      "weight": 0.0015,
+      "abs_importance": 0.0015
+    },
+    {
+      "feature_name": "mol_wt_scaled",
+      "weight": 0.0015,
+      "abs_importance": 0.0015
+    },
+    {
+      "feature_name": "hba_scaled",
+      "weight": -0.0015,
+      "abs_importance": 0.0015
+    },
+    {
+      "feature_name": "hbd_scaled",
+      "weight": -0.0015,
+      "abs_importance": 0.0015
+    },
+    {
+      "feature_name": "tpsa_scaled",
+      "weight": -0.0015,
+      "abs_importance": 0.0015
+    },
+    {
+      "feature_name": "logp_scaled",
+      "weight": 0.0015,
+      "abs_importance": 0.0015
+    },
+    {
+      "feature_name": "ecfp4_bit_846",
+      "weight": -0.0007,
+      "abs_importance": 0.0007
+    },
+    {
+      "feature_name": "ecfp4_bit_740",
+      "weight": 0.0007,
+      "abs_importance": 0.0007
+    }
+  ],
+  "uncertainty_quantile_q_hat": 0.0001481771469116211,
+  "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-ridge-ecfp4.joblib"
+}

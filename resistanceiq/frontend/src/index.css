@@ -1,0 +1,332 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --base: #05070B;
+  --surface: #0B1017;
+  --elevated: #111820;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-soft: rgba(255, 255, 255, 0.04);
+  --ink: #F1F5F9;
+  --ink-2: #9AACBE;
+  --ink-3: #7C8A9A;
+  --ink-4: #4E6078;
+  --ink-5: #203045;
+  --teal: #0BDFA0;
+  --teal-dim: rgba(11, 223, 160, 0.10);
+  --violet: #8B8CF8;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--base);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── Background Subtle Grid ─── */
+.page-bg {
+  background-color: #05070B;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(11, 223, 160, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 90% 100%, rgba(139, 140, 248, 0.035) 0%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  min-height: 100vh;
+}
+
+/* ─── Pure Flexbox Sidebar ─── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+  height: 100vh;
+  background: #080D13;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transition: width 0.22s ease, box-shadow 0.22s ease;
+  user-select: none;
+}
+
+.sidebar.is-expanded {
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+  box-shadow: 16px 0 48px rgba(0, 0, 0, 0.6);
+}
+
+.sidebar-brand {
+  height: 72px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.brand-logo-mark {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0BDFA0 0%, #8B8CF8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(11, 223, 160, 0.25);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.brand-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #F1F5F9;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  color: #7D8B9C;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.sidebar-nav {
+  width: 100%;
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.sidebar-nav-item {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #7D8B9C;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 0.14s, color 0.14s, border-color 0.14s;
+  cursor: pointer;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #F1F5F9;
+}
+
+.sidebar-nav-item.active {
+  background: rgba(0, 220, 180, 0.10);
+  border: 1px solid rgba(0, 220, 180, 0.28);
+  color: #00DDB5;
+}
+
+.sidebar.is-expanded .sidebar-nav-item {
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: 8px;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.sidebar-nav-item svg {
+  width: 19px;
+  height: 19px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.nav-item-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.sidebar-spacer {
+  flex: 1;
+  min-height: 24px;
+}
+
+.sidebar-bottom {
+  width: 100%;
+  padding: 8px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.sidebar.is-expanded .sidebar-bottom {
+  align-items: stretch;
+}
+
+.sidebar-pipeline {
+  width: 48px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: default;
+}
+
+.sidebar.is-expanded .sidebar-pipeline {
+  width: 100%;
+  padding: 8px 12px;
+  justify-content: flex-start;
+  gap: 10px;
+  background: rgba(11, 223, 160, 0.04);
+  border: 1px solid rgba(11, 223, 160, 0.12);
+  border-radius: 8px;
+}
+
+.pipeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0BDFA0;
+  box-shadow: 0 0 10px rgba(11, 223, 160, 0.6);
+  flex-shrink: 0;
+}
+
+.pipeline-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  line-height: 1.25;
+}
+
+.pipeline-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #F1F5F9;
+}
+
+.pipeline-status {
+  font-size: 10px;
+  color: #0BDFA0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Main Area & Pacing ─── */
+.main-area {
+  margin-left: 72px;
+  min-height: 100vh;
+}
+
+.page-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6vw, 96px);
+}
+
+.display-xl {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.display-md {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  height: 42px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #020609;
+}
+
+.btn-primary:hover {
+  background: #1BFAB8;
+  box-shadow: 0 0 0 1px var(--teal), 0 4px 20px rgba(11, 223, 160, 0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+}
+
+.btn-cta {
+  height: 50px;
+  padding: 0 28px;
+  font-size: 14px;
+}

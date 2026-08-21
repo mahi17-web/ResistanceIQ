@@ -1,0 +1,415 @@
+{
+  "evaluation_timestamp": "2026-08-18T17:08:37.887849+00:00",
+  "total_records": 15,
+  "split_counts": {
+    "train": 10,
+    "val": 3,
+    "test": 2
+  },
+  "candidate_results": [
+    {
+      "model_version": "v0.1-ridge-ecfp4",
+      "model_type": "RIDGE",
+      "target": "log10_rr",
+      "dataset_version": "v1.0-aprd-canonical",
+      "feature_version": "v1.0-ecfp4-irac",
+      "dataset_split": {
+        "train_count": 10,
+        "val_count": 3,
+        "test_count": 2,
+        "evaluation_set": "TEST_HOLDOUT (2011-2026)"
+      },
+      "metrics": {
+        "global_mean_baseline": {
+          "mae_log10": 0.2909,
+          "rmse_log10": 0.307,
+          "r2_score": -0.1136,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "species_moa_baseline": {
+          "mae_log10": 0.2909,
+          "rmse_log10": 0.307,
+          "r2_score": -0.1136,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "model_metrics": {
+          "mae_log10": 0.332,
+          "rmse_log10": 0.3395,
+          "r2_score": -0.3617,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "improvement_vs_global_baseline_pct": -14.13
+      },
+      "top_features": [
+        {
+          "feature_name": "pest_order_Lepidoptera",
+          "weight": 0.0797,
+          "abs_importance": 0.0797
+        },
+        {
+          "feature_name": "bioassay_method_Topical",
+          "weight": 0.0701,
+          "abs_importance": 0.0701
+        },
+        {
+          "feature_name": "pest_order_Trombidiformes",
+          "weight": -0.067,
+          "abs_importance": 0.067
+        },
+        {
+          "feature_name": "bioassay_method_Leaf-Dip",
+          "weight": -0.0648,
+          "abs_importance": 0.0648
+        },
+        {
+          "feature_name": "ecfp4_bit_898",
+          "weight": 0.0268,
+          "abs_importance": 0.0268
+        },
+        {
+          "feature_name": "ecfp4_bit_561",
+          "weight": -0.0203,
+          "abs_importance": 0.0203
+        },
+        {
+          "feature_name": "ecfp4_bit_695",
+          "weight": 0.0203,
+          "abs_importance": 0.0203
+        },
+        {
+          "feature_name": "ecfp4_bit_33",
+          "weight": 0.0203,
+          "abs_importance": 0.0203
+        },
+        {
+          "feature_name": "ecfp4_bit_268",
+          "weight": 0.0173,
+          "abs_importance": 0.0173
+        },
+        {
+          "feature_name": "ecfp4_bit_807",
+          "weight": 0.0167,
+          "abs_importance": 0.0167
+        }
+      ],
+      "uncertainty_quantile_q_hat": 0.40209996700286865,
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-ridge-ecfp4.joblib",
+      "artifact_sha256": "d98e4deacf2b670219ecc611135bbe6c761572a6e4caac7bb32ac8e3b47aa934",
+      "candidate_name": "v0.1-ridge-ecfp4-a1.0"
+    },
+    {
+      "model_version": "v0.1-ridge-ecfp4",
+      "model_type": "RIDGE",
+      "target": "log10_rr",
+      "dataset_version": "v1.0-aprd-canonical",
+      "feature_version": "v1.0-ecfp4-irac",
+      "dataset_split": {
+        "train_count": 10,
+        "val_count": 3,
+        "test_count": 2,
+        "evaluation_set": "TEST_HOLDOUT (2011-2026)"
+      },
+      "metrics": {
+        "global_mean_baseline": {
+          "mae_log10": 0.2909,
+          "rmse_log10": 0.307,
+          "r2_score": -0.1136,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "species_moa_baseline": {
+          "mae_log10": 0.2909,
+          "rmse_log10": 0.307,
+          "r2_score": -0.1136,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "model_metrics": {
+          "mae_log10": 0.3458,
+          "rmse_log10": 0.3555,
+          "r2_score": -0.4933,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "improvement_vs_global_baseline_pct": -18.87
+      },
+      "top_features": [
+        {
+          "feature_name": "pest_order_Lepidoptera",
+          "weight": 0.113,
+          "abs_importance": 0.113
+        },
+        {
+          "feature_name": "bioassay_method_Topical",
+          "weight": 0.102,
+          "abs_importance": 0.102
+        },
+        {
+          "feature_name": "pest_order_Trombidiformes",
+          "weight": -0.0988,
+          "abs_importance": 0.0988
+        },
+        {
+          "feature_name": "bioassay_method_Leaf-Dip",
+          "weight": -0.0973,
+          "abs_importance": 0.0973
+        },
+        {
+          "feature_name": "ecfp4_bit_898",
+          "weight": 0.0297,
+          "abs_importance": 0.0297
+        },
+        {
+          "feature_name": "ecfp4_bit_561",
+          "weight": -0.0222,
+          "abs_importance": 0.0222
+        },
+        {
+          "feature_name": "ecfp4_bit_33",
+          "weight": 0.0222,
+          "abs_importance": 0.0222
+        },
+        {
+          "feature_name": "ecfp4_bit_695",
+          "weight": 0.0222,
+          "abs_importance": 0.0222
+        },
+        {
+          "feature_name": "ecfp4_bit_268",
+          "weight": 0.021,
+          "abs_importance": 0.021
+        },
+        {
+          "feature_name": "ecfp4_bit_650",
+          "weight": 0.0203,
+          "abs_importance": 0.0203
+        }
+      ],
+      "uncertainty_quantile_q_hat": 0.34119486808776855,
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-ridge-ecfp4.joblib",
+      "artifact_sha256": "26842f9600ca6963d613b6716a26ac262517740e62e31d47fee3e3d441dd6a4d",
+      "candidate_name": "v0.1-ridge-ecfp4-a0.1"
+    },
+    {
+      "model_version": "v0.1-random_forest-ecfp4",
+      "model_type": "RANDOM_FOREST",
+      "target": "log10_rr",
+      "dataset_version": "v1.0-aprd-canonical",
+      "feature_version": "v1.0-ecfp4-irac",
+      "dataset_split": {
+        "train_count": 10,
+        "val_count": 3,
+        "test_count": 2,
+        "evaluation_set": "TEST_HOLDOUT (2011-2026)"
+      },
+      "metrics": {
+        "global_mean_baseline": {
+          "mae_log10": 0.2909,
+          "rmse_log10": 0.307,
+          "r2_score": -0.1136,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "species_moa_baseline": {
+          "mae_log10": 0.2909,
+          "rmse_log10": 0.307,
+          "r2_score": -0.1136,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "model_metrics": {
+          "mae_log10": 0.2729,
+          "rmse_log10": 0.3565,
+          "r2_score": -0.5012,
+          "spearman_rho": 1.0,
+          "risk_tier_accuracy": 0.5,
+          "sample_size": 2
+        },
+        "improvement_vs_global_baseline_pct": 6.19
+      },
+      "top_features": [
+        {
+          "feature_name": "ecfp4_bit_917",
+          "weight": 0.0899,
+          "abs_importance": 0.0899
+        },
+        {
+          "feature_name": "bioassay_method_Topical",
+          "weight": 0.083,
+          "abs_importance": 0.083
+        },
+        {
+          "feature_name": "bioassay_method_Leaf-Dip",
+          "weight": 0.0698,
+          "abs_importance": 0.0698
+        },
+        {
+          "feature_name": "ecfp4_bit_33",
+          "weight": 0.0612,
+          "abs_importance": 0.0612
+        },
+        {
+          "feature_name": "ecfp4_bit_695",
+          "weight": 0.0599,
+          "abs_importance": 0.0599
+        },
+        {
+          "feature_name": "pest_order_Lepidoptera",
+          "weight": 0.0429,
+          "abs_importance": 0.0429
+        },
+        {
+          "feature_name": "hbd_scaled",
+          "weight": 0.0424,
+          "abs_importance": 0.0424
+        },
+        {
+          "feature_name": "ecfp4_bit_650",
+          "weight": 0.0321,
+          "abs_importance": 0.0321
+        },
+        {
+          "feature_name": "ecfp4_bit_15",
+          "weight": 0.0267,
+          "abs_importance": 0.0267
+        },
+        {
+          "feature_name": "irac_moa_3A",
+          "weight": 0.023,
+          "abs_importance": 0.023
+        }
+      ],
+      "uncertainty_quantile_q_hat": 0.3655526638031006,
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-random_forest-ecfp4.joblib",
+      "artifact_sha256": "85337a20336f0bfeeb87a9f01fae795e03faac2d50bdb9600999f120cfa7729a",
+      "candidate_name": "v0.2-rf-ecfp4"
+    }
+  ],
+  "selected_model": {
+    "version": "v1.0.0-ridge-ecfp4",
+    "algorithm": "Ridge Linear Regressor (alpha=1.0)",
+    "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v1.0.0-ridge-ecfp4.joblib",
+    "artifact_sha256": "b4a48f90dd7a831df0725cb5501b55d497624df24012779f4063f7f7a8c4ad8b",
+    "metrics": {
+      "global_mean_baseline": {
+        "mae_log10": 0.2909,
+        "rmse_log10": 0.307,
+        "r2_score": -0.1136,
+        "spearman_rho": 1.0,
+        "risk_tier_accuracy": 0.5,
+        "sample_size": 2
+      },
+      "species_moa_baseline": {
+        "mae_log10": 0.2909,
+        "rmse_log10": 0.307,
+        "r2_score": -0.1136,
+        "spearman_rho": 1.0,
+        "risk_tier_accuracy": 0.5,
+        "sample_size": 2
+      },
+      "model_metrics": {
+        "mae_log10": 0.332,
+        "rmse_log10": 0.3395,
+        "r2_score": -0.3617,
+        "spearman_rho": 1.0,
+        "risk_tier_accuracy": 0.5,
+        "sample_size": 2
+      },
+      "improvement_vs_global_baseline_pct": -14.13
+    },
+    "status": "DEVELOPMENT_ONLY",
+    "acceptance_status": "DEVELOPMENT_APPROVED_PROD_PENDING_MORE_DATA"
+  },
+  "slice_analysis": {
+    "pest_order_slices": {
+      "Diptera": {
+        "count": 3,
+        "mean_mae": 0.0009
+      },
+      "Hemiptera": {
+        "count": 3,
+        "mean_mae": 0.1144
+      },
+      "Lepidoptera": {
+        "count": 6,
+        "mean_mae": 0.1308
+      },
+      "Trombidiformes": {
+        "count": 3,
+        "mean_mae": 0.0362
+      }
+    },
+    "irac_moa_slices": {
+      "3B": {
+        "count": 1,
+        "mean_mae": 0.0012
+      },
+      "1B": {
+        "count": 2,
+        "mean_mae": 0.0397
+      },
+      "1A": {
+        "count": 2,
+        "mean_mae": 0.0008
+      },
+      "3A": {
+        "count": 4,
+        "mean_mae": 0.0062
+      },
+      "6": {
+        "count": 1,
+        "mean_mae": 0.0002
+      },
+      "4A": {
+        "count": 2,
+        "mean_mae": 0.1711
+      },
+      "28": {
+        "count": 2,
+        "mean_mae": 0.3458
+      },
+      "23": {
+        "count": 1,
+        "mean_mae": 0.0985
+      }
+    }
+  },
+  "error_analysis": {
+    "max_error": 0.4283,
+    "mean_error": 0.0826,
+    "median_error": 0.0018,
+    "largest_error_case": {
+      "case_id": "APRD-000008",
+      "source_id": "APRD",
+      "source_record_id": "APRD-000008",
+      "organism": {
+        "canonical_name": "Plutella xylostella",
+        "order": "Lepidoptera",
+        "family": "Plutellidae",
+        "ncbi_taxid": 51655
+      },
+      "pesticide": {
+        "active_ingredient": "Chlorantraniliprole",
+        "irac_moa_group": "28",
+        "cas_number": "500008-45-7",
+        "chemical_class": "Diamide"
+      },
+      "resistance_year": 2011,
+      "country": "China",
+      "bioassay_method": "Leaf-Dip",
+      "resistance_ratio": 84.0,
+      "susceptible_baseline": 0.02
+    }
+  }
+}

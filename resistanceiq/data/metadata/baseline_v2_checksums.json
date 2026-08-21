@@ -1,0 +1,26 @@
+{
+  "dataset_v2_canonical": {
+    "path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\data\\processed\\processed_v2_canonical_dataset.jsonl",
+    "sha256": "b092dfb208d5078ea78fc8306f8c3cceee6a9fce14920557002d5475d9633d16",
+    "size_bytes": 42274,
+    "status": "LOCKED_IMMUTABLE"
+  },
+  "splits_v2_temporal": {
+    "path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\data\\splits\\aprd_v2_temporal_splits.json",
+    "sha256": "04d5e4f6c1cf1a4f28aa17e5946b98d2b0c7d605b6613b5123837df5bc7fee9b",
+    "size_bytes": 1295,
+    "status": "LOCKED_IMMUTABLE"
+  },
+  "model_v2_storage": {
+    "path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v2.0.0-gbrt-ecfp4.joblib",
+    "sha256": "6fc915fa26716dc4a06bad71f586af95ee071acf11e9a5b8acdc5171fed55622",
+    "size_bytes": 139296,
+    "status": "LOCKED_IMMUTABLE"
+  },
+  "model_v2_registry": {
+    "path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\ml\\registry\\v2.0.0-gbrt-ecfp4\\model.joblib",
+    "sha256": "d651785838a17b4c9c8f42585e9379c9c820fae488a1aba81e752824e5bd5521",
+    "size_bytes": 139381,
+    "status": "LOCKED_IMMUTABLE"
+  }
+}

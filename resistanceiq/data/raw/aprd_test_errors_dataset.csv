@@ -1,0 +1,5 @@
+Record ID,Genus,Species,Common Name,Compound,Class,MoA,Country,State,First Reported,Pub Year,Type,RR,Baseline LC50,Method,Citation
+APRD-ERR-001,,,,Imidacloprid,Neonicotinoid,4A,United States,California,2005,2007,Field Resistance,10.0,0.1,Leaf-Dip,Test Reference 1
+APRD-ERR-002,Myzus,persicae,Green Peach Aphid,,Neonicotinoid,4A,Spain,Murcia,2010,2012,Field Resistance,15.0,0.05,Leaf-Dip,Test Reference 2
+APRD-ERR-003,Plutella,xylostella,Diamondback Moth,Permethrin,Pyrethroid,3A,China,Guangdong,1850,2010,Field Resistance,20.0,0.5,Leaf-Dip,Test Reference 3
+APRD-ERR-004,Tetranychus,urticae,Two-Spotted Spider Mite,Abamectin,Avermectin,6,United States,Florida,2015,2017,Field Resistance,-5.2,0.02,Leaf-Dip,Test Reference 4

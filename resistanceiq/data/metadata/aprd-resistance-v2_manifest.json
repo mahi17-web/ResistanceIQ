@@ -1,0 +1,16 @@
+{
+  "dataset_version": "aprd-resistance-v2",
+  "source": "APRD (Arthropod Pesticide Resistance Database)",
+  "source_url": "https://www.pesticideresistance.org/",
+  "raw_file": "aprd_expanded_v2_records.csv",
+  "raw_sha256": "0dd068f2b4d5389b1a66a7c6c51febb1a5f6797e92330af35db0c26df865996d",
+  "processed_file": "processed_v2_canonical_dataset.jsonl",
+  "processed_sha256": "b092dfb208d5078ea78fc8306f8c3cceee6a9fce14920557002d5475d9633d16",
+  "total_records": 44,
+  "rejected_records": 0,
+  "train_count": 22,
+  "val_count": 12,
+  "test_count": 10,
+  "ingested_at": "2026-08-21T06:38:16.125499+00:00",
+  "status": "CANONICAL_PROCESSED"
+}

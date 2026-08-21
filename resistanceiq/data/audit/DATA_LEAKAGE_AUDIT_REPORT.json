@@ -1,0 +1,25 @@
+{
+  "audit_name": "TEMPORAL_OUT_OF_TIME_DATA_LEAKAGE_AUDIT",
+  "dataset_version": "aprd-resistance-v2",
+  "audit_passed": true,
+  "id_disjoint_verified": true,
+  "temporal_consistency": {
+    "train_max_year": 2012,
+    "val_min_year": 2013,
+    "val_max_year": 2017,
+    "test_min_year": 2018,
+    "temporal_ordering_valid": true
+  },
+  "split_record_counts": {
+    "train": 22,
+    "val": 12,
+    "test": 10,
+    "total": 44
+  },
+  "chemical_species_novelty_in_test": {
+    "total_test_pairs": 10,
+    "unseen_pairs_in_test": 10,
+    "overlap_pairs_tested_temporally": 0
+  },
+  "status": "PASSED"
+}

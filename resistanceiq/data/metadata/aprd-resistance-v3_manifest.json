@@ -1,0 +1,19 @@
+{
+  "dataset_version": "aprd-resistance-v3",
+  "dataset_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\data\\processed\\processed_v3_canonical_dataset.jsonl",
+  "sha256": "924f20e7d45f11305f32b984c7fafbf6aadb49c26e893ed00e1f7e5ad492734d",
+  "total_records": 74,
+  "independent_studies": 74,
+  "unique_species": 15,
+  "unique_compounds": 42,
+  "unique_countries": 24,
+  "year_min": 1982,
+  "year_max": 2024,
+  "deduplication_audit": {
+    "exact_duplicates_removed": 0,
+    "likely_duplicates_removed": 0,
+    "unresolved_records_quarantined": 0,
+    "independent_observations_retained": 74
+  },
+  "created_at": "2026-08-20T06:31:30.496658+00:00"
+}

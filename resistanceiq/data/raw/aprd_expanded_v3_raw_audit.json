@@ -1,0 +1,25 @@
+{
+  "ingestion_id": "INGEST-STEP18-20260820",
+  "dataset_version": "aprd-resistance-v3",
+  "raw_file": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\data\\raw\\aprd_expanded_v3_raw.json",
+  "sha256": "dcc3fe3add63d5ee32adb4caea8037fd447ba6d560574bfa97b79647436301c4",
+  "records_seen": 30,
+  "records_accepted": 30,
+  "records_rejected": 0,
+  "sources_represented": [
+    "APRD (Arthropod Pesticide Resistance Database)",
+    "FRAC Fungicide Resistance Monitoring Compendium",
+    "IRAC-GRBS / APRD",
+    "IRAC-GRBS / CABI CPC",
+    "IRAC-GRBS / USDA ARS",
+    "International Survey of Herbicide Resistant Weeds (IWRC)",
+    "RRes-IRD / APRD",
+    "RRes-IRD / IRAC",
+    "Rothamsted Insecticide Resistance Database (RRes-IRD)"
+  ],
+  "temporal_range": [
+    1982,
+    2024
+  ],
+  "retrieved_at": "2026-08-20T06:29:30.191878+00:00"
+}

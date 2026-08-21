@@ -1,0 +1,1243 @@
+[
+  {
+    "id": "crop_fao_0113_rice",
+    "crop_code": "0113",
+    "common_name": "Paddy Rice",
+    "scientific_name": "Oryza sativa",
+    "family": "Poaceae",
+    "genus": "Oryza",
+    "species": "Oryza sativa",
+    "ncbi_tax_id": 4530,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Oryza"
+    ],
+    "synonyms": [
+      "Asian rice",
+      "Chawal",
+      "Arroz",
+      "Riz"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0111_wheat",
+    "crop_code": "0111",
+    "common_name": "Bread Wheat",
+    "scientific_name": "Triticum aestivum",
+    "family": "Poaceae",
+    "genus": "Triticum",
+    "species": "Triticum aestivum",
+    "ncbi_tax_id": 4565,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Triticum"
+    ],
+    "synonyms": [
+      "Common wheat",
+      "Gehun",
+      "Ble tendre",
+      "Trigo"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0112_maize",
+    "crop_code": "0112",
+    "common_name": "Maize / Corn",
+    "scientific_name": "Zea mays",
+    "family": "Poaceae",
+    "genus": "Zea",
+    "species": "Zea mays",
+    "ncbi_tax_id": 4577,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Zea"
+    ],
+    "synonyms": [
+      "Corn",
+      "Indian corn",
+      "Makka",
+      "Maiz"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0115_barley",
+    "crop_code": "0115",
+    "common_name": "Barley",
+    "scientific_name": "Hordeum vulgare",
+    "family": "Poaceae",
+    "genus": "Hordeum",
+    "species": "Hordeum vulgare",
+    "ncbi_tax_id": 4513,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Hordeum"
+    ],
+    "synonyms": [
+      "Two-row barley",
+      "Jau",
+      "Orge"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0114_sorghum",
+    "crop_code": "0114",
+    "common_name": "Sorghum",
+    "scientific_name": "Sorghum bicolor",
+    "family": "Poaceae",
+    "genus": "Sorghum",
+    "species": "Sorghum bicolor",
+    "ncbi_tax_id": 4558,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Sorghum"
+    ],
+    "synonyms": [
+      "Great millet",
+      "Jowar",
+      "Milo"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0116_oats",
+    "crop_code": "0116",
+    "common_name": "Oats",
+    "scientific_name": "Avena sativa",
+    "family": "Poaceae",
+    "genus": "Avena",
+    "species": "Avena sativa",
+    "ncbi_tax_id": 4498,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Avena"
+    ],
+    "synonyms": [
+      "Common oat",
+      "Jai",
+      "Avoine"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0117_rye",
+    "crop_code": "0117",
+    "common_name": "Rye",
+    "scientific_name": "Secale cereale",
+    "family": "Poaceae",
+    "genus": "Secale",
+    "species": "Secale cereale",
+    "ncbi_tax_id": 4550,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Secale"
+    ],
+    "synonyms": [
+      "Cereal rye",
+      "Seigle"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0118_pearl_millet",
+    "crop_code": "0118",
+    "common_name": "Pearl Millet",
+    "scientific_name": "Pennisetum glaucum",
+    "family": "Poaceae",
+    "genus": "Pennisetum",
+    "species": "Pennisetum glaucum",
+    "ncbi_tax_id": 4543,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Pennisetum"
+    ],
+    "synonyms": [
+      "Bajra",
+      "Bulrush millet"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0121_tomato",
+    "crop_code": "0121",
+    "common_name": "Tomato",
+    "scientific_name": "Solanum lycopersicum",
+    "family": "Solanaceae",
+    "genus": "Solanum",
+    "species": "Solanum lycopersicum",
+    "ncbi_tax_id": 4081,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Solanales",
+      "Solanaceae",
+      "Solanum"
+    ],
+    "synonyms": [
+      "Lycopersicon esculentum",
+      "Tamatar",
+      "Tomate"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0122_cabbage",
+    "crop_code": "0122",
+    "common_name": "Cabbage / Brassica",
+    "scientific_name": "Brassica oleracea",
+    "family": "Brassicaceae",
+    "genus": "Brassica",
+    "species": "Brassica oleracea",
+    "ncbi_tax_id": 3712,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Brassicales",
+      "Brassicaceae",
+      "Brassica"
+    ],
+    "synonyms": [
+      "Head cabbage",
+      "Broccoli",
+      "Cauliflower",
+      "Patta gobhi"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0125_pepper",
+    "crop_code": "0125",
+    "common_name": "Chili / Bell Pepper",
+    "scientific_name": "Capsicum annuum",
+    "family": "Solanaceae",
+    "genus": "Capsicum",
+    "species": "Capsicum annuum",
+    "ncbi_tax_id": 4072,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Solanales",
+      "Solanaceae",
+      "Capsicum"
+    ],
+    "synonyms": [
+      "Sweet pepper",
+      "Capsicum",
+      "Mirch",
+      "Piment"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0126_onion",
+    "crop_code": "0126",
+    "common_name": "Dry Onion",
+    "scientific_name": "Allium cepa",
+    "family": "Amaryllidaceae",
+    "genus": "Allium",
+    "species": "Allium cepa",
+    "ncbi_tax_id": 4679,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Asparagales",
+      "Amaryllidaceae",
+      "Allium"
+    ],
+    "synonyms": [
+      "Bulb onion",
+      "Pyaz",
+      "Oignon",
+      "Cebolla"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0123_cucumber",
+    "crop_code": "0123",
+    "common_name": "Cucumber",
+    "scientific_name": "Cucumis sativus",
+    "family": "Cucurbitaceae",
+    "genus": "Cucumis",
+    "species": "Cucumis sativus",
+    "ncbi_tax_id": 3659,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Cucurbitales",
+      "Cucurbitaceae",
+      "Cucumis"
+    ],
+    "synonyms": [
+      "Gherkin",
+      "Kheera",
+      "Concombre"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0124_eggplant",
+    "crop_code": "0124",
+    "common_name": "Eggplant / Aubergine",
+    "scientific_name": "Solanum melongena",
+    "family": "Solanaceae",
+    "genus": "Solanum",
+    "species": "Solanum melongena",
+    "ncbi_tax_id": 4111,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Solanales",
+      "Solanaceae",
+      "Solanum"
+    ],
+    "synonyms": [
+      "Brinjal",
+      "Baingan",
+      "Aubergine"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0127_carrot",
+    "crop_code": "0127",
+    "common_name": "Carrot",
+    "scientific_name": "Daucus carota",
+    "family": "Apiaceae",
+    "genus": "Daucus",
+    "species": "Daucus carota",
+    "ncbi_tax_id": 4039,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Apiales",
+      "Apiaceae",
+      "Daucus"
+    ],
+    "synonyms": [
+      "Gajar",
+      "Carotte",
+      "Zanahoria"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0128_lettuce",
+    "crop_code": "0128",
+    "common_name": "Lettuce",
+    "scientific_name": "Lactuca sativa",
+    "family": "Asteraceae",
+    "genus": "Lactuca",
+    "species": "Lactuca sativa",
+    "ncbi_tax_id": 4236,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Asterales",
+      "Asteraceae",
+      "Lactuca"
+    ],
+    "synonyms": [
+      "Salad lettuce",
+      "Laitue"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0129_spinach",
+    "crop_code": "0129",
+    "common_name": "Spinach",
+    "scientific_name": "Spinacia oleracea",
+    "family": "Amaranthaceae",
+    "genus": "Spinacia",
+    "species": "Spinacia oleracea",
+    "ncbi_tax_id": 3562,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Caryophyllales",
+      "Amaranthaceae",
+      "Spinacia"
+    ],
+    "synonyms": [
+      "Palak",
+      "Epinard"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0151_potato",
+    "crop_code": "0151",
+    "common_name": "Potato",
+    "scientific_name": "Solanum tuberosum",
+    "family": "Solanaceae",
+    "genus": "Solanum",
+    "species": "Solanum tuberosum",
+    "ncbi_tax_id": 4113,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Solanales",
+      "Solanaceae",
+      "Solanum"
+    ],
+    "synonyms": [
+      "Irish potato",
+      "Aloo",
+      "Pomme de terre",
+      "Patata"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0152_cassava",
+    "crop_code": "0152",
+    "common_name": "Cassava / Manioc",
+    "scientific_name": "Manihot esculenta",
+    "family": "Euphorbiaceae",
+    "genus": "Manihot",
+    "species": "Manihot esculenta",
+    "ncbi_tax_id": 3983,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Malpighiales",
+      "Euphorbiaceae",
+      "Manihot"
+    ],
+    "synonyms": [
+      "Yuca",
+      "Tapioca",
+      "Manioc"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0153_sweet_potato",
+    "crop_code": "0153",
+    "common_name": "Sweet Potato",
+    "scientific_name": "Ipomoea batatas",
+    "family": "Convolvulaceae",
+    "genus": "Ipomoea",
+    "species": "Ipomoea batatas",
+    "ncbi_tax_id": 4120,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Solanales",
+      "Convolvulaceae",
+      "Ipomoea"
+    ],
+    "synonyms": [
+      "Shakarkand",
+      "Batata",
+      "Camote"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0161_soybean",
+    "crop_code": "0161",
+    "common_name": "Soybean",
+    "scientific_name": "Glycine max",
+    "family": "Fabaceae",
+    "genus": "Glycine",
+    "species": "Glycine max",
+    "ncbi_tax_id": 3847,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Fabales",
+      "Fabaceae",
+      "Glycine"
+    ],
+    "synonyms": [
+      "Soya bean",
+      "Soja",
+      "Bhat"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0162_chickpea",
+    "crop_code": "0162",
+    "common_name": "Chickpea / Gram",
+    "scientific_name": "Cicer arietinum",
+    "family": "Fabaceae",
+    "genus": "Cicer",
+    "species": "Cicer arietinum",
+    "ncbi_tax_id": 3827,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Fabales",
+      "Fabaceae",
+      "Cicer"
+    ],
+    "synonyms": [
+      "Garbanzo",
+      "Chana",
+      "Pois chiche"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0163_common_bean",
+    "crop_code": "0163",
+    "common_name": "Common Bean / Dry Bean",
+    "scientific_name": "Phaseolus vulgaris",
+    "family": "Fabaceae",
+    "genus": "Phaseolus",
+    "species": "Phaseolus vulgaris",
+    "ncbi_tax_id": 3885,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Fabales",
+      "Fabaceae",
+      "Phaseolus"
+    ],
+    "synonyms": [
+      "Kidney bean",
+      "Rajma",
+      "Haricot"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0164_dry_pea",
+    "crop_code": "0164",
+    "common_name": "Field Pea / Garden Pea",
+    "scientific_name": "Pisum sativum",
+    "family": "Fabaceae",
+    "genus": "Pisum",
+    "species": "Pisum sativum",
+    "ncbi_tax_id": 3888,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Fabales",
+      "Fabaceae",
+      "Pisum"
+    ],
+    "synonyms": [
+      "Green pea",
+      "Matar",
+      "Pois"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0165_lentil",
+    "crop_code": "0165",
+    "common_name": "Lentil",
+    "scientific_name": "Lens culinaris",
+    "family": "Fabaceae",
+    "genus": "Lens",
+    "species": "Lens culinaris",
+    "ncbi_tax_id": 3864,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Fabales",
+      "Fabaceae",
+      "Lens"
+    ],
+    "synonyms": [
+      "Masoor",
+      "Lentille"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0166_groundnut",
+    "crop_code": "0166",
+    "common_name": "Groundnut / Peanut",
+    "scientific_name": "Arachis hypogaea",
+    "family": "Fabaceae",
+    "genus": "Arachis",
+    "species": "Arachis hypogaea",
+    "ncbi_tax_id": 3818,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Fabales",
+      "Fabaceae",
+      "Arachis"
+    ],
+    "synonyms": [
+      "Peanut",
+      "Moongphali",
+      "Cacahuete"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0144_canola",
+    "crop_code": "0144",
+    "common_name": "Canola / Oilseed Rape",
+    "scientific_name": "Brassica napus",
+    "family": "Brassicaceae",
+    "genus": "Brassica",
+    "species": "Brassica napus",
+    "ncbi_tax_id": 3708,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Brassicales",
+      "Brassicaceae",
+      "Brassica"
+    ],
+    "synonyms": [
+      "Rapeseed",
+      "Colza",
+      "Sarson"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0142_sunflower",
+    "crop_code": "0142",
+    "common_name": "Sunflower",
+    "scientific_name": "Helianthus annuus",
+    "family": "Asteraceae",
+    "genus": "Helianthus",
+    "species": "Helianthus annuus",
+    "ncbi_tax_id": 4232,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Asterales",
+      "Asteraceae",
+      "Helianthus"
+    ],
+    "synonyms": [
+      "Surajmukhi",
+      "Tournesol",
+      "Girasol"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0143_oil_palm",
+    "crop_code": "0143",
+    "common_name": "Oil Palm",
+    "scientific_name": "Elaeis guineensis",
+    "family": "Arecaceae",
+    "genus": "Elaeis",
+    "species": "Elaeis guineensis",
+    "ncbi_tax_id": 51953,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Arecales",
+      "Arecaceae",
+      "Elaeis"
+    ],
+    "synonyms": [
+      "African oil palm",
+      "Palmier a huile"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0145_sesame",
+    "crop_code": "0145",
+    "common_name": "Sesame Seed",
+    "scientific_name": "Sesamum indicum",
+    "family": "Pedaliaceae",
+    "genus": "Sesamum",
+    "species": "Sesamum indicum",
+    "ncbi_tax_id": 4182,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Lamiales",
+      "Pedaliaceae",
+      "Sesamum"
+    ],
+    "synonyms": [
+      "Til",
+      "Sesam"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0131_apple",
+    "crop_code": "0131",
+    "common_name": "Apple",
+    "scientific_name": "Malus domestica",
+    "family": "Rosaceae",
+    "genus": "Malus",
+    "species": "Malus domestica",
+    "ncbi_tax_id": 3750,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Rosales",
+      "Rosaceae",
+      "Malus"
+    ],
+    "synonyms": [
+      "Seb",
+      "Pomme",
+      "Manzana"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0132_grape",
+    "crop_code": "0132",
+    "common_name": "Grape / Wine Grape",
+    "scientific_name": "Vitis vinifera",
+    "family": "Vitaceae",
+    "genus": "Vitis",
+    "species": "Vitis vinifera",
+    "ncbi_tax_id": 29760,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Vitales",
+      "Vitaceae",
+      "Vitis"
+    ],
+    "synonyms": [
+      "Angoor",
+      "Raisin",
+      "Uva"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0133_banana",
+    "crop_code": "0133",
+    "common_name": "Banana / Plantain",
+    "scientific_name": "Musa acuminata",
+    "family": "Musaceae",
+    "genus": "Musa",
+    "species": "Musa acuminata",
+    "ncbi_tax_id": 4641,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Zingiberales",
+      "Musaceae",
+      "Musa"
+    ],
+    "synonyms": [
+      "Kela",
+      "Banane",
+      "Platano"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0134_orange",
+    "crop_code": "0134",
+    "common_name": "Sweet Orange / Citrus",
+    "scientific_name": "Citrus sinensis",
+    "family": "Rutaceae",
+    "genus": "Citrus",
+    "species": "Citrus sinensis",
+    "ncbi_tax_id": 2711,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Sapindales",
+      "Rutaceae",
+      "Citrus"
+    ],
+    "synonyms": [
+      "Santra",
+      "Orange douce",
+      "Naranja"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0135_mango",
+    "crop_code": "0135",
+    "common_name": "Mango",
+    "scientific_name": "Mangifera indica",
+    "family": "Anacardiaceae",
+    "genus": "Mangifera",
+    "species": "Mangifera indica",
+    "ncbi_tax_id": 29780,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Sapindales",
+      "Anacardiaceae",
+      "Mangifera"
+    ],
+    "synonyms": [
+      "Aam",
+      "Mangue"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0136_strawberry",
+    "crop_code": "0136",
+    "common_name": "Strawberry",
+    "scientific_name": "Fragaria ananassa",
+    "family": "Rosaceae",
+    "genus": "Fragaria",
+    "species": "Fragaria ananassa",
+    "ncbi_tax_id": 60105,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Rosales",
+      "Rosaceae",
+      "Fragaria"
+    ],
+    "synonyms": [
+      "Garden strawberry",
+      "Fraise"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0137_olive",
+    "crop_code": "0137",
+    "common_name": "Olive",
+    "scientific_name": "Olea europaea",
+    "family": "Oleaceae",
+    "genus": "Olea",
+    "species": "Olea europaea",
+    "ncbi_tax_id": 4146,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Lamiales",
+      "Oleaceae",
+      "Olea"
+    ],
+    "synonyms": [
+      "European olive",
+      "Zaitoon",
+      "Olivier"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0192_cotton",
+    "crop_code": "0192",
+    "common_name": "Upland Cotton",
+    "scientific_name": "Gossypium hirsutum",
+    "family": "Malvaceae",
+    "genus": "Gossypium",
+    "species": "Gossypium hirsutum",
+    "ncbi_tax_id": 3635,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Malvales",
+      "Malvaceae",
+      "Gossypium"
+    ],
+    "synonyms": [
+      "American cotton",
+      "Kapas",
+      "Coton"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0191_sugarcane",
+    "crop_code": "0191",
+    "common_name": "Sugarcane",
+    "scientific_name": "Saccharum officinarum",
+    "family": "Poaceae",
+    "genus": "Saccharum",
+    "species": "Saccharum officinarum",
+    "ncbi_tax_id": 4547,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Liliopsida",
+      "Poales",
+      "Poaceae",
+      "Saccharum"
+    ],
+    "synonyms": [
+      "Ganna",
+      "Canna a sucre",
+      "Cana de azucar"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0193_coffee",
+    "crop_code": "0193",
+    "common_name": "Arabica Coffee",
+    "scientific_name": "Coffea arabica",
+    "family": "Rubiaceae",
+    "genus": "Coffea",
+    "species": "Coffea arabica",
+    "ncbi_tax_id": 13443,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Gentianales",
+      "Rubiaceae",
+      "Coffea"
+    ],
+    "synonyms": [
+      "Coffee",
+      "Cafe"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0194_tea",
+    "crop_code": "0194",
+    "common_name": "Tea Plant",
+    "scientific_name": "Camellia sinensis",
+    "family": "Theaceae",
+    "genus": "Camellia",
+    "species": "Camellia sinensis",
+    "ncbi_tax_id": 4442,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Ericales",
+      "Theaceae",
+      "Camellia"
+    ],
+    "synonyms": [
+      "Chai",
+      "The"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0195_tobacco",
+    "crop_code": "0195",
+    "common_name": "Cultivated Tobacco",
+    "scientific_name": "Nicotiana tabacum",
+    "family": "Solanaceae",
+    "genus": "Nicotiana",
+    "species": "Nicotiana tabacum",
+    "ncbi_tax_id": 4097,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Solanales",
+      "Solanaceae",
+      "Nicotiana"
+    ],
+    "synonyms": [
+      "Tambaku",
+      "Tabac"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  },
+  {
+    "id": "crop_fao_0196_cocoa",
+    "crop_code": "0196",
+    "common_name": "Cacao / Cocoa Tree",
+    "scientific_name": "Theobroma cacao",
+    "family": "Malvaceae",
+    "genus": "Theobroma",
+    "species": "Theobroma cacao",
+    "ncbi_tax_id": 3641,
+    "taxonomy_status": "RESOLVED",
+    "taxonomy_rank": "species",
+    "taxonomy_lineage": [
+      "Eukaryota",
+      "Viridiplantae",
+      "Streptophyta",
+      "Magnoliopsida",
+      "Malvales",
+      "Malvaceae",
+      "Theobroma"
+    ],
+    "synonyms": [
+      "Cacao",
+      "Chocolate tree"
+    ],
+    "source": "FAO Indicative Crop Classification (ICC) v1.1",
+    "source_version": "ICC-1.1-2020",
+    "evidence_level": "DIRECT"
+  }
+]

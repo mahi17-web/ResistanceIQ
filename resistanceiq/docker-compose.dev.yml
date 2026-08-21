@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: resistanceiq-postgres-dev
+    environment:
+      POSTGRES_DB: resistanceiq_dev
+      POSTGRES_USER: resistanceiq_dev_user
+      POSTGRES_PASSWORD: devpassword123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+    networks:
+      - resistanceiq-dev-net
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: resistanceiq-backend-dev
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - postgres
+    environment:
+      APP_ENV: development
+      DEBUG: "true"
+      DATABASE_URL: postgresql://resistanceiq_dev_user:devpassword123@postgres:5432/resistanceiq_dev
+      JWT_SECRET: dev-secret-key-32-chars-minimum
+      BACKEND_CORS_ORIGINS: '["http://localhost:5173", "http://localhost:3000"]'
+      ALLOW_DEV_SEEDING: "true"
+      ALLOW_DEV_FALLBACK_AUTH: "true"
+    volumes:
+      - ./backend:/app/backend
+      - ./ml:/app/ml
+      - ./storage:/app/storage
+    ports:
+      - "8000:8000"
+    networks:
+      - resistanceiq-dev-net
+
+networks:
+  resistanceiq-dev-net:
+    driver: bridge
+
+volumes:
+  pgdata_dev:

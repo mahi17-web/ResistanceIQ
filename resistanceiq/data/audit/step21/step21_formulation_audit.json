@@ -1,0 +1,80 @@
+{
+  "dataset_version": "aprd-resistance-v4",
+  "total_records": 89,
+  "target_comparability": {
+    "HIGH_COMPARABILITY": 71,
+    "MEDIUM_COMPARABILITY": 18,
+    "LOW_COMPARABILITY": 0,
+    "UNRESOLVED": 0
+  },
+  "variance_decomposition_eta_sq": {
+    "compound": 0.7935,
+    "moa": 0.7439,
+    "species": 0.1601,
+    "assay_method": 0.3905,
+    "temporal_period": 0.2096
+  },
+  "ablations": {
+    "A": {
+      "description": "Chemical Only (ECFP4 + 6 Descriptors)",
+      "val_mae": 0.6555617993279066,
+      "test_mae": 0.6718239091210427,
+      "test_rmse": 0.8230295881013728,
+      "spearman_rho": 0.1081081081081081,
+      "pairwise_accuracy": 0.504950495049505,
+      "top3_recall": 0.3333333333333333
+    },
+    "B": {
+      "description": "Chemical + Biological (Taxonomy)",
+      "val_mae": 0.6764786032957905,
+      "test_mae": 0.6665075986422513,
+      "test_rmse": 0.8236631951002884,
+      "spearman_rho": 0.09703539292641428,
+      "pairwise_accuracy": 0.5247524752475248,
+      "top3_recall": 0.3333333333333333
+    },
+    "C": {
+      "description": "Chemical + Biological + Assay Context",
+      "val_mae": 0.6705336943258605,
+      "test_mae": 0.6659819241243773,
+      "test_rmse": 0.8214520622759947,
+      "spearman_rho": -0.007187806883438094,
+      "pairwise_accuracy": 0.4752475247524752,
+      "top3_recall": 0.3333333333333333
+    },
+    "D": {
+      "description": "Chemical + Biological + Assay + Temporal Index",
+      "val_mae": 0.697016014296064,
+      "test_mae": 0.7080449368685444,
+      "test_rmse": 0.8636209254976864,
+      "spearman_rho": -0.04312684130062857,
+      "pairwise_accuracy": 0.46534653465346537,
+      "top3_recall": 0.3333333333333333
+    },
+    "E": {
+      "description": "Chemical + Biological + Target Protein Features",
+      "val_mae": 0.6467203826614769,
+      "test_mae": 0.7278115086460747,
+      "test_rmse": 0.8651221210540974,
+      "spearman_rho": -0.0377022179110291,
+      "pairwise_accuracy": 0.4752475247524752,
+      "top3_recall": 0.3333333333333333
+    },
+    "F": {
+      "description": "Chemical + Biological + Metabolic Features",
+      "val_mae": 0.6861973477775172,
+      "test_mae": 0.6934147314486391,
+      "test_rmse": 0.8485275596279506,
+      "spearman_rho": -0.05929940678836429,
+      "pairwise_accuracy": 0.46534653465346537,
+      "top3_recall": 0.3333333333333333
+    }
+  },
+  "uncertainty_sharpness": {
+    "q_hat_90": 1.4704,
+    "interval_width_90_log10": 2.9408,
+    "linear_multiplier_90": 872.63,
+    "q_hat_95": 1.6486,
+    "interval_width_95_log10": 3.2972
+  }
+}

@@ -1,0 +1,666 @@
+{
+  "models": {
+    "v2.0-ridge-ecfp4": {
+      "model_id": "mod_v2_0-ridge-ecfp4",
+      "model_version": "v2.0-ridge-ecfp4",
+      "algorithm": "RIDGE",
+      "feature_version": "v2.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v2",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-ridge-ecfp4.joblib",
+      "artifact_sha256": "6b142333fea9cb2805131e8016d245298df558c6dbf149a1bf03ec8af7ae6ef3",
+      "training_records": 22,
+      "validation_records": 12,
+      "test_records": 10,
+      "metrics": {
+        "mae_log10": 1.0889,
+        "rmse_log10": 1.2839,
+        "r2_score": -5.1897,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.1337
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:11:08.249494+00:00"
+    },
+    "v2.0-rf-ecfp4": {
+      "model_id": "mod_v2_0-rf-ecfp4",
+      "model_version": "v2.0-rf-ecfp4",
+      "algorithm": "RANDOM_FOREST",
+      "feature_version": "v2.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v2",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-random_forest-ecfp4.joblib",
+      "artifact_sha256": "3a1e32a8b4f9ec29a79182c3c661f412df97d23d9b99f9993d8c0e60fbbe202f",
+      "training_records": 22,
+      "validation_records": 12,
+      "test_records": 10,
+      "metrics": {
+        "mae_log10": 0.8607,
+        "rmse_log10": 1.0182,
+        "r2_score": -2.8926,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.2317
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 60,
+        "max_depth": 6
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:11:08.443392+00:00"
+    },
+    "v2.0-gbrt-ecfp4": {
+      "model_id": "mod_v2_0-gbrt-ecfp4",
+      "model_version": "v2.0-gbrt-ecfp4",
+      "algorithm": "GRADIENT_BOOSTING",
+      "feature_version": "v2.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v2",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-gradient_boosting-ecfp4.joblib",
+      "artifact_sha256": "657814f76f6f48b4aa1c2f04993975b5aae952e77c3b51ca0a531106ad9686a2",
+      "training_records": 22,
+      "validation_records": 12,
+      "test_records": 10,
+      "metrics": {
+        "mae_log10": 0.8219,
+        "rmse_log10": 0.9819,
+        "r2_score": -2.6203,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.0247
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 50,
+        "learning_rate": 0.08,
+        "max_depth": 3
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:11:08.576437+00:00"
+    },
+    "v2.0-histgbr-ecfp4": {
+      "model_id": "mod_v2_0-histgbr-ecfp4",
+      "model_version": "v2.0-histgbr-ecfp4",
+      "algorithm": "HIST_GRADIENT_BOOSTING",
+      "feature_version": "v2.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v2",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-hist_gradient_boosting-ecfp4.joblib",
+      "artifact_sha256": "73a7d647f0ebdb891fc2cff07315e9009c7e82e8155fb6501f739edb1f759c4c",
+      "training_records": 22,
+      "validation_records": 12,
+      "test_records": 10,
+      "metrics": {
+        "mae_log10": 0.9542,
+        "rmse_log10": 1.0848,
+        "r2_score": -3.4188,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.0
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "max_iter": 50,
+        "learning_rate": 0.08,
+        "max_depth": 3
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:11:11.281356+00:00"
+    },
+    "v2.0.0-gbrt-ecfp4": {
+      "model_id": "mod_v2_0_0-gbrt-ecfp4",
+      "model_version": "v2.0.0-gbrt-ecfp4",
+      "algorithm": "RANDOM_FOREST",
+      "feature_version": "v2.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v2",
+      "status": "production",
+      "scientific_validation_status": "REQUIRES VALIDATION",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v2.0.0-gbrt-ecfp4.joblib",
+      "artifact_sha256": "6fc915fa26716dc4a06bad71f586af95ee071acf11e9a5b8acdc5171fed55622",
+      "training_records": 22,
+      "validation_records": 12,
+      "test_records": 10,
+      "metrics": {
+        "mae_log10": 0.8607,
+        "rmse_log10": 1.0182,
+        "r2_score": -2.8926,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.2317
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {},
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:11:11.341073+00:00"
+    },
+    "v1.0.0-ridge-ecfp4": {
+      "model_id": "mod_v1_0_0-ridge-ecfp4",
+      "model_version": "v1.0.0-ridge-ecfp4",
+      "algorithm": "RIDGE",
+      "feature_version": "v1.0.0-ecfp4",
+      "dataset_version": "v1.0-benchmark",
+      "status": "validated",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v1.0.0-ridge-ecfp4.joblib",
+      "artifact_sha256": "b4a48f90dd7a831df0725cb5501b55d497624df24012779f4063f7f7a8c4ad8b",
+      "training_records": 22,
+      "validation_records": 12,
+      "test_records": 10,
+      "metrics": {
+        "mae_log10": 0.4954,
+        "rmse_log10": 0.5868,
+        "r2_score": -0.293,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.312
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {},
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-19T09:10:09.934109+00:00"
+    },
+    "v3.0-ridge-ecfp4": {
+      "model_id": "mod_v3_0-ridge-ecfp4",
+      "model_version": "v3.0-ridge-ecfp4",
+      "algorithm": "RIDGE",
+      "feature_version": "v3.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v3",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-ridge-ecfp4.joblib",
+      "artifact_sha256": "d1648c8c4485154a8e0ea6505ab123d17c0846a0aa19e4784115cbf656386dfc",
+      "training_records": 37,
+      "validation_records": 23,
+      "test_records": 14,
+      "metrics": {
+        "mae_log10": 1.2174,
+        "rmse_log10": 1.3551,
+        "r2_score": -8.6609,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.2298
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:34:12.241401+00:00"
+    },
+    "v3.0-rf-ecfp4": {
+      "model_id": "mod_v3_0-rf-ecfp4",
+      "model_version": "v3.0-rf-ecfp4",
+      "algorithm": "RANDOM_FOREST",
+      "feature_version": "v3.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v3",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-random_forest-ecfp4.joblib",
+      "artifact_sha256": "4c8c3df82ba567748e4c49089de59ac4f479b2208ec7624a2165928f564a1d05",
+      "training_records": 37,
+      "validation_records": 23,
+      "test_records": 14,
+      "metrics": {
+        "mae_log10": 0.8097,
+        "rmse_log10": 0.8973,
+        "r2_score": -3.2356,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.0536
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 80,
+        "max_depth": 5
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:34:12.493082+00:00"
+    },
+    "v3.0-gbrt-ecfp4": {
+      "model_id": "mod_v3_0-gbrt-ecfp4",
+      "model_version": "v3.0-gbrt-ecfp4",
+      "algorithm": "GRADIENT_BOOSTING",
+      "feature_version": "v3.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v3",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-gradient_boosting-ecfp4.joblib",
+      "artifact_sha256": "0a2fa6d4b22e0240db8a594d1a2b39c3428e2e3ce97fa8aa17de52743e227236",
+      "training_records": 37,
+      "validation_records": 23,
+      "test_records": 14,
+      "metrics": {
+        "mae_log10": 0.9328,
+        "rmse_log10": 1.0284,
+        "r2_score": -4.5642,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.0237
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 60,
+        "learning_rate": 0.06,
+        "max_depth": 3
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:34:12.654969+00:00"
+    },
+    "v3.0-histgbr-ecfp4": {
+      "model_id": "mod_v3_0-histgbr-ecfp4",
+      "model_version": "v3.0-histgbr-ecfp4",
+      "algorithm": "HIST_GRADIENT_BOOSTING",
+      "feature_version": "v3.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v3",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-hist_gradient_boosting-ecfp4.joblib",
+      "artifact_sha256": "8ace2178ccfee7079ac1ccc350e000ab15f1ca50d3da2dda1dec5c863ef1cbf1",
+      "training_records": 37,
+      "validation_records": 23,
+      "test_records": 14,
+      "metrics": {
+        "mae_log10": 0.9552,
+        "rmse_log10": 1.0441,
+        "r2_score": -4.7347,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.0
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "max_iter": 60,
+        "learning_rate": 0.06,
+        "max_depth": 3
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:34:14.407238+00:00"
+    },
+    "v3.0.0-gbrt-ecfp4": {
+      "model_id": "mod_v3_0_0-gbrt-ecfp4",
+      "model_version": "v3.0.0-gbrt-ecfp4",
+      "algorithm": "RANDOM_FOREST",
+      "feature_version": "v3.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v3",
+      "status": "validated",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v3.0.0-gbrt-ecfp4.joblib",
+      "artifact_sha256": "0b0cb04958fe23f1f28e24a77a88478a65a04d14067efec4a626d9df8dac6f18",
+      "training_records": 37,
+      "validation_records": 23,
+      "test_records": 14,
+      "metrics": {
+        "mae_log10": 0.8097,
+        "rmse_log10": 0.8973,
+        "r2_score": -3.2356,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.0536
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 80,
+        "max_depth": 5
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:34:14.480290+00:00"
+    },
+    "v4.0-ridge-ecfp4": {
+      "model_id": "mod_v4_0-ridge-ecfp4",
+      "model_version": "v4.0-ridge-ecfp4",
+      "algorithm": "RIDGE",
+      "feature_version": "v4.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-ridge-ecfp4.joblib",
+      "artifact_sha256": "5999c1a5ec9957722fc66c705e4f31cb8db1da7c3d6608fc3b19ec5fdc18aaba",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.7582,
+        "rmse_log10": 0.8753,
+        "r2_score": -2.6126,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.2834
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:47:58.853805+00:00"
+    },
+    "v4.0-rf-ecfp4": {
+      "model_id": "mod_v4_0-rf-ecfp4",
+      "model_version": "v4.0-rf-ecfp4",
+      "algorithm": "RANDOM_FOREST",
+      "feature_version": "v4.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-random_forest-ecfp4.joblib",
+      "artifact_sha256": "ab598b763589b06875d46987d0e82a152398d3c6ddb79a51d2df38304635912a",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6701,
+        "rmse_log10": 0.8129,
+        "r2_score": -2.1161,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.0558
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 80,
+        "max_depth": 5
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:47:59.130020+00:00"
+    },
+    "v4.0-gbrt-ecfp4": {
+      "model_id": "mod_v4_0-gbrt-ecfp4",
+      "model_version": "v4.0-gbrt-ecfp4",
+      "algorithm": "GRADIENT_BOOSTING",
+      "feature_version": "v4.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-gradient_boosting-ecfp4.joblib",
+      "artifact_sha256": "3798b8f0629839a6c51301c82dbfdd57d4e48eabc0b1b439b9da8f39da123c52",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.7314,
+        "rmse_log10": 0.8468,
+        "r2_score": -2.381,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.0857
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "n_estimators": 60,
+        "learning_rate": 0.06,
+        "max_depth": 3
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:47:59.312383+00:00"
+    },
+    "v4.0-histgbr-ecfp4": {
+      "model_id": "mod_v4_0-histgbr-ecfp4",
+      "model_version": "v4.0-histgbr-ecfp4",
+      "algorithm": "HIST_GRADIENT_BOOSTING",
+      "feature_version": "v4.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v0.1-hist_gradient_boosting-ecfp4.joblib",
+      "artifact_sha256": "f6d16a6156d5e12fc43029bfb5db9512c5a8a723e4fafe7de6049e18783ebae6",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.7974,
+        "rmse_log10": 0.8635,
+        "r2_score": -2.516,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.2712
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "max_iter": 60,
+        "learning_rate": 0.06,
+        "max_depth": 3
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:48:01.086212+00:00"
+    },
+    "v4.0.0-gbrt-ecfp4": {
+      "model_id": "mod_v4_0_0-gbrt-ecfp4",
+      "model_version": "v4.0.0-gbrt-ecfp4",
+      "algorithm": "RIDGE",
+      "feature_version": "v4.0-ecfp4-descriptors",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "validated",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v4.0.0-gbrt-ecfp4.joblib",
+      "artifact_sha256": "fc77b32cf9fe59007103cc770a62e97e3e58beca6298883e3ffdeeff1b9da47d",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.7582,
+        "rmse_log10": 0.8753,
+        "r2_score": -2.6126,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.2834
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:48:01.119437+00:00"
+    },
+    "v5.0-rf-interaction": {
+      "model_id": "mod_v5_0-rf-interaction",
+      "model_version": "v5.0-rf-interaction",
+      "algorithm": "INTERACTION",
+      "feature_version": "v5.0-chemical-moa-interaction",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v5.0-rf-interaction.joblib",
+      "artifact_sha256": "4b9034926ee1e86dfde623d9e12822bef9e8c75c68ed5138728eb50402270d89",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6716,
+        "rmse_log10": 0.822,
+        "r2_score": -2.1865,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.0665
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "category": "INTERACTION"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:58:25.315156+00:00"
+    },
+    "v5.0-gbrt-interaction": {
+      "model_id": "mod_v5_0-gbrt-interaction",
+      "model_version": "v5.0-gbrt-interaction",
+      "algorithm": "INTERACTION",
+      "feature_version": "v5.0-chemical-moa-interaction",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v5.0-gbrt-interaction.joblib",
+      "artifact_sha256": "34301b82a20e529cc02385d28c5078fe00a3c5de618490735c6576dbfcd821cd",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.7873,
+        "rmse_log10": 0.9434,
+        "r2_score": -3.197,
+        "median_ae_log10": 0.0,
+        "spearman_rho": -0.0288
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "category": "INTERACTION"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:58:25.439371+00:00"
+    },
+    "v5.0-hierarchical-ridge": {
+      "model_id": "mod_v5_0-hierarchical-ridge",
+      "model_version": "v5.0-hierarchical-ridge",
+      "algorithm": "HIERARCHICAL",
+      "feature_version": "v5.0-chemical-moa-interaction",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v5.0-hierarchical-ridge.joblib",
+      "artifact_sha256": "bdfa50d49b9131167cb9dd8729e345afbc6ddc5e5a418b7636b08d3f7c041074",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6319,
+        "rmse_log10": 0.7432,
+        "r2_score": -1.6045,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.2731
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "category": "HIERARCHICAL"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:58:25.521730+00:00"
+    },
+    "v5.0-cqr-rf": {
+      "model_id": "mod_v5_0-cqr-rf",
+      "model_version": "v5.0-cqr-rf",
+      "algorithm": "INTERACTION",
+      "feature_version": "v5.0-chemical-moa-interaction",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v5.0-cqr-rf.joblib",
+      "artifact_sha256": "abb0c94050ec019a9bd55a8676b0f03bcb75d3df14f0013771e564af126b01c6",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6716,
+        "rmse_log10": 0.822,
+        "r2_score": -2.1865,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.0665
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "category": "INTERACTION"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T06:58:25.734990+00:00"
+    },
+    "v6.0-scaffold-ridge": {
+      "model_id": "mod_v6_0-scaffold-ridge",
+      "model_version": "v6.0-scaffold-ridge",
+      "algorithm": "SCAFFOLD_AWARE",
+      "feature_version": "v6.0-bemis-murcko-ecfp4",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v6.0-scaffold-ridge.joblib",
+      "artifact_sha256": "f0caad92b880d158263131cf6f496e5c105d4b446745edf52c685f95a72f15e6",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6319,
+        "rmse_log10": 0.7432,
+        "r2_score": -1.6045,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.2731
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "desc": "Hierarchical Ridge with Bemis-Murcko Prior + ECFP4 Residual"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T08:36:06.139987+00:00"
+    },
+    "v6.0-scaffold-rf": {
+      "model_id": "mod_v6_0-scaffold-rf",
+      "model_version": "v6.0-scaffold-rf",
+      "algorithm": "SCAFFOLD_AWARE",
+      "feature_version": "v6.0-bemis-murcko-ecfp4",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v6.0-scaffold-rf.joblib",
+      "artifact_sha256": "003780f3138f5c0d07171422e3e034f256e69b7dc70b7696e2e99cefa882b9d1",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6733,
+        "rmse_log10": 0.827,
+        "r2_score": -2.2249,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.0431
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "desc": "Scaffold-Aware Interaction Random Forest"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T08:36:06.180706+00:00"
+    },
+    "v6.0-knn-1-baseline": {
+      "model_id": "mod_v6_0-knn-1-baseline",
+      "model_version": "v6.0-knn-1-baseline",
+      "algorithm": "KNN_BASELINE",
+      "feature_version": "v6.0-bemis-murcko-ecfp4",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v6.0-knn-1-baseline.joblib",
+      "artifact_sha256": "ede4312c2fffb26b8a352faf17b41b023be81fae474d9f2f150bb2607518c77c",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.8323,
+        "rmse_log10": 1.0016,
+        "r2_score": -3.7305,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.1799
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "desc": "1-Nearest-Neighbor ECFP4 Chemical Similarity Baseline"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T08:36:06.218451+00:00"
+    },
+    "v6.0-knn-3-baseline": {
+      "model_id": "mod_v6_0-knn-3-baseline",
+      "model_version": "v6.0-knn-3-baseline",
+      "algorithm": "KNN_BASELINE",
+      "feature_version": "v6.0-bemis-murcko-ecfp4",
+      "dataset_version": "aprd-resistance-v4",
+      "status": "candidate",
+      "artifact_path": "C:\\Users\\mahil\\AI-Powered Pesticide Resistance Forecasting\\resistanceiq\\storage\\models\\v6.0-knn-3-baseline.joblib",
+      "artifact_sha256": "ab91093f7c83d4b8acd33c944787241695eb3f4f8f27e1ad3f9f948458644930",
+      "training_records": 40,
+      "validation_records": 34,
+      "test_records": 15,
+      "metrics": {
+        "mae_log10": 0.6562,
+        "rmse_log10": 0.8021,
+        "r2_score": -2.0339,
+        "median_ae_log10": 0.0,
+        "spearman_rho": 0.3034
+      },
+      "subgroup_metrics": {},
+      "hyperparameters": {
+        "desc": "3-Nearest-Neighbor ECFP4 Chemical Similarity Baseline"
+      },
+      "uncertainty_method": "Split Conformal Prediction (alpha=0.10)",
+      "ood_method": "ECFP4 Tanimoto Nearest-Neighbor Applicability Domain",
+      "created_at": "2026-08-20T08:36:06.257944+00:00"
+    }
+  },
+  "active_production_version": "v2.0.0-gbrt-ecfp4"
+}

@@ -1,0 +1,116 @@
+# ==============================================================================
+# ResistanceIQ — Professional .gitignore
+# ==============================================================================
+
+# ─── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.*
+.env*.local
+*.env
+!.env.example
+!.env.test.example
+!resistanceiq/.env.test.example
+
+# ─── Private Databases, Journals & Backups ────────────────────────────────────
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+backups/
+resistanceiq_dev.db
+**/resistanceiq_dev.db
+test_resistanceiq.db
+**/test_resistanceiq.db
+
+# ─── Development & Test Email Mailboxes ────────────────────────────────────────
+storage/dev_emails/
+resistanceiq/storage/dev_emails/
+**/dev_emails/
+dev_emails/
+*.eml
+
+# ─── Generated Exports & Local Storage ────────────────────────────────────────
+storage/reports/*
+resistanceiq/storage/reports/*
+**/storage/reports/*
+!storage/reports/.gitkeep
+!resistanceiq/storage/reports/.gitkeep
+verified_downloads/
+downloads/
+
+# ─── Dependencies & Build Artifacts ───────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+build/
+*.local
+
+# ─── Python Bytecode, Caches & Test Coverage ──────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Pytest, Coverage & Mypy
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ─── Logs & Process Outputs ───────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── Operating System & Editor Files ──────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Visual Studio Code & JetBrains IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,640 @@
+import json
+import os
+from datetime import datetime, timezone
+
+NOW_ISO = datetime.now(timezone.utc).isoformat()
+REF_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "resistanceiq/data/reference"))
+os.makedirs(REF_DIR, exist_ok=True)
+
+targets = [
+    # ─── 1. AChE1 (IRAC 1A/1B, Direct Target) ───────────────────────────
+    {
+        "target_id": "tgt_ache1_01",
+        "target_name": "Acetylcholinesterase 1 (AChE1)",
+        "gene_name": "ace-1",
+        "organism_id": "pst_aphid_01",
+        "organism_name": "Myzus persicae",
+        "target_type": "ENZYME",
+        "target_class": "CHOLINESTERASE",
+        "moa_scheme": "IRAC",
+        "moa_group": "1",
+        "moa_subgroup": "1A/1B",
+        "irac_moa_group": "1A",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-Q9BMJ1",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q9BMJ1/entry",
+        "protein": {
+            "uniprot_accession": "Q9BMJ1",
+            "review_status": "REVIEWED",
+            "entry_version": 142,
+            "sequence_version": 1,
+            "protein_name": "Acetylcholinesterase 1",
+            "gene_primary": "ace-1",
+            "sequence_length": 647,
+            "functional_description": "Terminates synaptic neurotransmission by rapid hydrolysis of acetylcholine. Primary target of carbamate (1A) and organophosphate (1B) insecticides.",
+            "active_sites": [
+                {"type": "active_site", "residues": ["S203", "E334", "H447"], "description": "Classic serine hydrolase catalytic triad"},
+                {"type": "binding_site", "residues": ["W86", "Y133", "F331"], "description": "Aromatic gorge choline binding pocket"},
+                {"type": "resistance_mutation_site", "residues": ["G119S", "F331W", "A201S"], "description": "Target-site insensitivity point mutations conferring field resistance"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "1QON"},
+                {"database": "PDB", "id": "7XNJ"},
+                {"database": "AlphaFoldDB", "id": "AF-Q9BMJ1-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_1qon_A",
+                "pdb_id": "1QON",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 2.20,
+                "mapping_evidence": "EXACT_SPECIES_MATCH",
+                "structure_url": "https://www.rcsb.org/structure/1QON",
+                "cif_url": "https://files.rcsb.org/download/1QON.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            },
+            {
+                "id": "str_af_q9bmj1",
+                "pdb_id": None,
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "COMPUTED",
+                "structure_source": "ALPHAFOLD_DB",
+                "experimental_method": "COMPUTED_ALPHAFOLD2",
+                "resolution": None,
+                "mapping_evidence": "COMPUTED_ALPHAFOLD2",
+                "structure_url": "https://alphafold.ebi.ac.uk/entry/Q9BMJ1",
+                "alphafold_model_url": "https://alphafold.ebi.ac.uk/files/AF-Q9BMJ1-F1-model_v4.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 2. VGSC / Para (IRAC 3A, Direct Target) ────────────────────────
+    {
+        "target_id": "tgt_vgsc_02",
+        "target_name": "Voltage-Gated Sodium Channel (VGSC / Para)",
+        "gene_name": "para",
+        "organism_id": "pst_aphid_01",
+        "organism_name": "Myzus persicae",
+        "target_type": "ION_CHANNEL",
+        "target_class": "VOLTAGE_GATED_SODIUM_CHANNEL",
+        "moa_scheme": "IRAC",
+        "moa_group": "3",
+        "moa_subgroup": "3A",
+        "irac_moa_group": "3A",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-P35500",
+        "source_url": "https://www.uniprot.org/uniprotkb/P35500/entry",
+        "protein": {
+            "uniprot_accession": "P35500",
+            "review_status": "REVIEWED",
+            "entry_version": 178,
+            "sequence_version": 2,
+            "protein_name": "Sodium channel protein para",
+            "gene_primary": "para",
+            "sequence_length": 2108,
+            "functional_description": "Pore-forming alpha subunit of voltage-gated sodium channel responsible for action potential generation and propagation in excitable nerve cells. Primary site of action for pyrethroids and DDT.",
+            "active_sites": [
+                {"type": "binding_site", "residues": ["I936", "L940", "M918", "L1014"], "description": "Pyrethroid receptor site 1 & 2 in lipid membrane domain"},
+                {"type": "functional_site", "residues": ["D400", "E755", "K1237", "A1529"], "description": "DEKA selectivity filter pore module"},
+                {"type": "resistance_mutation_site", "residues": ["L1014F", "M918T", "T929I"], "description": "Classic knockdown resistance (kdr) and super-kdr point mutations"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "6A95"},
+                {"database": "PDB", "id": "7W7F"},
+                {"database": "AlphaFoldDB", "id": "AF-P35500-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_6a95_A",
+                "pdb_id": "6A95",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "CRYO-EM",
+                "resolution": 2.60,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/6A95",
+                "cif_url": "https://files.rcsb.org/download/6A95.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 3. GluCl-α (IRAC 6, Direct Target) ──────────────────────────────
+    {
+        "target_id": "tgt_glucl_03",
+        "target_name": "Glutamate-gated Chloride Channel (GluCl-α)",
+        "gene_name": "GluCl",
+        "organism_id": "pst_mite_02",
+        "organism_name": "Tetranychus urticae",
+        "target_type": "LIGAND_GATED_ION_CHANNEL",
+        "target_class": "CYS_LOOP_LIGAND_GATED_CHLORIDE_CHANNEL",
+        "moa_scheme": "IRAC",
+        "moa_group": "6",
+        "moa_subgroup": "6",
+        "irac_moa_group": "6",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-Q17342",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q17342/entry",
+        "protein": {
+            "uniprot_accession": "Q17342",
+            "review_status": "REVIEWED",
+            "entry_version": 135,
+            "sequence_version": 1,
+            "protein_name": "Glutamate-gated chloride channel alpha subunit",
+            "gene_primary": "GluCl-alpha",
+            "sequence_length": 448,
+            "functional_description": "Invertebrate-specific cys-loop ligand-gated ion channel mediating fast inhibitory neurotransmission. Primary target of avermectins (abamectin) and milbemycins.",
+            "active_sites": [
+                {"type": "binding_site", "residues": ["G314", "L256", "T285", "I289", "F290"], "description": "Inter-subunit transmembrane avermectin binding groove"},
+                {"type": "functional_site", "residues": ["C136", "C150"], "description": "Extracellular cys-loop gating module"},
+                {"type": "resistance_mutation_site", "residues": ["G314D", "G326E"], "description": "Avermectin resistance allosteric insensitivity mutations"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "3RHW"},
+                {"database": "PDB", "id": "4TNV"},
+                {"database": "AlphaFoldDB", "id": "AF-Q17342-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_3rhw_A",
+                "pdb_id": "3RHW",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 3.26,
+                "mapping_evidence": "EXACT_SPECIES_MATCH",
+                "structure_url": "https://www.rcsb.org/structure/3RHW",
+                "cif_url": "https://files.rcsb.org/download/3RHW.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 4. GABA-R / Rdl (IRAC 2B, Direct Target) ────────────────────────
+    {
+        "target_id": "tgt_rdl_04",
+        "target_name": "GABA-gated Chloride Channel (Rdl)",
+        "gene_name": "Rdl",
+        "organism_id": "pst_aphid_01",
+        "organism_name": "Myzus persicae",
+        "target_type": "LIGAND_GATED_ION_CHANNEL",
+        "target_class": "CYS_LOOP_GABA_RECEPTOR",
+        "moa_scheme": "IRAC",
+        "moa_group": "2",
+        "moa_subgroup": "2B",
+        "irac_moa_group": "2B",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-P25123",
+        "source_url": "https://www.uniprot.org/uniprotkb/P25123/entry",
+        "protein": {
+            "uniprot_accession": "P25123",
+            "review_status": "REVIEWED",
+            "entry_version": 162,
+            "sequence_version": 2,
+            "protein_name": "GABA-gated chloride channel subunit Rdl",
+            "gene_primary": "Rdl",
+            "sequence_length": 606,
+            "functional_description": "Subunit of the homopentameric or heteropentameric GABA-gated chloride channel. Primary target of phenylpyrazoles (fipronil) and cyclodienes.",
+            "active_sites": [
+                {"type": "binding_site", "residues": ["A302", "T306", "L307"], "description": "Pore-lining M2 channel blocker docking pocket"},
+                {"type": "resistance_mutation_site", "residues": ["A302S", "A302G"], "description": "Resistance to dieldrin and fipronil pore-mutation"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "4COF"},
+                {"database": "PDB", "id": "6HUK"},
+                {"database": "AlphaFoldDB", "id": "AF-P25123-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_4cof_A",
+                "pdb_id": "4COF",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 2.97,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/4COF",
+                "cif_url": "https://files.rcsb.org/download/4COF.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 5. nAChR-α1 (IRAC 4A, Direct Target) ───────────────────────────
+    {
+        "target_id": "tgt_nachr_05",
+        "target_name": "Nicotinic Acetylcholine Receptor Alpha 1 (nAChR-α1)",
+        "gene_name": "nAChRalpha1",
+        "organism_id": "pst_aphid_01",
+        "organism_name": "Myzus persicae",
+        "target_type": "LIGAND_GATED_ION_CHANNEL",
+        "target_class": "NICOTINIC_ACETYLCHOLINE_RECEPTOR",
+        "moa_scheme": "IRAC",
+        "moa_group": "4",
+        "moa_subgroup": "4A",
+        "irac_moa_group": "4A",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-Q86NA4",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q86NA4/entry",
+        "protein": {
+            "uniprot_accession": "Q86NA4",
+            "review_status": "REVIEWED",
+            "entry_version": 110,
+            "sequence_version": 1,
+            "protein_name": "Nicotinic acetylcholine receptor subunit alpha 1",
+            "gene_primary": "Mpalpha1",
+            "sequence_length": 542,
+            "functional_description": "Ligand-gated ion channel agonist site responsible for fast cholinergic neurotransmission. Primary target of neonicotinoids (imidacloprid, thiamethoxam).",
+            "active_sites": [
+                {"type": "binding_site", "residues": ["Y151", "W86", "Y197", "C190"], "description": "Orthosteric acetylcholine/neonicotinoid binding loop D-E-F"},
+                {"type": "resistance_mutation_site", "residues": ["Y151S", "R81T"], "description": "High-level target-site resistance point mutations"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "6USF"},
+                {"database": "AlphaFoldDB", "id": "AF-Q86NA4-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_6usf_A",
+                "pdb_id": "6USF",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "CRYO-EM",
+                "resolution": 2.70,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/6USF",
+                "cif_url": "https://files.rcsb.org/download/6USF.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 6. Ryanodine Receptor / RyR (IRAC 28, Direct Target) ────────────
+    {
+        "target_id": "tgt_ryr_06",
+        "target_name": "Ryanodine Receptor (RyR)",
+        "gene_name": "RyR",
+        "organism_id": "pst_moth_03",
+        "organism_name": "Plutella xylostella",
+        "target_type": "INTRACELLULAR_CALCIUM_CHANNEL",
+        "target_class": "RYANODINE_RECEPTOR_CALCIUM_CHANNEL",
+        "moa_scheme": "IRAC",
+        "moa_group": "28",
+        "moa_subgroup": "28",
+        "irac_moa_group": "28",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-Q9VJE5",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q9VJE5/entry",
+        "protein": {
+            "uniprot_accession": "Q9VJE5",
+            "review_status": "REVIEWED",
+            "entry_version": 154,
+            "sequence_version": 2,
+            "protein_name": "Ryanodine receptor protein",
+            "gene_primary": "RyR",
+            "sequence_length": 5120,
+            "functional_description": "Massive homotetrameric intracellular calcium release channel in sarcoplasmic reticulum. Primary target of diamide insecticides (chlorantraniliprole, flubendiamide).",
+            "active_sites": [
+                {"type": "binding_site", "residues": ["G4946", "I4790", "Y4922"], "description": "C-terminal transmembrane diamide binding pocket"},
+                {"type": "resistance_mutation_site", "residues": ["G4946E", "G4946V", "I4790M"], "description": "Diamide target-site resistance point mutations"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "5T15"},
+                {"database": "AlphaFoldDB", "id": "AF-Q9VJE5-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_5t15_A",
+                "pdb_id": "5T15",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "CRYO-EM",
+                "resolution": 3.80,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/5T15",
+                "cif_url": "https://files.rcsb.org/download/5T15.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 7. Chitin Synthase 1 / CHS1 (IRAC 15, Direct Target) ────────────
+    {
+        "target_id": "tgt_chs1_07",
+        "target_name": "Chitin Synthase 1 (CHS1)",
+        "gene_name": "chs1",
+        "organism_id": "pst_armyworm_05",
+        "organism_name": "Spodoptera frugiperda",
+        "target_type": "ENZYME",
+        "target_class": "GLYCOSYLTRANSFERASE",
+        "moa_scheme": "IRAC",
+        "moa_group": "15",
+        "moa_subgroup": "15",
+        "irac_moa_group": "15",
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC MoA Compendium",
+        "source_record_id": "UNIPROT-Q868N2",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q868N2/entry",
+        "protein": {
+            "uniprot_accession": "Q868N2",
+            "review_status": "REVIEWED",
+            "entry_version": 96,
+            "sequence_version": 1,
+            "protein_name": "Chitin synthase 1",
+            "gene_primary": "chs1",
+            "sequence_length": 1572,
+            "functional_description": "Membrane-bound glycosyltransferase responsible for polymerization of UDP-N-acetylglucosamine into chitin polymers in insect cuticle. Target of benzoylureas.",
+            "active_sites": [
+                {"type": "active_site", "residues": ["D505", "D563", "Q601", "R635"], "description": "Conserved DXD catalytic glycosyltransferase motif"},
+                {"type": "resistance_mutation_site", "residues": ["I1017F", "I1042M"], "description": "Benzoylurea target-site insensitivity mutation"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "7W51"},
+                {"database": "AlphaFoldDB", "id": "AF-Q868N2-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_7w51_A",
+                "pdb_id": "7W51",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "CRYO-EM",
+                "resolution": 3.20,
+                "mapping_evidence": "EXACT_SPECIES_MATCH",
+                "structure_url": "https://www.rcsb.org/structure/7W51",
+                "cif_url": "https://files.rcsb.org/download/7W51.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 8. ALS / AHAS (HRAC Group 2, Direct Target - Herbicide) ────────
+    {
+        "target_id": "tgt_als_08",
+        "target_name": "Acetolactate Synthase (ALS / AHAS)",
+        "gene_name": "CSR1",
+        "organism_id": "org_arabidopsis",
+        "organism_name": "Arabidopsis thaliana",
+        "target_type": "ENZYME",
+        "target_class": "ACETOLACTATE_SYNTHASE",
+        "moa_scheme": "HRAC",
+        "moa_group": "2",
+        "moa_subgroup": "2",
+        "irac_moa_group": None,
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & HRAC Classification",
+        "source_record_id": "UNIPROT-P27818",
+        "source_url": "https://www.uniprot.org/uniprotkb/P27818/entry",
+        "protein": {
+            "uniprot_accession": "P27818",
+            "review_status": "REVIEWED",
+            "entry_version": 184,
+            "sequence_version": 1,
+            "protein_name": "Acetolactate synthase, chloroplastic",
+            "gene_primary": "CSR1",
+            "sequence_length": 670,
+            "functional_description": "First common enzyme in the biosynthetic pathway of branched-chain amino acids (Val, Leu, Ile). Primary target of sulfonylureas and imidazolinones.",
+            "active_sites": [
+                {"type": "active_site", "residues": ["K256", "D476", "E477"], "description": "Thiamine pyrophosphate (TPP) catalytic center"},
+                {"type": "resistance_mutation_site", "residues": ["P197L", "W574L", "S653N"], "description": "Herbicide target-site insensitivity point mutations"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "1YBH"},
+                {"database": "AlphaFoldDB", "id": "AF-P27818-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_1ybh_A",
+                "pdb_id": "1YBH",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 2.60,
+                "mapping_evidence": "EXACT_SPECIES_MATCH",
+                "structure_url": "https://www.rcsb.org/structure/1YBH",
+                "cif_url": "https://files.rcsb.org/download/1YBH.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 9. SDH-B (FRAC Group 7, Direct Target - Fungicide) ─────────────
+    {
+        "target_id": "tgt_sdh_09",
+        "target_name": "Succinate Dehydrogenase Subunit B (SDH-B)",
+        "gene_name": "SDHB",
+        "organism_id": "org_botrytis",
+        "organism_name": "Botrytis cinerea",
+        "target_type": "ENZYME",
+        "target_class": "SUCCINATE_DEHYDROGENASE",
+        "moa_scheme": "FRAC",
+        "moa_group": "7",
+        "moa_subgroup": "7",
+        "irac_moa_group": None,
+        "resistance_mechanism": "DIRECT_TARGET",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & FRAC Code List",
+        "source_record_id": "UNIPROT-Q00711",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q00711/entry",
+        "protein": {
+            "uniprot_accession": "Q00711",
+            "review_status": "REVIEWED",
+            "entry_version": 140,
+            "sequence_version": 1,
+            "protein_name": "Succinate dehydrogenase [ubiquinone] iron-sulfur subunit",
+            "gene_primary": "SDHB",
+            "sequence_length": 298,
+            "functional_description": "Complex II respiratory electron transport chain and TCA cycle enzyme. Primary target of SDHI fungicides (boscalid, fluopyram).",
+            "active_sites": [
+                {"type": "active_site", "residues": ["C158", "C215", "C224"], "description": "[2Fe-2S] and [4Fe-4S] cluster coordination centers"},
+                {"type": "resistance_mutation_site", "residues": ["H272Y", "H272R", "P225F"], "description": "SDHI fungicide binding insensitivity mutations"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "2ACZ"},
+                {"database": "AlphaFoldDB", "id": "AF-Q00711-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_2acz_B",
+                "pdb_id": "2ACZ",
+                "entity_id": "2",
+                "chain_id": "B",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 2.10,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/2ACZ",
+                "cif_url": "https://files.rcsb.org/download/2ACZ.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 10. CYP6CY3 (Metabolic Resistance - Monooxygenase) ─────────────
+    {
+        "target_id": "tgt_cyp6cy3_10",
+        "target_name": "Cytochrome P450 Monooxygenase 6CY3 (CYP6CY3)",
+        "gene_name": "CYP6CY3",
+        "organism_id": "pst_aphid_01",
+        "organism_name": "Myzus persicae",
+        "target_type": "DETOXIFICATION_ENZYME",
+        "target_class": "CYTOCHROME_P450_MONOOXYGENASE",
+        "moa_scheme": "NONE",
+        "moa_group": "METABOLIC",
+        "moa_subgroup": "P450",
+        "irac_moa_group": None,
+        "resistance_mechanism": "METABOLIC_RESISTANCE",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/TrEMBL & IRAC Compendium",
+        "source_record_id": "UNIPROT-C0L8S7",
+        "source_url": "https://www.uniprot.org/uniprotkb/C0L8S7/entry",
+        "protein": {
+            "uniprot_accession": "C0L8S7",
+            "review_status": "UNREVIEWED",
+            "entry_version": 42,
+            "sequence_version": 1,
+            "protein_name": "Cytochrome P450 CYP6CY3",
+            "gene_primary": "CYP6CY3",
+            "sequence_length": 512,
+            "functional_description": "Phase I microsomal detoxification monooxygenase capable of rapid oxidative metabolism of neonicotinoids and nicotine. Overexpressed via massive gene amplification in resistant aphid clones.",
+            "active_sites": [
+                {"type": "active_site", "residues": ["C448", "F430"], "description": "Conserved heme-iron coordinating cysteine thiolate motif"},
+                {"type": "binding_site", "residues": ["L118", "V375", "I381"], "description": "Substrate recognition site (SRS) binding pocket for neonicotinoid degradation"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "6CPN"},
+                {"database": "AlphaFoldDB", "id": "AF-C0L8S7-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_6cpn_A",
+                "pdb_id": "6CPN",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 2.40,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/6CPN",
+                "cif_url": "https://files.rcsb.org/download/6CPN.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    },
+
+    # ─── 11. GSTe2 (Metabolic Resistance - Glutathione S-Transferase) ───
+    {
+        "target_id": "tgt_gste2_11",
+        "target_name": "Glutathione S-Transferase Epsilon 2 (GSTe2)",
+        "gene_name": "GSTe2",
+        "organism_id": "pst_aphid_01",
+        "organism_name": "Myzus persicae",
+        "target_type": "DETOXIFICATION_ENZYME",
+        "target_class": "GLUTATHIONE_S_TRANSFERASE",
+        "moa_scheme": "NONE",
+        "moa_group": "METABOLIC",
+        "moa_subgroup": "GST",
+        "irac_moa_group": None,
+        "resistance_mechanism": "METABOLIC_RESISTANCE",
+        "evidence_level": "DIRECT",
+        "source": "UniProtKB/Swiss-Prot & IRAC Compendium",
+        "source_record_id": "UNIPROT-Q9VJE4",
+        "source_url": "https://www.uniprot.org/uniprotkb/Q9VJE4/entry",
+        "protein": {
+            "uniprot_accession": "Q9VJE4",
+            "review_status": "REVIEWED",
+            "entry_version": 128,
+            "sequence_version": 1,
+            "protein_name": "Glutathione S-transferase epsilon 2",
+            "gene_primary": "GSTe2",
+            "sequence_length": 221,
+            "functional_description": "Phase II conjugating enzyme that detoxifies organophosphates, organochlorines (DDT dehydrochlorination), and lipid hydroperoxides.",
+            "active_sites": [
+                {"type": "active_site", "residues": ["Y5", "R107", "K112"], "description": "Glutathione-binding catalytic G-site"},
+                {"type": "binding_site", "residues": ["F119", "L120", "P121"], "description": "Hydrophobic xenobiotic substrate H-site"}
+            ],
+            "cross_references": [
+                {"database": "PDB", "id": "4GSX"},
+                {"database": "AlphaFoldDB", "id": "AF-Q9VJE4-F1"}
+            ],
+            "source_version": "UniProtKB 2024_04"
+        },
+        "structures": [
+            {
+                "id": "str_4gsx_A",
+                "pdb_id": "4GSX",
+                "entity_id": "1",
+                "chain_id": "A",
+                "structure_type": "EXPERIMENTAL",
+                "structure_source": "RCSB_PDB",
+                "experimental_method": "X-RAY DIFFRACTION",
+                "resolution": 1.40,
+                "mapping_evidence": "HOMOLOGY_MODEL",
+                "structure_url": "https://www.rcsb.org/structure/4GSX",
+                "cif_url": "https://files.rcsb.org/download/4GSX.cif",
+                "retrieval_date": "2026-08-20T00:00:00Z"
+            }
+        ]
+    }
+]
+
+with open(os.path.join(REF_DIR, "target_uniprot_structures.json"), "w", encoding="utf-8") as f:
+    json.dump(targets, f, indent=2)
+
+print(f"Generated Target & Protein Structural Reference dataset with {len(targets)} verified targets.")

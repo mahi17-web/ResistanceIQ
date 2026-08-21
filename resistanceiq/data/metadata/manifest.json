@@ -1,0 +1,11 @@
+{
+  "description": "ResistanceIQ Scientific Data Directory Structure",
+  "directories": {
+    "raw": "Original source-preserved raw files (never modified)",
+    "staging": "Parsed intermediate records prior to canonical normalization",
+    "processed": "Canonical, validated, deduplicated datasets",
+    "rejected": "Quarantined invalid records with logged error codes",
+    "metadata": "Data profiles, quality reports, and ingestion run logs"
+  },
+  "created_at": "2026-08-18T22:08:00Z"
+}

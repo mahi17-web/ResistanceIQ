@@ -1,0 +1,312 @@
+{
+  "dataset_version": "aprd-resistance-v3",
+  "total_test_observations": 14,
+  "all_flagged_ood": true,
+  "mean_nearest_neighbor_tanimoto": 0.565,
+  "median_nearest_neighbor_tanimoto": 0.59,
+  "chemical_novelty_pct": 50.0,
+  "unseen_species_count": 1,
+  "unseen_moa_count": 5,
+  "bootstrap_diff_ci_95": [
+    -0.0146,
+    0.0301
+  ],
+  "test_records_audit": [
+    {
+      "test_index": 1,
+      "case_id": "REC-V2-0014",
+      "compound": "Lambda-cyhalothrin",
+      "species": "Spodoptera frugiperda",
+      "year": 2019,
+      "moa_group": "3A",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "Brazil",
+      "resistance_ratio": 110.0,
+      "max_tanimoto_training": 0.857,
+      "closest_train_compound": "Cypermethrin",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "TEMPORAL SHIFT",
+      "shift_reasons": [
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 2,
+      "case_id": "REC-V2-0018",
+      "compound": "Spirotetramat",
+      "species": "Myzus persicae",
+      "year": 2019,
+      "moa_group": "23",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "Spain",
+      "resistance_ratio": 6.0,
+      "max_tanimoto_training": 0.192,
+      "closest_train_compound": "Spinosad",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN ONLY IN VALIDATION",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "MOA SHIFT (SEEN ONLY IN VALIDATION)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 3,
+      "case_id": "REC-V2-0031",
+      "compound": "Chlorantraniliprole",
+      "species": "Leptinotarsa decemlineata",
+      "year": 2019,
+      "moa_group": "28",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "USA",
+      "resistance_ratio": 5.0,
+      "max_tanimoto_training": 1.0,
+      "closest_train_compound": "Chlorantraniliprole",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "TEMPORAL SHIFT",
+      "shift_reasons": [
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 4,
+      "case_id": "REC-V3-0124",
+      "compound": "Chlorantraniliprole",
+      "species": "Spodoptera frugiperda",
+      "year": 2019,
+      "moa_group": "28",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "Brazil",
+      "resistance_ratio": 36.0,
+      "max_tanimoto_training": 1.0,
+      "closest_train_compound": "Chlorantraniliprole",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "TEMPORAL SHIFT",
+      "shift_reasons": [
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 5,
+      "case_id": "REC-V2-0012",
+      "compound": "Chlorantraniliprole",
+      "species": "Spodoptera frugiperda",
+      "year": 2020,
+      "moa_group": "28",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "Brazil",
+      "resistance_ratio": 48.0,
+      "max_tanimoto_training": 1.0,
+      "closest_train_compound": "Chlorantraniliprole",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "TEMPORAL SHIFT",
+      "shift_reasons": [
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 6,
+      "case_id": "REC-V3-0125",
+      "compound": "Emamectin benzoate",
+      "species": "Helicoverpa armigera",
+      "year": 2020,
+      "moa_group": "6",
+      "resistance_mechanism": "METABOLIC_RESISTANCE",
+      "country": "India",
+      "resistance_ratio": 24.0,
+      "max_tanimoto_training": 0.9,
+      "closest_train_compound": "Abamectin",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "TEMPORAL SHIFT",
+      "shift_reasons": [
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 7,
+      "case_id": "REC-V2-0013",
+      "compound": "Spinetoram",
+      "species": "Spodoptera frugiperda",
+      "year": 2021,
+      "moa_group": "5",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "USA",
+      "resistance_ratio": 4.0,
+      "max_tanimoto_training": 1.0,
+      "closest_train_compound": "Spinosad",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "TEMPORAL SHIFT",
+      "shift_reasons": [
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 8,
+      "case_id": "REC-V2-0029",
+      "compound": "Cyantraniliprole",
+      "species": "Bemisia tabaci",
+      "year": 2021,
+      "moa_group": "28",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "Greece",
+      "resistance_ratio": 9.0,
+      "max_tanimoto_training": 0.806,
+      "closest_train_compound": "Chlorantraniliprole",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "SEEN IN TRAINING",
+      "geographic_support": "NEW GEOGRAPHY",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "GEOGRAPHIC EXPANSION",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 9,
+      "case_id": "REC-V3-0126",
+      "compound": "Flonicamid",
+      "species": "Myzus persicae",
+      "year": 2021,
+      "moa_group": "29",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "United Kingdom",
+      "resistance_ratio": 6.0,
+      "max_tanimoto_training": 0.217,
+      "closest_train_compound": "Boscalid",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "UNSEEN",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "MOA SHIFT (UNSEEN)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 10,
+      "case_id": "REC-V2-0025",
+      "compound": "Triflumezopyrim",
+      "species": "Nilaparvata lugens",
+      "year": 2022,
+      "moa_group": "4E",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "China",
+      "resistance_ratio": 3.0,
+      "max_tanimoto_training": 0.145,
+      "closest_train_compound": "Pyriproxyfen",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "UNSEEN",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "MOA SHIFT (UNSEEN)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 11,
+      "case_id": "REC-V3-0127",
+      "compound": "Broflanilide",
+      "species": "Plutella xylostella",
+      "year": 2022,
+      "moa_group": "30",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "China",
+      "resistance_ratio": 6.0,
+      "max_tanimoto_training": 0.373,
+      "closest_train_compound": "Chlorantraniliprole",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "UNSEEN",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "MOA SHIFT (UNSEEN)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 12,
+      "case_id": "REC-V3-0128",
+      "compound": "Afidopyropen",
+      "species": "Bemisia tabaci",
+      "year": 2023,
+      "moa_group": "9D",
+      "resistance_mechanism": "DIRECT_TARGET",
+      "country": "USA",
+      "resistance_ratio": 8.0,
+      "max_tanimoto_training": 0.0,
+      "closest_train_compound": "None",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "UNSEEN",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "MOA SHIFT (UNSEEN)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 13,
+      "case_id": "REC-V3-0130",
+      "compound": "Glufosinate",
+      "species": "Palmer Amaranth",
+      "year": 2023,
+      "moa_group": "10",
+      "resistance_mechanism": "METABOLIC_RESISTANCE",
+      "country": "USA",
+      "resistance_ratio": 12.0,
+      "max_tanimoto_training": 0.192,
+      "closest_train_compound": "Cry1Ac",
+      "species_support": "UNSEEN",
+      "moa_support": "UNSEEN",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "SPECIES NOVELTY (UNSEEN)",
+        "MOA SHIFT (UNSEEN)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    },
+    {
+      "test_index": 14,
+      "case_id": "REC-V3-0129",
+      "compound": "Triflumezopyrim",
+      "species": "Nilaparvata lugens",
+      "year": 2024,
+      "moa_group": "4E",
+      "resistance_mechanism": "METABOLIC_RESISTANCE",
+      "country": "China",
+      "resistance_ratio": 9.0,
+      "max_tanimoto_training": 0.222,
+      "closest_train_compound": "Boscalid",
+      "species_support": "SEEN IN TRAINING",
+      "moa_support": "UNSEEN",
+      "geographic_support": "SEEN IN TRAINING",
+      "primary_classification": "MULTIPLE",
+      "shift_reasons": [
+        "CHEMICAL NOVELTY (Max Tanimoto < 0.40)",
+        "MOA SHIFT (UNSEEN)",
+        "TEMPORAL ACCUMULATION"
+      ]
+    }
+  ]
+}
