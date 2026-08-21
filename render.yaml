@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: resistanceiq-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: HOST
+        value: 0.0.0.0
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: EMAIL_PROVIDER
+        value: smtp
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USERNAME
+        value: resistanceiq69@gmail.com
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_FROM_EMAIL
+        value: resistanceiq69@gmail.com
+      - key: SMTP_FROM_NAME
+        value: ResistanceIQ Security
+      - key: SMTP_USE_TLS
+        value: "true"
+      - key: MODEL_VERSION
+        value: v2.0.0-gbrt-ecfp4
+      - key: MODEL_ARTIFACT_PATH
+        value: resistanceiq/storage/models/v2.0.0-gbrt-ecfp4.joblib
+      - key: MODEL_ARTIFACT_SHA256
+        value: 6fc915fa26716dc4a06bad71f586af95ee071acf11e9a5b8acdc5171fed55622
+      - key: ALLOW_SQLITE_IN_PROD
+        value: "false"
+      - key: ALLOW_DEV_SEEDING
+        value: "false"
