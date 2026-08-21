@@ -27,6 +27,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Build-time verification: ensure critical runtime dependencies exist in the image
+RUN python -c "import matplotlib; import email_validator; from pydantic import EmailStr; print('BUILD VERIFY: matplotlib and pydantic email validation installed successfully (matplotlib=' + matplotlib.__version__ + ')')"
+
 # Copy backend source code, ML packages, data manifests, and locked model artifacts
 COPY resistanceiq/ ./resistanceiq/
 
