@@ -55,15 +55,37 @@ from app.schemas import (
     FeaturePreviewResponse,
 )
 from app.auth.dependencies import get_current_user, require_role
-from ml.inference.predictor import ResistancePredictor, FeatureValidationError
-from ml.inference.loader import ModelLoader
-from ml.registry.model_registry import ModelRegistry
+try:
+    from ml.inference.predictor import ResistancePredictor, FeatureValidationError
+    from ml.inference.loader import ModelLoader
+    from ml.registry.model_registry import ModelRegistry
+except (ImportError, ModuleNotFoundError):
+    from resistanceiq.ml.inference.predictor import ResistancePredictor, FeatureValidationError
+    from resistanceiq.ml.inference.loader import ModelLoader
+    from resistanceiq.ml.registry.model_registry import ModelRegistry
 from app.core.telemetry import metrics_collector
 
 logger = logging.getLogger("resistanceiq.api.forecasts")
 router = APIRouter()
 
-MODELS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../storage/models"))
+
+def resolve_models_dir() -> str:
+    candidates = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../storage/models")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../storage/models")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../storage/models")),
+        "/app/resistanceiq/storage/models",
+        "/app/storage/models",
+        os.path.abspath("resistanceiq/storage/models"),
+        os.path.abspath("storage/models"),
+    ]
+    for c in candidates:
+        if os.path.exists(c) and any(f.endswith(".joblib") for f in os.listdir(c)):
+            return c
+    return candidates[0]
+
+
+MODELS_DIR = resolve_models_dir()
 model_predictor = ResistancePredictor(storage_dir=MODELS_DIR)
 model_registry = ModelRegistry(storage_dir=MODELS_DIR)
 

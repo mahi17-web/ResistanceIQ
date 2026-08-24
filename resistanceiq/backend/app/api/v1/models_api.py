@@ -6,10 +6,31 @@ Provides inspection, validation status, artifact integrity verification, and act
 import os
 from typing import List, Dict, Any, Optional
 from fastapi import APIRouter, HTTPException, status
-from ml.registry.model_registry import ModelRegistry
+try:
+    from ml.registry.model_registry import ModelRegistry
+except (ImportError, ModuleNotFoundError):
+    from resistanceiq.ml.registry.model_registry import ModelRegistry
 
 router = APIRouter()
-registry = ModelRegistry()
+
+
+def resolve_models_dir() -> str:
+    candidates = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../storage/models")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../storage/models")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../storage/models")),
+        "/app/resistanceiq/storage/models",
+        "/app/storage/models",
+        os.path.abspath("resistanceiq/storage/models"),
+        os.path.abspath("storage/models"),
+    ]
+    for c in candidates:
+        if os.path.exists(c) and any(f.endswith(".joblib") for f in os.listdir(c)):
+            return c
+    return candidates[0]
+
+
+registry = ModelRegistry(storage_dir=resolve_models_dir())
 
 
 @router.get("/active")
