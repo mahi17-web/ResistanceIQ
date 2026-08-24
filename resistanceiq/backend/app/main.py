@@ -119,6 +119,12 @@ async def http_exception_handler(request: Request, exc: HTTPException):
 async def global_exception_handler(request: Request, exc: Exception):
     req_id = getattr(request.state, "request_id", None) or request.headers.get("X-Request-ID") or f"req_{uuid.uuid4().hex[:8]}"
     logger.error(f"[{req_id}] Unhandled Exception on {request.method} {request.url.path}: {str(exc)}", exc_info=True)
+    origin = request.headers.get("origin")
+    headers = {"X-Request-ID": req_id}
+    if origin and ("vercel.app" in origin or "localhost" in origin or "127.0.0.1" in origin):
+        headers["Access-Control-Allow-Origin"] = origin
+        headers["Access-Control-Allow-Credentials"] = "true"
+
     if settings.DEBUG:
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -131,7 +137,7 @@ async def global_exception_handler(request: Request, exc: Exception):
                 "type": exc.__class__.__name__,
                 "retryable": False,
             },
-            headers={"X-Request-ID": req_id},
+            headers=headers,
         )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -143,7 +149,7 @@ async def global_exception_handler(request: Request, exc: Exception):
             "detail": "An internal server error occurred. Please contact support.",
             "retryable": False,
         },
-        headers={"X-Request-ID": req_id},
+        headers=headers,
     )
 
 

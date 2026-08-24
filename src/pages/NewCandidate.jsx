@@ -359,9 +359,32 @@ export default function NewCandidate() {
         });
       } catch (err) {
         console.error('Failed to load crop threats', err);
-        if (isMounted) {
-          setThreatList([]);
-          setSelectedThreat(null);
+        try {
+          const generalPests = await getPests();
+          const normPests = normalizeArray(generalPests);
+          const fallbackThreats = normPests.map((p) => ({
+            id: `ct_reg_${p.id}`,
+            organism_id: p.id,
+            organism_name: p.species_name,
+            common_name: p.common_name,
+            relationship: 'DOCUMENTED_PEST',
+            evidence_level: 'PEST_REGISTRY',
+            ncbi_tax_id: p.id,
+          }));
+          if (isMounted) {
+            setThreatList(fallbackThreats);
+            setSelectedThreat((prev) => {
+              if (prev && fallbackThreats.some((t) => (t.id && t.id === prev.id) || (t.organism_id && t.organism_id === prev.organism_id))) {
+                return prev;
+              }
+              return fallbackThreats.length > 0 ? fallbackThreats[0] : null;
+            });
+          }
+        } catch {
+          if (isMounted) {
+            setThreatList([]);
+            setSelectedThreat(null);
+          }
         }
       } finally {
         if (isMounted) setLoadingThreats(false);

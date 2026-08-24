@@ -33,69 +33,112 @@ from sqlalchemy import text
 
 
 def ensure_schema_upgrades():
-    """Ensures newly added columns to existing SQLite dev tables are migrated safely."""
-    if engine.dialect.name != "sqlite":
-        # In production PostgreSQL, Alembic migrations manage all schema upgrades
-        return
-
+    """
+    Applies non-destructive schema migrations for missing columns across SQLite and PostgreSQL.
+    """
     Base.metadata.create_all(bind=engine)
+    is_postgres = "postgres" in engine.dialect.name
+
+    table_columns = {
+        "molecules": [
+            ("pubchem_cid", "INTEGER"),
+            ("iupac_name", "TEXT"),
+            ("molecular_formula", "VARCHAR(128)"),
+            ("tpsa", "FLOAT"),
+            ("rotatable_bonds", "INTEGER"),
+            ("inchikey", "VARCHAR(32)"),
+            ("inchi", "TEXT"),
+            ("is_novel", "BOOLEAN DEFAULT FALSE" if is_postgres else "BOOLEAN DEFAULT 0"),
+            ("standardization_status", "VARCHAR(64) DEFAULT 'STANDARDIZED'"),
+            ("resolution_method", "VARCHAR(64) DEFAULT 'PUBCHEM_NAME_SEARCH'"),
+            ("source_identifier", "VARCHAR(128)"),
+            ("conformer_3d_available", "BOOLEAN DEFAULT FALSE" if is_postgres else "BOOLEAN DEFAULT 0"),
+            ("synonyms_json", "TEXT"),
+            ("svg_2d", "TEXT"),
+            ("retrieved_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+        ],
+        "crop_threats": [
+            ("crop_id", "VARCHAR(64)"),
+            ("organism_id", "VARCHAR(64)"),
+            ("organism_name", "VARCHAR(128)"),
+            ("common_name", "VARCHAR(128)"),
+            ("organism_type", "VARCHAR(32) DEFAULT 'insect'"),
+            ("ncbi_tax_id", "INTEGER"),
+            ("relationship", "VARCHAR(64) DEFAULT 'PRIMARY_HOST'"),
+            ("source", "VARCHAR(128)"),
+            ("source_record_id", "VARCHAR(128)"),
+            ("source_url", "VARCHAR(512)"),
+            ("source_version", "VARCHAR(32) DEFAULT '2024.1'"),
+            ("evidence_level", "VARCHAR(32) DEFAULT 'DIRECT'"),
+            ("confidence_score", "FLOAT DEFAULT 1.0"),
+            ("citation", "TEXT"),
+            ("retrieved_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+            ("created_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+        ],
+        "crops": [
+            ("family", "VARCHAR(64)"),
+            ("genus", "VARCHAR(64)"),
+            ("species", "VARCHAR(64)"),
+            ("crop_code", "VARCHAR(32)"),
+            ("ncbi_tax_id", "INTEGER"),
+            ("taxonomy_status", "VARCHAR(32) DEFAULT 'RESOLVED'"),
+            ("taxonomy_rank", "VARCHAR(32) DEFAULT 'species'"),
+            ("taxonomy_lineage", "TEXT"),
+            ("synonyms", "TEXT"),
+            ("source", "VARCHAR(128)"),
+            ("source_version", "VARCHAR(32)"),
+            ("evidence_level", "VARCHAR(32)"),
+            ("retrieved_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+            ("updated_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+        ],
+        "targets": [
+            ("moa_scheme", "VARCHAR(32)"),
+            ("moa_group", "VARCHAR(32)"),
+            ("moa_subgroup", "VARCHAR(32)"),
+            ("organism_id", "VARCHAR(64)"),
+            ("protein_name", "VARCHAR(255)"),
+            ("evidence_level", "VARCHAR(32)"),
+        ],
+        "users": [
+            ("first_name", "VARCHAR(64)"),
+            ("last_name", "VARCHAR(64)"),
+            ("display_name", "VARCHAR(128)"),
+            ("email_verified", "BOOLEAN DEFAULT FALSE" if is_postgres else "BOOLEAN DEFAULT 0"),
+            ("email_verification_token", "VARCHAR(255)"),
+            ("email_verification_expires_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+            ("last_login_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+            ("password_reset_token", "VARCHAR(255)"),
+            ("password_reset_expires_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+            ("invitation_token", "VARCHAR(255)"),
+            ("invitation_expires_at", "TIMESTAMP WITH TIME ZONE" if is_postgres else "DATETIME"),
+        ],
+        "activity_logs": [
+            ("organization_id", "VARCHAR(36)"),
+            ("event_type", "VARCHAR(64)"),
+            ("resource_type", "VARCHAR(64)"),
+            ("resource_id", "VARCHAR(64)"),
+            ("ip_address", "VARCHAR(45)"),
+            ("user_agent", "VARCHAR(255)"),
+        ],
+    }
+
     with engine.connect() as conn:
-        # Check molecules columns
-        try:
-            existing_cols = [row[1] for row in conn.execute(text("PRAGMA table_info(molecules)")).fetchall()]
-            new_columns = [
-                ("pubchem_cid", "INTEGER"),
-                ("iupac_name", "TEXT"),
-                ("molecular_formula", "VARCHAR(128)"),
-                ("tpsa", "FLOAT"),
-                ("rotatable_bonds", "INTEGER"),
-                ("inchikey", "VARCHAR(32)"),
-                ("inchi", "TEXT"),
-                ("is_novel", "BOOLEAN DEFAULT 0"),
-                ("standardization_status", "VARCHAR(64) DEFAULT 'STANDARDIZED'"),
-                ("resolution_method", "VARCHAR(64) DEFAULT 'PUBCHEM_NAME_SEARCH'"),
-                ("source_identifier", "VARCHAR(128)"),
-                ("conformer_3d_available", "BOOLEAN DEFAULT 0"),
-                ("synonyms_json", "TEXT"),
-                ("svg_2d", "TEXT"),
-                ("retrieved_at", "DATETIME"),
-            ]
-            # Check users columns
-            user_cols = [row[1] for row in conn.execute(text("PRAGMA table_info(users)")).fetchall()]
-            new_user_cols = [
-                ("first_name", "VARCHAR(64)"),
-                ("last_name", "VARCHAR(64)"),
-                ("display_name", "VARCHAR(128)"),
-                ("email_verified", "BOOLEAN DEFAULT 0"),
-                ("email_verification_token", "VARCHAR(255)"),
-                ("email_verification_expires_at", "DATETIME"),
-                ("last_login_at", "DATETIME"),
-                ("password_reset_token", "VARCHAR(255)"),
-                ("password_reset_expires_at", "DATETIME"),
-                ("invitation_token", "VARCHAR(255)"),
-                ("invitation_expires_at", "DATETIME"),
-            ]
-            for col_name, col_type in new_user_cols:
-                if col_name not in user_cols:
-                    conn.execute(text(f"ALTER TABLE users ADD COLUMN {col_name} {col_type}"))
-
-            # Check activity_logs columns
-            log_cols = [row[1] for row in conn.execute(text("PRAGMA table_info(activity_logs)")).fetchall()]
-            new_log_cols = [
-                ("organization_id", "VARCHAR(36)"),
-                ("event_type", "VARCHAR(64)"),
-                ("resource_type", "VARCHAR(64)"),
-                ("resource_id", "VARCHAR(64)"),
-                ("ip_address", "VARCHAR(45)"),
-                ("user_agent", "VARCHAR(255)"),
-            ]
-            for col_name, col_type in new_log_cols:
-                if col_name not in log_cols:
-                    conn.execute(text(f"ALTER TABLE activity_logs ADD COLUMN {col_name} {col_type}"))
-
-            conn.commit()
-        except Exception as e:
-            print(f"Note on schema upgrade: {e}")
+        for table, cols in table_columns.items():
+            try:
+                if is_postgres:
+                    for col_name, col_type in cols:
+                        try:
+                            conn.execute(text(f"ALTER TABLE {table} ADD COLUMN IF NOT EXISTS {col_name} {col_type}"))
+                        except Exception as e_col:
+                            print(f"PG column check note ({table}.{col_name}): {e_col}")
+                else:
+                    existing_cols = [row[1] for row in conn.execute(text(f"PRAGMA table_info({table})")).fetchall()]
+                    for col_name, col_type in cols:
+                        if col_name not in existing_cols:
+                            conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {col_name} {col_type}"))
+                conn.commit()
+            except Exception as e_tbl:
+                print(f"Note on table migration ({table}): {e_tbl}")
 
 
 def init_database_and_canonical_graph():
@@ -110,8 +153,7 @@ def init_database_and_canonical_graph():
     This runs in ALL environments on server startup (development, staging, production).
     """
     Base.metadata.create_all(bind=engine)
-    if engine.dialect.name == "sqlite":
-        ensure_schema_upgrades()
+    ensure_schema_upgrades()
 
     db = SessionLocal()
     try:
