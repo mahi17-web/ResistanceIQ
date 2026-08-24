@@ -237,11 +237,12 @@ def evaluate_candidate(payload: EvaluateCandidateRequest):
             technical_details=str(ve),
         )
     except Exception as e:
+        logger.error(f"[{req_id}] INFERENCE EXECUTION ERROR: {str(e)}", exc_info=True)
         raise make_pipeline_error(
             error_code="INFERENCE_FAILED",
             stage="MODEL_INFERENCE",
             request_id=req_id,
-            message="Model inference execution failed.",
+            message=f"Model inference execution failed: {str(e)}",
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             technical_details=str(e),
         )
