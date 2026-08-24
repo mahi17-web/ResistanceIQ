@@ -21,6 +21,7 @@ export default function Login() {
   const location = useLocation();
   const setUser = useProjectStore((s) => s.setUser);
   const setOrg = useProjectStore((s) => s.setOrg);
+  const setAuthStatus = useProjectStore((s) => s.setAuthStatus);
   const addNotification = useProjectStore((s) => s.addNotification);
 
   const [email, setEmail] = useState('');
@@ -71,6 +72,7 @@ export default function Login() {
         if (data.user.organization) {
           setOrg(data.user.organization);
         }
+        setAuthStatus('authenticated');
         addNotification({
           title: 'Workspace Restored',
           message: `Signed in as ${data.user.full_name || data.user.email}`,

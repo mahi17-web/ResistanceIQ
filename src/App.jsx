@@ -135,18 +135,21 @@ export default function App() {
 
         <main className="flex-1">
           <Routes>
-            <Route path="/"                 element={<Dashboard />}        />
-            <Route path="/new"              element={<NewCandidate />}     />
-            <Route path="/forecast/:id"     element={<CandidateDetail />}   />
-            <Route path="/forecast"         element={<CandidateDetail />}   />
-            <Route path="/comparison"       element={<Comparison />}       />
-            <Route path="/backtest"         element={<Backtest />}         />
-            <Route path="/reports"          element={<Reports />}          />
-            <Route path="/settings"         element={<Settings />}         />
-            <Route path="/profile"          element={<Profile />}          />
+            <Route path="/"                  element={<Dashboard />}        />
+            <Route path="/new"               element={<NewCandidate />}     />
+            <Route path="/new-candidate"     element={<NewCandidate />}     />
+            <Route path="/candidates/new"    element={<NewCandidate />}     />
+            <Route path="/candidate/new"     element={<NewCandidate />}     />
+            <Route path="/forecast/:id"      element={<CandidateDetail />}   />
+            <Route path="/forecast"          element={<CandidateDetail />}   />
+            <Route path="/comparison"        element={<Comparison />}       />
+            <Route path="/backtest"          element={<Backtest />}         />
+            <Route path="/reports"           element={<Reports />}          />
+            <Route path="/settings"          element={<Settings />}         />
+            <Route path="/profile"           element={<Profile />}          />
             <Route path="/settings/security" element={<SecuritySettings />} />
             <Route path="/settings/users"    element={<UserManagement />}   />
-            <Route path="*"                 element={<Navigate to="/" replace />} />
+            <Route path="*"                  element={<Navigate to="/" replace />} />
           </Routes>
         </main>
       </div>

@@ -20,6 +20,7 @@ export default function Register() {
   const navigate = useNavigate();
   const setUser = useProjectStore((s) => s.setUser);
   const setOrg = useProjectStore((s) => s.setOrg);
+  const setAuthStatus = useProjectStore((s) => s.setAuthStatus);
   const addNotification = useProjectStore((s) => s.addNotification);
 
   // Form State
@@ -150,6 +151,7 @@ export default function Register() {
         if (data.user.organization) {
           setOrg(data.user.organization);
         }
+        setAuthStatus('authenticated');
         addNotification({
           title: 'Workspace Created',
           message: `Welcome to ResistanceIQ, ${data.user.full_name || data.user.email}!`,
