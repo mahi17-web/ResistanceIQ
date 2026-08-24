@@ -98,6 +98,151 @@ def ensure_schema_upgrades():
             print(f"Note on schema upgrade: {e}")
 
 
+def init_database_and_canonical_graph():
+    """
+    Ensures all database tables exist and canonical reference data is initialized:
+    - FAO Indicative Crop Classification (ICC v1.1)
+    - Validated Crop-Threat Associations
+    - Curated Biological Target Receptors & UniProt Sequences
+    - Macromolecular 3D Structures (PDB / AlphaFold)
+    - Canonical Agricultural Pests
+    - Standard Baseline Molecules
+    This runs in ALL environments on server startup (development, staging, production).
+    """
+    Base.metadata.create_all(bind=engine)
+    if engine.dialect.name == "sqlite":
+        ensure_schema_upgrades()
+
+    db = SessionLocal()
+    try:
+        from app.models import Crop, Pest, Target, Molecule, CropThreat, Project, ProjectStatus
+        from app.ingestion.knowledge_graph_builder import KnowledgeGraphBuilder
+
+        # 1. Pests
+        if db.query(Pest).count() == 0:
+            pests = [
+                Pest(
+                    id="pst_aphid_01",
+                    common_name="Green Peach Aphid",
+                    species_name="Myzus persicae",
+                    generation_time_days=10,
+                    typical_population_size=50000000,
+                    baseline_mutation_rate=2.5e-8,
+                ),
+                Pest(
+                    id="pst_mite_02",
+                    common_name="Two-Spotted Spider Mite",
+                    species_name="Tetranychus urticae",
+                    generation_time_days=8,
+                    typical_population_size=120000000,
+                    baseline_mutation_rate=4.1e-8,
+                ),
+                Pest(
+                    id="pst_moth_03",
+                    common_name="Diamondback Moth",
+                    species_name="Plutella xylostella",
+                    generation_time_days=18,
+                    typical_population_size=30000000,
+                    baseline_mutation_rate=1.8e-8,
+                ),
+                Pest(
+                    id="pst_bollworm_04",
+                    common_name="Cotton Bollworm",
+                    species_name="Helicoverpa armigera",
+                    generation_time_days=32,
+                    typical_population_size=15000000,
+                    baseline_mutation_rate=1.2e-8,
+                ),
+                Pest(
+                    id="pst_armyworm_05",
+                    common_name="Fall Armyworm",
+                    species_name="Spodoptera frugiperda",
+                    generation_time_days=28,
+                    typical_population_size=20000000,
+                    baseline_mutation_rate=1.5e-8,
+                ),
+                Pest(
+                    id="pst_planthopper_07",
+                    common_name="Brown Planthopper (BPH)",
+                    species_name="Nilaparvata lugens",
+                    generation_time_days=25,
+                    typical_population_size=40000000,
+                    baseline_mutation_rate=2.0e-8,
+                ),
+            ]
+            db.add_all(pests)
+            db.commit()
+
+        # 2. Canonical Knowledge Graph (Crops, Threats, Targets, Proteins, Structures)
+        if db.query(Crop).count() == 0 or db.query(CropThreat).count() == 0 or db.query(Target).count() == 0:
+            print("Initializing Canonical Knowledge Graph (FAO, EPPO, UniProt, RCSB PDB)...")
+            builder = KnowledgeGraphBuilder(db=db)
+            builder.sync_all("ALL")
+
+        # 3. Baseline Molecules
+        if db.query(Molecule).count() == 0:
+            molecules = [
+                Molecule(
+                    id="mol_imidacloprid",
+                    chemical_name="Imidacloprid",
+                    smiles="C1CN(C(=N1)NC(=O)N)CC2=CN=C(C=C2)Cl",
+                    molecular_weight=255.66,
+                    logp=0.57,
+                    pubchem_cid=86287518,
+                    provenance_source="PUBCHEM",
+                    standardization_status="STANDARDIZED",
+                ),
+                Molecule(
+                    id="mol_chlorantraniliprole",
+                    chemical_name="Chlorantraniliprole",
+                    smiles="CC1=C(C(=CC=C1)NC(=O)C2=NN(C(=C2)C3=NC=CC=C3)C4=CC(=CC=C4Cl)Cl)NC(=O)C(C)(C)C",
+                    molecular_weight=483.15,
+                    logp=2.76,
+                    pubchem_cid=644260,
+                    provenance_source="PUBCHEM",
+                    standardization_status="STANDARDIZED",
+                ),
+                Molecule(
+                    id="mol_abamectin",
+                    chemical_name="Abamectin",
+                    smiles="CC1CC2CC(C(=O)O2)CC(=CC3C(C(C(=CC4C(C(C(=O)O4)C1O)O)C)O)O)C",
+                    molecular_weight=873.09,
+                    logp=4.4,
+                    pubchem_cid=6434889,
+                    provenance_source="PUBCHEM",
+                    standardization_status="STANDARDIZED",
+                ),
+                Molecule(
+                    id="mol_spinosad",
+                    chemical_name="Spinosad",
+                    smiles="CCC1CC=C(C2C1C3C=C(CC3C(=O)O2)C4CC(CC(O4)C)N(C)C)C",
+                    molecular_weight=731.98,
+                    logp=4.0,
+                    pubchem_cid=183015,
+                    provenance_source="PUBCHEM",
+                    standardization_status="STANDARDIZED",
+                ),
+            ]
+            db.add_all(molecules)
+            db.commit()
+
+        # 4. Default Project if none exists
+        if db.query(Project).count() == 0:
+            default_proj = Project(
+                id="prj_ache1_series",
+                name="Resistance Discovery Series",
+                description="Primary candidate evaluation and resistance forecasting series",
+                status=ProjectStatus.ACTIVE,
+            )
+            db.add(default_proj)
+            db.commit()
+
+    except Exception as e:
+        print(f"Note during canonical database initialization: {e}")
+    finally:
+        db.close()
+
+
 def seed_development_data():
     if not settings.ALLOW_DEV_SEEDING or settings.APP_ENV.lower() == "production":
         return

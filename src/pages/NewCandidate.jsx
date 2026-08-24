@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Sprout,
@@ -32,6 +32,7 @@ import {
 import {
   getCrops,
   getCropThreats,
+  getPests,
   getThreatTargets,
   getTargets,
   getTargetProtein,
@@ -42,6 +43,7 @@ import {
   resolveChemicalStructure,
   uploadChemicalStructureFile,
   exportForecast,
+  normalizeArray,
 } from '../api/client.js';
 import { useForecast } from '../hooks/useForecast.js';
 import { parseSmiles } from '../utils/smilesParser.js';
@@ -286,125 +288,181 @@ export default function NewCandidate() {
   // Step 6: Review & Pre-check
   const [applicabilityDomain, setApplicabilityDomain] = useState(null);
 
-  // Initial Load: Fetch FAO Crops
+  // ─── Step 1: Crop Loader & Search ──────────────────────────────────────────
   useEffect(() => {
-    loadCrops();
-  }, []);
-
-  async function loadCrops(query = '') {
-    setLoadingCrops(true);
-    try {
-      const data = await getCrops(query);
-      setCropList(data || []);
-      if (!selectedCrop && data && data.length > 0) {
-        setSelectedCrop(data[0]);
+    let isMounted = true;
+    const timer = setTimeout(async () => {
+      setLoadingCrops(true);
+      try {
+        const data = await getCrops(cropSearch);
+        const normalized = normalizeArray(data);
+        if (!isMounted) return;
+        setCropList(normalized);
+        setSelectedCrop((prev) => {
+          if (prev && normalized.some((c) => c.id === prev.id)) {
+            return prev;
+          }
+          return normalized.length > 0 ? normalized[0] : null;
+        });
+      } catch (err) {
+        console.error('Failed to load FAO crops', err);
+        if (isMounted) setCropList([]);
+      } finally {
+        if (isMounted) setLoadingCrops(false);
       }
-    } catch (err) {
-      console.error('Failed to load FAO crops', err);
-    } finally {
-      setLoadingCrops(false);
-    }
-  }
+    }, cropSearch ? 250 : 0);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, [cropSearch]);
 
   function handleCropSearchChange(e) {
-    const val = e.target.value;
-    setCropSearch(val);
-    loadCrops(val);
+    setCropSearch(e.target.value);
   }
 
-  // When Crop changes, automatically load its associated threats
+  // ─── Step 2: Threat Loader ─────────────────────────────────────────────────
   useEffect(() => {
-    if (selectedCrop) {
-      loadThreatsForCrop(selectedCrop.id);
-    }
-  }, [selectedCrop]);
-
-  async function loadThreatsForCrop(cropId) {
-    setLoadingThreats(true);
-    try {
-      let threats = await getCropThreats(cropId);
-      if (!threats || threats.length === 0) {
-        threats = await getCropThreats('crop_fao_0121_tomato');
-      }
-      setThreatList(threats || []);
-      if (threats && threats.length > 0) {
-        setSelectedThreat(threats[0]);
-      } else {
-        setSelectedThreat(null);
-      }
-    } catch (err) {
-      console.error('Failed to load crop threats', err);
-      try {
-        const fallback = await getCropThreats('crop_fao_0121_tomato');
-        setThreatList(fallback || []);
-        if (fallback && fallback.length > 0) setSelectedThreat(fallback[0]);
-      } catch (e2) {
+    let isMounted = true;
+    const cropId = selectedCrop?.id;
+    async function fetchThreats() {
+      if (!cropId) {
         setThreatList([]);
+        setSelectedThreat(null);
+        return;
       }
-    } finally {
-      setLoadingThreats(false);
-    }
-  }
-
-  // When Threat changes, automatically load biological targets
-  useEffect(() => {
-    if (selectedThreat) {
-      loadTargetsForThreat(selectedThreat.organism_id || selectedThreat.organism_name);
-    }
-  }, [selectedThreat]);
-
-  async function loadTargetsForThreat(organismId) {
-    setLoadingTargets(true);
-    try {
-      let targets = await getThreatTargets(organismId);
-      if (!targets || targets.length === 0) {
-        targets = await getTargets({ pest_id: organismId });
-      }
-      if (!targets || targets.length === 0) {
-        targets = await getTargets();
-      }
-      setTargetList(targets || []);
-      if (targets && targets.length > 0) {
-        setSelectedTarget(targets[0]);
-      } else {
-        setSelectedTarget(null);
-      }
-    } catch (err) {
-      console.error('Failed to load targets for threat', err);
+      setLoadingThreats(true);
       try {
-        const allTargets = await getTargets();
-        setTargetList(allTargets || []);
-        if (allTargets && allTargets.length > 0) setSelectedTarget(allTargets[0]);
-      } catch (e2) {
-        setTargetList([]);
+        let threats = await getCropThreats(cropId);
+        threats = normalizeArray(threats);
+        if (threats.length === 0) {
+          const generalPests = await getPests();
+          const normPests = normalizeArray(generalPests);
+          threats = normPests.map((p) => ({
+            id: `ct_reg_${p.id}`,
+            organism_id: p.id,
+            organism_name: p.species_name,
+            common_name: p.common_name,
+            relationship: 'DOCUMENTED_PEST',
+            evidence_level: 'PEST_REGISTRY',
+            ncbi_tax_id: p.id,
+          }));
+        }
+        if (!isMounted) return;
+        setThreatList(threats);
+        setSelectedThreat((prev) => {
+          if (prev && threats.some((t) => (t.id && t.id === prev.id) || (t.organism_id && t.organism_id === prev.organism_id))) {
+            return prev;
+          }
+          return threats.length > 0 ? threats[0] : null;
+        });
+      } catch (err) {
+        console.error('Failed to load crop threats', err);
+        if (isMounted) {
+          setThreatList([]);
+          setSelectedThreat(null);
+        }
+      } finally {
+        if (isMounted) setLoadingThreats(false);
       }
-    } finally {
-      setLoadingTargets(false);
     }
-  }
 
-  // When Target changes, fetch live Protein & Structure metadata
+    fetchThreats();
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedCrop?.id]);
+
+  // ─── Step 3: Target Loader ─────────────────────────────────────────────────
   useEffect(() => {
-    if (selectedTarget) {
-      loadProteinAndStructures(selectedTarget.id);
+    let isMounted = true;
+    const orgId = selectedThreat?.organism_id || selectedThreat?.organism_name || selectedThreat?.id;
+    async function fetchTargets() {
+      if (!orgId) {
+        setTargetList([]);
+        setSelectedTarget(null);
+        return;
+      }
+      setLoadingTargets(true);
+      try {
+        let targets = await getThreatTargets(orgId);
+        targets = normalizeArray(targets);
+        if (targets.length === 0) {
+          targets = await getTargets({ pest_id: orgId, organism_id: orgId });
+          targets = normalizeArray(targets);
+        }
+        if (targets.length === 0) {
+          targets = await getTargets();
+          targets = normalizeArray(targets);
+        }
+        if (!isMounted) return;
+        setTargetList(targets);
+        setSelectedTarget((prev) => {
+          if (prev && targets.some((t) => t.id === prev.id)) {
+            return prev;
+          }
+          return targets.length > 0 ? targets[0] : null;
+        });
+      } catch (err) {
+        console.error('Failed to load targets for threat', err);
+        if (isMounted) {
+          try {
+            const allTargets = await getTargets();
+            const normAll = normalizeArray(allTargets);
+            setTargetList(normAll);
+            setSelectedTarget(normAll.length > 0 ? normAll[0] : null);
+          } catch {
+            setTargetList([]);
+            setSelectedTarget(null);
+          }
+        }
+      } finally {
+        if (isMounted) setLoadingTargets(false);
+      }
     }
-  }, [selectedTarget]);
 
-  async function loadProteinAndStructures(targetId) {
-    setLoadingProtein(true);
-    try {
-      const [prot, structs] = await Promise.all([
-        getTargetProtein(targetId).catch(() => null),
-        getTargetStructures(targetId).catch(() => []),
-      ]);
-      setProteinRecord(prot);
-      setStructuresList(structs || []);
-    } catch (err) {
-      console.error('Failed to load protein / structures', err);
-    } finally {
-      setLoadingProtein(false);
+    fetchTargets();
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedThreat?.organism_id, selectedThreat?.organism_name, selectedThreat?.id]);
+
+  // ─── Step 4: Protein & Structures Loader ───────────────────────────────────
+  useEffect(() => {
+    let isMounted = true;
+    const targetId = selectedTarget?.id;
+    async function fetchProteinAndStructures() {
+      if (!targetId) {
+        setProteinRecord(null);
+        setStructuresList([]);
+        return;
+      }
+      setLoadingProtein(true);
+      try {
+        const [prot, structs] = await Promise.all([
+          getTargetProtein(targetId).catch(() => null),
+          getTargetStructures(targetId).catch(() => []),
+        ]);
+        if (!isMounted) return;
+        setProteinRecord(prot);
+        setStructuresList(normalizeArray(structs));
+      } catch (err) {
+        console.error('Failed to load protein / structures', err);
+        if (isMounted) {
+          setProteinRecord(null);
+          setStructuresList([]);
+        }
+      } finally {
+        if (isMounted) setLoadingProtein(false);
+      }
     }
-  }
+
+    fetchProteinAndStructures();
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedTarget?.id]);
 
   // ─── Step 5: Automated Chemical Resolution Handlers ──────────────────────
 
@@ -765,62 +823,118 @@ export default function NewCandidate() {
                 />
               </div>
 
-              {/* Crop Selection Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, maxHeight: 340, overflowY: 'auto', paddingRight: 4 }}>
-                {cropList.map((crop) => {
-                  const isSelected = selectedCrop?.id === crop.id;
-                  return (
+              {/* Crop Selection Grid / States */}
+              {loadingCrops ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 20px', gap: 12, background: 'var(--bg-deep, #05070B)', borderRadius: 10 }}>
+                  <Loader2 size={26} className="animate-spin" style={{ color: 'var(--teal, #0BDFA0)' }} />
+                  <p style={{ fontSize: 13, color: 'var(--ink-4, #7C8A9A)', fontWeight: 600 }}>Loading canonical crops...</p>
+                </div>
+              ) : cropList.length === 0 ? (
+                <div style={{ padding: '32px 20px', textAlign: 'center', background: 'var(--bg-deep, #05070B)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <p style={{ fontSize: 14, color: '#F1F5F9', fontWeight: 600 }}>No crops found matching "{cropSearch}"</p>
+                  <p style={{ fontSize: 12, color: 'var(--ink-4, #7C8A9A)', marginTop: 4 }}>
+                    Try searching for "Rice", "Tomato", "Wheat", "Maize", "Cotton", or "Soybean"
+                  </p>
+                  {cropSearch && (
                     <button
-                      key={crop.id}
                       type="button"
-                      onClick={() => setSelectedCrop(crop)}
+                      onClick={() => setCropSearch('')}
                       style={{
-                        padding: '14px 16px',
-                        borderRadius: 10,
-                        background: isSelected ? 'rgba(11,223,160,0.08)' : 'var(--bg-deep, #05070B)',
-                        border: isSelected ? '1.5px solid var(--teal, #0BDFA0)' : '1px solid rgba(255,255,255,0.06)',
-                        textAlign: 'left',
+                        marginTop: 14,
+                        padding: '6px 14px',
+                        borderRadius: 6,
+                        background: 'rgba(11,223,160,0.12)',
+                        border: '1px solid var(--teal, #0BDFA0)',
+                        color: 'var(--teal, #0BDFA0)',
+                        fontSize: 12,
+                        fontWeight: 700,
                         cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 4,
-                        transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: 14, fontWeight: 700, color: isSelected ? 'var(--teal, #0BDFA0)' : 'var(--ink, #F1F5F9)' }}>
-                          {crop.common_name}
-                        </span>
-                        <span className="mono" style={{ fontSize: 10, padding: '2px 6px', borderRadius: 4, background: 'rgba(255,255,255,0.06)', color: 'var(--ink-4, #7C8A9A)' }}>
-                          ICC {crop.crop_code}
-                        </span>
-                      </div>
-                      <span style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--ink-4, #7C8A9A)' }}>
-                        {crop.scientific_name}
-                      </span>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
-                        <span className="badge" style={{ fontSize: 9, padding: '2px 6px', background: 'rgba(139,140,248,0.1)', color: '#8B8CF8' }}>
-                          {crop.family || 'Family'}
-                        </span>
-                        {crop.ncbi_tax_id && (
-                          <span className="mono" style={{ fontSize: 9, color: 'var(--ink-5, #4B5563)' }}>
-                            TaxID: {crop.ncbi_tax_id}
+                      Clear Search
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, maxHeight: 340, overflowY: 'auto', paddingRight: 4 }}>
+                  {cropList.map((crop) => {
+                    const isSelected = selectedCrop?.id === crop.id;
+                    const cropDisplayName = crop.common_name || crop.name || crop.crop_name || crop.scientific_name || 'Crop';
+                    const cropScientific = crop.scientific_name || crop.taxonomy_name || '';
+                    const cropCode = crop.crop_code ? `ICC ${crop.crop_code}` : (crop.id ? crop.id.replace('crop_fao_', '').toUpperCase() : '');
+                    const cropFamily = crop.family || 'Agronomic Crop';
+                    return (
+                      <button
+                        key={crop.id}
+                        type="button"
+                        onClick={() => setSelectedCrop(crop)}
+                        style={{
+                          padding: '14px 16px',
+                          borderRadius: 10,
+                          background: isSelected ? 'rgba(11,223,160,0.08)' : 'var(--bg-deep, #05070B)',
+                          border: isSelected ? '1.5px solid var(--teal, #0BDFA0)' : '1px solid rgba(255,255,255,0.06)',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 4,
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span style={{ fontSize: 14, fontWeight: 700, color: isSelected ? 'var(--teal, #0BDFA0)' : 'var(--ink, #F1F5F9)' }}>
+                            {cropDisplayName}
+                          </span>
+                          {cropCode && (
+                            <span className="mono" style={{ fontSize: 10, padding: '2px 6px', borderRadius: 4, background: 'rgba(255,255,255,0.06)', color: 'var(--ink-4, #7C8A9A)' }}>
+                              {cropCode}
+                            </span>
+                          )}
+                        </div>
+                        {cropScientific && (
+                          <span style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--ink-4, #7C8A9A)' }}>
+                            {cropScientific}
                           </span>
                         )}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
+                          <span className="badge" style={{ fontSize: 9, padding: '2px 6px', background: 'rgba(139,140,248,0.1)', color: '#8B8CF8' }}>
+                            {cropFamily}
+                          </span>
+                          {crop.ncbi_tax_id && (
+                            <span className="mono" style={{ fontSize: 9, color: 'var(--ink-5, #4B5563)' }}>
+                              TaxID: {crop.ncbi_tax_id}
+                            </span>
+                          )}
+                          {isSelected && (
+                            <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', color: 'var(--teal, #0BDFA0)' }}>
+                              <Check size={14} />
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 24 }}>
                 <button
                   type="button"
                   id="btn-step1-next"
-                  disabled={!selectedCrop}
+                  disabled={!selectedCrop || loadingCrops}
                   onClick={() => setCurrentStep(2)}
                   className="btn btn-primary"
-                  style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 8, background: 'var(--teal, #0BDFA0)', color: '#05070B', fontWeight: 700, cursor: 'pointer' }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '10px 20px',
+                    borderRadius: 8,
+                    background: selectedCrop ? 'var(--teal, #0BDFA0)' : 'rgba(255,255,255,0.1)',
+                    color: selectedCrop ? '#05070B' : 'var(--ink-4, #7C8A9A)',
+                    fontWeight: 700,
+                    cursor: selectedCrop ? 'pointer' : 'not-allowed',
+                  }}
                 >
                   <span>Select Threat Organism</span>
                   <ArrowRight size={16} />
@@ -839,22 +953,31 @@ export default function NewCandidate() {
                 <div>
                   <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--ink, #F1F5F9)' }}>Step 2: Select Verified Threat Organism</h2>
                   <p style={{ fontSize: 12, color: 'var(--ink-4, #7C8A9A)' }}>
-                    Threat organisms known to attack {selectedCrop?.common_name} ({selectedCrop?.scientific_name})
+                    Threat organisms known to attack {selectedCrop?.common_name || selectedCrop?.name} ({selectedCrop?.scientific_name})
                   </p>
                 </div>
               </div>
 
-              {threatList.length === 0 ? (
+              {loadingThreats ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 20px', gap: 12, background: 'var(--bg-deep, #05070B)', borderRadius: 10 }}>
+                  <Loader2 size={26} className="animate-spin" style={{ color: '#F3B14D' }} />
+                  <p style={{ fontSize: 13, color: 'var(--ink-4, #7C8A9A)', fontWeight: 600 }}>Loading verified threat organisms...</p>
+                </div>
+              ) : threatList.length === 0 ? (
                 <div style={{ padding: 24, textAlign: 'center', background: 'var(--bg-deep, #05070B)', borderRadius: 10 }}>
                   <p style={{ fontSize: 13, color: 'var(--ink-4, #7C8A9A)' }}>No specific verified threats configured for this crop.</p>
                 </div>
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }}>
                   {threatList.map((threat) => {
-                    const isSelected = selectedThreat?.id === threat.id;
+                    const isSelected = selectedThreat?.id === threat.id || (selectedThreat?.organism_id && selectedThreat.organism_id === threat.organism_id);
+                    const threatCommon = threat.common_name || threat.organism_name || threat.species_name || 'Threat Organism';
+                    const threatScientific = threat.organism_name || threat.species_name || '';
+                    const threatRel = threat.relationship || 'HOST_ASSOCIATION';
+                    const threatEvidence = threat.evidence_level || 'DIRECT';
                     return (
                       <button
-                        key={threat.id}
+                        key={threat.id || threat.organism_id}
                         type="button"
                         onClick={() => setSelectedThreat(threat)}
                         style={{
@@ -873,19 +996,28 @@ export default function NewCandidate() {
                         <div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                             <span style={{ fontSize: 15, fontWeight: 700, color: isSelected ? '#F3B14D' : 'var(--ink, #F1F5F9)' }}>
-                              {threat.common_name || threat.organism_name}
+                              {threatCommon}
                             </span>
                             <span className="badge" style={{ fontSize: 10, background: 'rgba(255,255,255,0.08)', color: 'var(--ink-4, #7C8A9A)' }}>
-                              {threat.relationship}
+                              {threatRel}
                             </span>
                           </div>
-                          <p style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--ink-4, #7C8A9A)', marginTop: 2 }}>
-                            {threat.organism_name} (TaxID: {threat.ncbi_tax_id})
-                          </p>
+                          {threatScientific && (
+                            <p style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--ink-4, #7C8A9A)', marginTop: 2 }}>
+                              {threatScientific} {threat.ncbi_tax_id ? `(TaxID: ${threat.ncbi_tax_id})` : ''}
+                            </p>
+                          )}
                         </div>
-                        <span className="badge badge-teal" style={{ fontSize: 10, fontWeight: 600 }}>
-                          {threat.evidence_level}
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span className="badge badge-teal" style={{ fontSize: 10, fontWeight: 600 }}>
+                            {threatEvidence}
+                          </span>
+                          {isSelected && (
+                            <span style={{ color: '#F3B14D', display: 'flex', alignItems: 'center' }}>
+                              <Check size={16} />
+                            </span>
+                          )}
+                        </div>
                       </button>
                     );
                   })}
@@ -904,10 +1036,20 @@ export default function NewCandidate() {
                 <button
                   type="button"
                   id="btn-step2-next"
-                  disabled={!selectedThreat}
+                  disabled={!selectedThreat || loadingThreats}
                   onClick={() => setCurrentStep(3)}
                   className="btn btn-primary"
-                  style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 8, background: 'var(--teal, #0BDFA0)', color: '#05070B', fontWeight: 700, cursor: 'pointer' }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '10px 20px',
+                    borderRadius: 8,
+                    background: selectedThreat ? 'var(--teal, #0BDFA0)' : 'rgba(255,255,255,0.1)',
+                    color: selectedThreat ? '#05070B' : 'var(--ink-4, #7C8A9A)',
+                    fontWeight: 700,
+                    cursor: selectedThreat ? 'pointer' : 'not-allowed',
+                  }}
                 >
                   <span>Select Biological Target</span>
                   <ArrowRight size={16} />
@@ -926,12 +1068,17 @@ export default function NewCandidate() {
                 <div>
                   <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--ink, #F1F5F9)' }}>Step 3: Select Biological Target Receptor</h2>
                   <p style={{ fontSize: 12, color: 'var(--ink-4, #7C8A9A)' }}>
-                    Receptor sites mapped to {selectedThreat?.organism_name} ({selectedThreat?.common_name})
+                    Receptor sites mapped to {selectedThreat?.organism_name || selectedThreat?.common_name} ({selectedThreat?.common_name})
                   </p>
                 </div>
               </div>
 
-              {targetList.length === 0 ? (
+              {loadingTargets ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 20px', gap: 12, background: 'var(--bg-deep, #05070B)', borderRadius: 10 }}>
+                  <Loader2 size={26} className="animate-spin" style={{ color: '#8B8CF8' }} />
+                  <p style={{ fontSize: 13, color: 'var(--ink-4, #7C8A9A)', fontWeight: 600 }}>Loading biological target receptors...</p>
+                </div>
+              ) : targetList.length === 0 ? (
                 <div style={{ padding: 24, textAlign: 'center', background: 'var(--bg-deep, #05070B)', borderRadius: 10 }}>
                   <p style={{ fontSize: 13, color: 'var(--ink-4, #7C8A9A)' }}>No validated targets available for this threat organism.</p>
                 </div>
@@ -939,6 +1086,10 @@ export default function NewCandidate() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }}>
                   {targetList.map((tgt) => {
                     const isSelected = selectedTarget?.id === tgt.id;
+                    const targetName = tgt.name || tgt.target_name || tgt.protein_name || 'Biological Target';
+                    const targetMoa = tgt.irac_moa_group || tgt.moa_group;
+                    const targetUniprot = tgt.uniprot_id || tgt.uniprot_accession;
+                    const targetGene = tgt.gene_name || tgt.gene_primary;
                     return (
                       <button
                         key={tgt.id}
@@ -960,28 +1111,37 @@ export default function NewCandidate() {
                         <div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                             <span style={{ fontSize: 15, fontWeight: 700, color: isSelected ? '#8B8CF8' : 'var(--ink, #F1F5F9)' }}>
-                              {tgt.name}
+                              {targetName}
                             </span>
-                            {tgt.irac_moa_group && (
+                            {targetMoa && (
                               <span className="badge" style={{ fontSize: 10, background: 'rgba(11,223,160,0.12)', color: 'var(--teal, #0BDFA0)' }}>
-                                IRAC {tgt.irac_moa_group}
+                                IRAC {targetMoa}
                               </span>
                             )}
                           </div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 4 }}>
-                            <span className="mono" style={{ fontSize: 11, color: '#8B8CF8' }}>
-                              UniProt: {tgt.uniprot_id}
-                            </span>
-                            {tgt.gene_name && (
+                            {targetUniprot && (
+                              <span className="mono" style={{ fontSize: 11, color: '#8B8CF8' }}>
+                                UniProt: {targetUniprot}
+                              </span>
+                            )}
+                            {targetGene && (
                               <span className="mono" style={{ fontSize: 11, color: 'var(--ink-4, #7C8A9A)' }}>
-                                Gene: {tgt.gene_name}
+                                Gene: {targetGene}
                               </span>
                             )}
                           </div>
                         </div>
-                        <span className="badge" style={{ fontSize: 10, background: 'rgba(255,255,255,0.08)', color: 'var(--ink-4, #7C8A9A)' }}>
-                          {tgt.evidence_level || 'CURATED'}
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span className="badge" style={{ fontSize: 10, background: 'rgba(255,255,255,0.08)', color: 'var(--ink-4, #7C8A9A)' }}>
+                            {tgt.evidence_level || 'CURATED'}
+                          </span>
+                          {isSelected && (
+                            <span style={{ color: '#8B8CF8', display: 'flex', alignItems: 'center' }}>
+                              <Check size={16} />
+                            </span>
+                          )}
+                        </div>
                       </button>
                     );
                   })}
@@ -1000,10 +1160,20 @@ export default function NewCandidate() {
                 <button
                   type="button"
                   id="btn-step3-next"
-                  disabled={!selectedTarget}
+                  disabled={!selectedTarget || loadingTargets}
                   onClick={() => setCurrentStep(4)}
                   className="btn btn-primary"
-                  style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 8, background: 'var(--teal, #0BDFA0)', color: '#05070B', fontWeight: 700, cursor: 'pointer' }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '10px 20px',
+                    borderRadius: 8,
+                    background: selectedTarget ? 'var(--teal, #0BDFA0)' : 'rgba(255,255,255,0.1)',
+                    color: selectedTarget ? '#05070B' : 'var(--ink-4, #7C8A9A)',
+                    fontWeight: 700,
+                    cursor: selectedTarget ? 'pointer' : 'not-allowed',
+                  }}
                 >
                   <span>Inspect Protein & Structure</span>
                   <ArrowRight size={16} />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, UserPlus, Shield, CheckCircle2, AlertCircle, Trash2, Ban, RefreshCw, Mail } from 'lucide-react';
+import { Users, UserPlus, CheckCircle2, AlertCircle, Trash2, Ban, RefreshCw } from 'lucide-react';
 import useProjectStore from '../store/projectStore.js';
 import {
   getUsers,

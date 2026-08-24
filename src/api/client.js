@@ -238,10 +238,26 @@ export async function removeUser(userId) {
   });
 }
 
+// ─── Array Normalizer Helper ───────────────────────────────────────────────────
+export function normalizeArray(data) {
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data.items)) return data.items;
+  if (Array.isArray(data.data)) return data.data;
+  if (Array.isArray(data.results)) return data.results;
+  if (Array.isArray(data.crops)) return data.crops;
+  if (Array.isArray(data.threats)) return data.threats;
+  if (Array.isArray(data.targets)) return data.targets;
+  if (Array.isArray(data.pests)) return data.pests;
+  if (Array.isArray(data.candidates)) return data.candidates;
+  return [];
+}
+
 // ─── Crops & Knowledge Graph ──────────────────────────────────────────────────
 export async function getCrops(search = '') {
   const query = search ? `?search=${encodeURIComponent(search)}` : '';
-  return request(`/crops${query}`);
+  const res = await request(`/crops${query}`);
+  return normalizeArray(res);
 }
 
 export async function getCrop(id) {
@@ -249,12 +265,14 @@ export async function getCrop(id) {
 }
 
 export async function getCropThreats(cropId) {
-  return request(`/crops/${cropId}/threats`);
+  const res = await request(`/crops/${cropId}/threats`);
+  return normalizeArray(res);
 }
 
 // ─── Pests ────────────────────────────────────────────────────────────────────
 export async function getPests() {
-  return request('/pests');
+  const res = await request('/pests');
+  return normalizeArray(res);
 }
 
 // ─── Target Proteins & Structures ─────────────────────────────────────────────
@@ -270,11 +288,13 @@ export async function getTargets(params = {}) {
   }
   const qs = queryParams.toString();
   if (qs) endpoint += `?${qs}`;
-  return request(endpoint);
+  const res = await request(endpoint);
+  return normalizeArray(res);
 }
 
 export async function getThreatTargets(organismId) {
-  return request(`/targets/threat/${encodeURIComponent(organismId)}`);
+  const res = await request(`/targets/threat/${encodeURIComponent(organismId)}`);
+  return normalizeArray(res);
 }
 
 export async function getTarget(id) {
@@ -286,7 +306,8 @@ export async function getTargetProtein(targetId) {
 }
 
 export async function getTargetStructures(targetId) {
-  return request(`/targets/${targetId}/structures`);
+  const res = await request(`/targets/${targetId}/structures`);
+  return normalizeArray(res);
 }
 
 export async function getKnowledgeGraphStatus() {

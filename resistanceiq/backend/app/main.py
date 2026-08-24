@@ -43,8 +43,9 @@ def log_safe_email_configuration():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize DB tables and ensure seed records are loaded
-    from app.db.seed import seed_development_data
+    # Initialize DB tables and ensure canonical knowledge graph is loaded in all environments
+    from app.db.seed import init_database_and_canonical_graph, seed_development_data
+    init_database_and_canonical_graph()
     seed_development_data()
     log_safe_email_configuration()
     yield

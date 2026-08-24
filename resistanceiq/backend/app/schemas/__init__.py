@@ -268,7 +268,7 @@ class MoleculeRead(BaseModel):
     svg_2d: Optional[str] = None
     provenance_source: Optional[str] = None
     retrieved_at: Optional[datetime] = None
-    created_at: datetime
+    created_at: Optional[datetime] = None
 
 
 # ─── Knowledge Graph: Crops, Proteins, Structures ────────────────────────────

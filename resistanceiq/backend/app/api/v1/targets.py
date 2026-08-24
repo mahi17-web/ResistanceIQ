@@ -67,6 +67,7 @@ def list_targets(
 def list_targets_for_threat(organism_id: str, db: Session = Depends(get_db)):
     """
     Retrieves validated biological targets specifically linked to a threat organism.
+    Falls back to curated biological targets so researchers can evaluate any target receptor.
     """
     pest = db.query(Pest).filter(or_(Pest.id == organism_id, Pest.species_name == organism_id)).first()
     if pest:
@@ -77,7 +78,8 @@ def list_targets_for_threat(organism_id: str, db: Session = Depends(get_db)):
                 Target.organism == pest.common_name,
             )
         ).all()
-        return targets
+        if targets:
+            return targets
 
     targets = db.query(Target).filter(
         or_(
@@ -85,6 +87,10 @@ def list_targets_for_threat(organism_id: str, db: Session = Depends(get_db)):
             Target.organism.ilike(f"%{organism_id}%"),
         )
     ).all()
+
+    if not targets:
+        targets = db.query(Target).order_by(Target.name.asc()).all()
+
     return targets
 
 
