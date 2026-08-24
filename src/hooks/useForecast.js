@@ -100,10 +100,23 @@ export function useForecast() {
 
       let result;
       if (projectId && moleculeId && targetId && pestId) {
-        result = await triggerForecast(moleculeId, targetId, pestId, projectId, modelVersion);
+        try {
+          result = await triggerForecast(moleculeId, targetId, pestId, projectId, modelVersion);
+        } catch (trigErr) {
+          console.warn('Persisted forecast error, falling back to direct ML evaluation:', trigErr);
+          result = await evaluateCandidate({
+            chemical_name: chemicalName || 'Candidate Compound',
+            smiles: smiles || 'CCO',
+            irac_moa_group: moaGroup || '4A',
+            pest_name: 'Myzus persicae',
+            pest_order: pestOrder || 'Hemiptera',
+            assay_method: assayMethod || 'Leaf-Dip',
+            model_version: modelVersion,
+          });
+        }
       } else {
         result = await evaluateCandidate({
-          chemical_name: chemicalName || 'Candidate',
+          chemical_name: chemicalName || 'Candidate Compound',
           smiles: smiles || 'CCO',
           irac_moa_group: moaGroup || '4A',
           pest_name: 'Myzus persicae',
