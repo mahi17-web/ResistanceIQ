@@ -1,5 +1,5 @@
 import os
-from typing import List, Union, Optional
+from typing import List, Union, Optional, Any
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -24,10 +24,13 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
 
-    FRONTEND_URL: str = "http://localhost:5173"
-    CORS_ORIGINS: Optional[List[str]] = None
+    FRONTEND_URL: str = "https://resistance-iq.vercel.app"
+    CORS_ORIGINS: Optional[Union[List[str], str]] = None
 
     BACKEND_CORS_ORIGINS: List[str] = [
+        "https://resistance-iq.vercel.app",
+        "https://resistanceiq.vercel.app",
+        "https://resistanceiq-api.onrender.com",
         "http://localhost:5173",
         "http://localhost:3000",
         "http://127.0.0.1:5173",
@@ -83,12 +86,52 @@ class Settings(BaseSettings):
             return os.path.join(root_dir, clean_rel).replace("\\", "/")
         return v
 
+    @field_validator("BACKEND_CORS_ORIGINS", "CORS_ORIGINS", mode="before")
+    @classmethod
+    def resolve_cors_origins(cls, v: Any) -> Optional[List[str]]:
+        if v is None:
+            return None
+        if isinstance(v, str):
+            v_str = v.strip()
+            if not v_str:
+                return []
+            if v_str.startswith("[") and v_str.endswith("]"):
+                import json
+                try:
+                    parsed = json.loads(v_str)
+                    if isinstance(parsed, list):
+                        return [str(o).strip().rstrip("/") for o in parsed if str(o).strip()]
+                except Exception:
+                    pass
+            return [o.strip().rstrip("/") for o in v_str.split(",") if o.strip()]
+        if isinstance(v, (list, tuple, set)):
+            return [str(o).strip().rstrip("/") for o in v if str(o).strip()]
+        return v
+
     @model_validator(mode="after")
     def sync_aliases_and_enforce_production_isolation(self):
         if self.JWT_SECRET_KEY and (not self.JWT_SECRET or self.JWT_SECRET.startswith("super-secret")):
             self.JWT_SECRET = self.JWT_SECRET_KEY
         if self.CORS_ORIGINS:
-            self.BACKEND_CORS_ORIGINS = self.CORS_ORIGINS
+            origins = list(self.CORS_ORIGINS) if isinstance(self.CORS_ORIGINS, (list, set, tuple)) else [self.CORS_ORIGINS]
+            for origin in origins:
+                clean_origin = str(origin).strip().rstrip("/")
+                if clean_origin and clean_origin not in self.BACKEND_CORS_ORIGINS:
+                    self.BACKEND_CORS_ORIGINS.append(clean_origin)
+
+        if self.FRONTEND_URL:
+            clean_fe = self.FRONTEND_URL.strip().rstrip("/")
+            if clean_fe and clean_fe not in self.BACKEND_CORS_ORIGINS:
+                self.BACKEND_CORS_ORIGINS.append(clean_fe)
+
+        for default_origin in [
+            "https://resistance-iq.vercel.app",
+            "https://resistanceiq.vercel.app",
+            "https://resistanceiq-api.onrender.com",
+        ]:
+            if default_origin not in self.BACKEND_CORS_ORIGINS:
+                self.BACKEND_CORS_ORIGINS.append(default_origin)
+
 
         if self.APP_ENV.lower() == "production":
             self.ALLOW_DEV_SEEDING = False

@@ -4,9 +4,36 @@
  * error handling, and zero mock fallback data.
  */
 
-const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL)
-  ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}/api/v1`
-  : '/api/v1';
+const PROD_API_BASE_URL = 'https://resistanceiq-api.onrender.com';
+
+function resolveApiBase() {
+  // 1. Explicit environment variable set at build-time or runtime
+  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) {
+    const customUrl = import.meta.env.VITE_API_BASE_URL.trim();
+    if (customUrl) {
+      const clean = customUrl.replace(/\/$/, '');
+      return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
+    }
+  }
+
+  // 2. Production browser context fallback (e.g. deployed on Vercel or non-localhost)
+  if (typeof window !== 'undefined' && window.location?.hostname) {
+    const host = window.location.hostname;
+    if (host !== 'localhost' && host !== '127.0.0.1' && host !== '0.0.0.0' && host !== '') {
+      return `${PROD_API_BASE_URL}/api/v1`;
+    }
+  }
+
+  // 3. Production Vite build fallback
+  if (typeof import.meta !== 'undefined' && import.meta.env?.PROD) {
+    return `${PROD_API_BASE_URL}/api/v1`;
+  }
+
+  // 4. Local development proxy fallback
+  return '/api/v1';
+}
+
+const API_BASE = resolveApiBase();
 
 function getAuthHeader() {
   const token = localStorage.getItem('riq_auth_token') || localStorage.getItem('riq_token');
@@ -304,7 +331,7 @@ export async function uploadChemicalStructureFile(file, chemicalName = '') {
   const token = localStorage.getItem('riq_auth_token') || localStorage.getItem('riq_token');
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-  const response = await fetch('/api/v1/molecules/upload', {
+  const response = await fetch(`${API_BASE}/molecules/upload`, {
     method: 'POST',
     headers,
     body: formData,

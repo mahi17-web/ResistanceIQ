@@ -1,6 +1,26 @@
 import { User } from './types.ts';
 
-const BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || '/api/v1';
+const PROD_API_BASE = 'https://resistanceiq-api.onrender.com';
+
+function resolveBaseUrl(): string {
+  const envUrl = (import.meta as any).env?.VITE_API_BASE_URL?.trim();
+  if (envUrl) {
+    const clean = envUrl.replace(/\/$/, '');
+    return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
+  }
+  if (typeof window !== 'undefined' && window.location?.hostname) {
+    const host = window.location.hostname;
+    if (host !== 'localhost' && host !== '127.0.0.1' && host !== '0.0.0.0' && host !== '') {
+      return `${PROD_API_BASE}/api/v1`;
+    }
+  }
+  if ((import.meta as any).env?.PROD) {
+    return `${PROD_API_BASE}/api/v1`;
+  }
+  return '/api/v1';
+}
+
+const BASE_URL = resolveBaseUrl();
 
 export async function fetchJSON<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const token = localStorage.getItem('riq_auth_token') || localStorage.getItem('riq_token');

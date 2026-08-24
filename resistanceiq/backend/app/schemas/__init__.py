@@ -365,10 +365,10 @@ class TargetRead(BaseModel):
     id: str
     name: str
     gene_name: Optional[str] = None
-    uniprot_id: str
+    uniprot_id: Optional[str] = None
     protein_name: Optional[str] = None
     target_type: Optional[str] = None
-    organism: str
+    organism: Optional[str] = None
     organism_id: Optional[str] = None
     moa_scheme: Optional[str] = "IRAC"
     moa_group: Optional[str] = None
@@ -385,7 +385,7 @@ class TargetRead(BaseModel):
     source_record_id: Optional[str] = None
     source_url: Optional[str] = None
     binding_pocket_residues: Optional[str] = None
-    created_at: datetime
+    created_at: Optional[datetime] = None
     protein_record: Optional[ProteinRecordRead] = None
     structures: Optional[List[ProteinStructureRead]] = None
 
