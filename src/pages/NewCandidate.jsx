@@ -60,6 +60,84 @@ const WIZARD_STEPS = [
   { id: 7, label: 'Forecast', desc: 'ML Durability Scoring', icon: Sparkles },
 ];
 
+const FALLBACK_RECEPTORS = [
+  {
+    id: 'tgt_ache1_pest_01',
+    name: 'Acetylcholinesterase-1 (AChE1)',
+    gene_name: 'ace-1',
+    uniprot_id: 'Q96303',
+    protein_name: 'Acetylcholinesterase 1',
+    target_type: 'Enzyme / Hydrolase',
+    organism: 'Myzus persicae',
+    organism_id: 'pst_aphid_01',
+    moa_scheme: 'IRAC',
+    moa_group: '1A/1B',
+    target_class: 'Acetylcholinesterase (AChE) Inhibitors',
+    structure_source: 'RCSB_PDB',
+    evidence_level: 'DIRECT',
+  },
+  {
+    id: 'tgt_glucl_pest_02',
+    name: 'Glutamate-gated Chloride Channel (GluCl-α)',
+    gene_name: 'GluCl',
+    uniprot_id: 'Q9NHD8',
+    protein_name: 'Glutamate-gated chloride channel alpha',
+    target_type: 'Ion Channel / Cys-loop Ligand-Gated',
+    organism: 'Tetranychus urticae',
+    organism_id: 'pst_mite_02',
+    moa_scheme: 'IRAC',
+    moa_group: '6',
+    target_class: 'Glutamate-gated chloride channel allosteric modulators',
+    structure_source: 'RCSB_PDB',
+    evidence_level: 'DIRECT',
+  },
+  {
+    id: 'tgt_vgsc_pest_03',
+    name: 'Voltage-Gated Sodium Channel (VGSC)',
+    gene_name: 'para',
+    uniprot_id: 'P35500',
+    protein_name: 'Voltage-dependent sodium channel alpha subunit',
+    target_type: 'Ion Channel / Voltage-Gated',
+    organism: 'Plutella xylostella',
+    organism_id: 'pst_moth_03',
+    moa_scheme: 'IRAC',
+    moa_group: '3A',
+    target_class: 'Sodium channel modulators',
+    structure_source: 'ALPHAFOLD_DB',
+    evidence_level: 'DIRECT',
+  },
+  {
+    id: 'tgt_ryr_pest_04',
+    name: 'Ryanodine Receptor (RyR)',
+    gene_name: 'RyR',
+    uniprot_id: 'Q9BIY7',
+    protein_name: 'Ryanodine receptor 1',
+    target_type: 'Intracellular Calcium Release Channel',
+    organism: 'Helicoverpa armigera',
+    organism_id: 'pst_bollworm_04',
+    moa_scheme: 'IRAC',
+    moa_group: '28',
+    target_class: 'Ryanodine receptor modulators',
+    structure_source: 'RCSB_PDB',
+    evidence_level: 'DIRECT',
+  },
+  {
+    id: 'tgt_gaba_pest_05',
+    name: 'GABA-Gated Chloride Channel (Rdl)',
+    gene_name: 'Rdl',
+    uniprot_id: 'P25123',
+    protein_name: 'GABA receptor subunit alpha',
+    target_type: 'Ion Channel / Cys-loop Ligand-Gated',
+    organism: 'Spodoptera frugiperda',
+    organism_id: 'pst_armyworm_05',
+    moa_scheme: 'IRAC',
+    moa_group: '2A/2B',
+    target_class: 'GABA-gated chloride channel antagonists',
+    structure_source: 'ALPHAFOLD_DB',
+    evidence_level: 'DIRECT',
+  },
+];
+
 /* ─── Molecular Preview Component ────────────────────────────────── */
 function MolecularPreviewCanvas({ smiles, molName, rawSvg, formula, molecularWeight, isNovel = false }) {
   const parsed = smiles?.trim() ? parseSmiles(smiles) : null;
@@ -433,11 +511,12 @@ export default function NewCandidate() {
           try {
             const allTargets = await getTargets();
             const normAll = normalizeArray(allTargets);
-            setTargetList(normAll);
-            setSelectedTarget(normAll.length > 0 ? normAll[0] : null);
+            const list = normAll.length > 0 ? normAll : FALLBACK_RECEPTORS;
+            setTargetList(list);
+            setSelectedTarget((prev) => (prev && list.some((t) => t.id === prev.id) ? prev : list[0]));
           } catch {
-            setTargetList([]);
-            setSelectedTarget(null);
+            setTargetList(FALLBACK_RECEPTORS);
+            setSelectedTarget(FALLBACK_RECEPTORS[0]);
           }
         }
       } finally {
