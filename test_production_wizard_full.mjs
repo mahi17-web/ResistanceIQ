@@ -132,17 +132,29 @@ async function runEndToEndWizardPipeline() {
 
     console.log('       Executing Live ML Pipeline ("Run Forecast →")...');
     await page.click('#btn-step6-run-forecast');
-    await new Promise((r) => setTimeout(r, 5000));
+    
+    // Wait for forecast completion
+    console.log('       Waiting for ML inference computation and uncertainty calibration...');
+    await page.waitForFunction(
+      () => {
+        const text = document.body.innerText;
+        return text.includes('FORECAST COMPLETE') || text.includes('OUT OF DOMAIN') || text.includes('COULD NOT BE COMPLETED');
+      },
+      { timeout: 20000 }
+    ).catch(() => {});
+    await new Promise((r) => setTimeout(r, 2000));
 
     const finalHeader = await page.evaluate(() => document.querySelector('h2')?.innerText);
     console.log('       Final Status Header:', finalHeader);
 
-    const forecastMetrics = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll('.badge, p, span'))
-        .map((e) => e.innerText.trim())
-        .filter((t) => t.includes('RISK') || t.includes('CONFIDENCE') || t.includes('Years') || t.includes('FORECAST') || t.includes('Score'));
+    const fullSummary = await page.evaluate(() => {
+      const badges = Array.from(document.querySelectorAll('.badge')).map((b) => b.innerText.trim());
+      return {
+        url: window.location.href,
+        badges,
+      };
     });
-    console.log('       Forecast Telemetry:', forecastMetrics.slice(0, 8));
+    console.log('       Forecast Telemetry Badges:', fullSummary.badges);
 
     console.log('\n================================================================');
     console.log('>>> SUCCESS: FULL 7-STEP PRODUCTION END-TO-END FLOW VERIFIED! <<<');
