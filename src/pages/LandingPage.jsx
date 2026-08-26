@@ -192,7 +192,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-[#030609] text-[#F1F5F9] font-sans antialiased overflow-x-hidden selection:bg-[#0BDFA0]/20 selection:text-[#0BDFA0]">
-      {/* ─── 1. Header (Sticky 72px Clean Glass Header) ──────────────── */}
+      {/* ─── 1. Header (Sticky 74px Clean Glass Header) ──────────────── */}
       <header className="sticky top-0 z-50 h-[72px] sm:h-[76px] border-b border-white/[0.07] bg-[#030609]/90 backdrop-blur-xl">
         <div className="w-full max-w-[1480px] xl:max-w-[1520px] mx-auto h-full px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20 flex items-center justify-between">
           {/* Brand */}
@@ -236,10 +236,9 @@ export default function LandingPage() {
             )}
             <button
               onClick={handleOpenWorkspace}
-              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-[13px] font-bold tracking-wide transition-all duration-200 shadow-[0_0_18px_rgba(11,223,160,0.25)] hover:shadow-[0_0_28px_rgba(11,223,160,0.4)] cursor-pointer"
+              className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-[13px] font-bold tracking-wide transition-all duration-200 shadow-[0_0_18px_rgba(11,223,160,0.25)] hover:shadow-[0_0_28px_rgba(11,223,160,0.4)] cursor-pointer uppercase"
             >
-              <span>Open Workspace</span>
-              <ArrowRight size={15} />
+              <span>Open Workspace →</span>
             </button>
           </div>
 
@@ -270,14 +269,14 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* ─── 2. Hero Section (Spacious Two-Column Desktop Layout) ─────── */}
-      <section className="relative pt-16 sm:pt-20 lg:pt-24 pb-16 lg:pb-20">
+      {/* ─── 2. Hero Section (Spacious Two-Column Balanced Layout) ────── */}
+      <section className="relative pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24 lg:pb-28">
         {/* Soft Ambient Glow Flares */}
         <div className="absolute top-10 left-1/4 w-[550px] h-[350px] bg-[#0BDFA0]/10 blur-[140px] rounded-full pointer-events-none -z-10" />
         <div className="absolute top-20 right-1/4 w-[600px] h-[380px] bg-[#8B8CF8]/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
         <div className="w-full max-w-[1480px] xl:max-w-[1520px] mx-auto px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 xl:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 xl:gap-20 items-center">
             {/* ─── LEFT COLUMN (~52%) ─── */}
             <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
               {/* Eyebrow */}
@@ -286,7 +285,7 @@ export default function LandingPage() {
                 <span>SCIENTIFIC INTELLIGENCE PLATFORM • AI-POWERED RESISTANCE FORECASTING</span>
               </div>
 
-              {/* Main Heading (56px–72px Scale) */}
+              {/* Main Heading (56px–68px Desktop Scale) */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[56px] xl:text-[66px] font-extrabold tracking-tight text-white leading-[1.04] mb-6 max-w-[700px]">
                 Resistance<span className="text-[#0BDFA0]">IQ</span> –<br />
                 AI-Powered<br />
@@ -344,7 +343,7 @@ export default function LandingPage() {
               <div className="absolute -inset-1.5 bg-gradient-to-r from-[#0BDFA0]/20 via-[#38BDF8]/15 to-[#8B8CF8]/20 rounded-3xl blur-xl opacity-70" />
 
               {/* Console Dashboard Card */}
-              <div className="relative min-h-[540px] rounded-[24px] border border-white/12 bg-[#080D13] p-7 sm:p-8 shadow-[0_30px_80px_rgba(0,0,0,0.95)] overflow-hidden group flex flex-col justify-between">
+              <div className="relative min-h-[560px] rounded-[24px] border border-white/12 bg-[#080D13] p-7 sm:p-8 shadow-[0_30px_80px_rgba(0,0,0,0.95)] overflow-hidden group flex flex-col justify-between">
                 {/* SVG Lattice Background */}
                 <MolecularLatticeBg />
 
@@ -397,7 +396,7 @@ export default function LandingPage() {
                   </div>
 
                   {/* Candidate Molecule Info Box */}
-                  <div className="p-4 sm:p-5 rounded-2xl bg-[#05070B]/90 border border-white/[0.06] backdrop-blur-sm">
+                  <div className="p-5 rounded-2xl bg-[#05070B]/90 border border-white/[0.06] backdrop-blur-sm">
                     <div className="flex items-center justify-between mb-1 text-[11px] font-mono">
                       <span className="text-[#0BDFA0] font-bold">CANDIDATE MOLECULE</span>
                       <span className="text-[#7C8A9A]">{activeDemo.formula}</span>
@@ -411,7 +410,7 @@ export default function LandingPage() {
 
                   {/* Target & Organism Cards (Two Large Horizontal Cards) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 sm:p-5 rounded-2xl bg-[#05070B]/90 border border-white/[0.06] min-h-[110px] flex flex-col justify-between">
+                    <div className="p-5 rounded-2xl bg-[#05070B]/90 border border-white/[0.06] min-h-[110px] flex flex-col justify-between">
                       <div className="flex items-center gap-1.5 text-[10.5px] font-mono text-[#8B8CF8] font-bold">
                         <Atom size={14} />
                         <span>TARGET RECEPTOR</span>
@@ -424,7 +423,7 @@ export default function LandingPage() {
                       </div>
                     </div>
 
-                    <div className="p-4 sm:p-5 rounded-2xl bg-[#05070B]/90 border border-white/[0.06] min-h-[110px] flex flex-col justify-between">
+                    <div className="p-5 rounded-2xl bg-[#05070B]/90 border border-white/[0.06] min-h-[110px] flex flex-col justify-between">
                       <div className="flex items-center gap-1.5 text-[10.5px] font-mono text-[#F3B14D] font-bold">
                         <Bug size={14} />
                         <span>TARGET ORGANISM</span>
@@ -439,7 +438,7 @@ export default function LandingPage() {
                   </div>
 
                   {/* Predictive ML Output Section (4 Large Metric Blocks) */}
-                  <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08]">
+                  <div className="p-5 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08]">
                     <div className="flex items-center justify-between mb-4">
                       <div className="text-[10.5px] font-mono font-bold text-[#7C8A9A]">PREDICTIVE ML OUTPUT</div>
                       <div
