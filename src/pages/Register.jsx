@@ -224,7 +224,7 @@ export default function Register() {
             <div className="pt-2">
               <button
                 id="continue-to-app-btn"
-                onClick={() => navigate('/', { replace: true })}
+                onClick={() => navigate('/dashboard', { replace: true })}
                 className="w-full h-[56px] rounded-[13px] font-bold text-sm text-[#020609] flex items-center justify-center gap-2 cursor-pointer transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-[#0BDFA0]/20"
                 style={{
                   background: 'linear-gradient(135deg, #0BDFA0 0%, #00B27A 50%, #38BDF8 100%)',

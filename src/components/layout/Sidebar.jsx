@@ -7,7 +7,7 @@ import {
 import useProjectStore from '../../store/projectStore.js';
 
 const NAV_ITEMS = [
-  { to: '/',           icon: LayoutDashboard, label: 'Dashboard', end: true },
+  { to: '/dashboard',  icon: LayoutDashboard, label: 'Dashboard', end: true },
   { to: '/new',        icon: FlaskConical,    label: 'New Candidate' },
   { to: '/comparison', icon: GitCompare,      label: 'Comparison' },
   { to: '/backtest',   icon: ClipboardCheck,  label: 'Backtest' },
@@ -39,9 +39,9 @@ export default function Sidebar() {
     >
       {/* ── 1. Brand / Logo Area ── */}
       <NavLink
-        to="/"
+        to="/dashboard"
         className="sidebar-brand"
-        aria-label="ResistanceIQ Home"
+        aria-label="ResistanceIQ Dashboard"
       >
         <div className="brand-logo-mark">
           <Dna size={19} color="#020609" strokeWidth={2.5} />

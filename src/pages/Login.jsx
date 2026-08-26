@@ -38,7 +38,7 @@ export default function Login() {
   const [forgotLoading, setForgotLoading] = useState(false);
   const [forgotSuccess, setForgotSuccess] = useState('');
 
-  const redirectUrl = location.state?.from || '/';
+  const redirectUrl = location.state?.from || '/dashboard';
 
   // Rotate loading states during real asynchronous login
   useEffect(() => {

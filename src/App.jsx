@@ -4,6 +4,7 @@ import Sidebar from './components/layout/Sidebar.jsx';
 import TopBar from './components/layout/TopBar.jsx';
 import NotificationTray from './components/ui/Notification.jsx';
 import CommandPalette from './components/ui/CommandPalette.jsx';
+import LandingPage from './pages/LandingPage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import NewCandidate from './pages/NewCandidate.jsx';
 import CandidateDetail from './pages/CandidateDetail.jsx';
@@ -86,14 +87,14 @@ export default function App() {
     location.pathname === '/register' ||
     location.pathname === '/forgot-password';
 
-  // Loading Splash Screen while checking initial token
-  if (authStatus === 'loading' && !isAuthRoute) {
+  const isPublicLanding = location.pathname === '/';
+
+  // If on public homepage, render Landing Page directly without blocking crawlers or users
+  if (isPublicLanding) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#030712] text-slate-400">
-        <div className="w-10 h-10 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin mb-4" />
-        <p className="text-xs tracking-wider uppercase font-semibold text-slate-300">
-          Initializing ResistanceIQ Session...
-        </p>
+      <div className="min-h-screen bg-[#05070B]">
+        <NotificationTray />
+        <LandingPage />
       </div>
     );
   }
@@ -109,6 +110,18 @@ export default function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
+      </div>
+    );
+  }
+
+  // Loading Splash Screen while checking initial token for protected workspace routes
+  if (authStatus === 'loading') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#030712] text-slate-400">
+        <div className="w-10 h-10 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-xs tracking-wider uppercase font-semibold text-slate-300">
+          Initializing ResistanceIQ Session...
+        </p>
       </div>
     );
   }
@@ -135,7 +148,7 @@ export default function App() {
 
         <main className="flex-1">
           <Routes>
-            <Route path="/"                  element={<Dashboard />}        />
+            <Route path="/dashboard"         element={<Dashboard />}        />
             <Route path="/new"               element={<NewCandidate />}     />
             <Route path="/new-candidate"     element={<NewCandidate />}     />
             <Route path="/candidates/new"    element={<NewCandidate />}     />
@@ -149,7 +162,7 @@ export default function App() {
             <Route path="/profile"           element={<Profile />}          />
             <Route path="/settings/security" element={<SecuritySettings />} />
             <Route path="/settings/users"    element={<UserManagement />}   />
-            <Route path="*"                  element={<Navigate to="/" replace />} />
+            <Route path="*"                  element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </main>
       </div>
