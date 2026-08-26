@@ -11,72 +11,188 @@ import {
   BarChart3,
   Cpu,
   FileText,
-  CheckCircle2,
-  AlertCircle,
   ExternalLink,
   ChevronRight,
   Atom,
   Bug,
   Compass,
+  Sprout,
+  Menu,
+  X,
+  Workflow,
+  Microscope,
 } from 'lucide-react';
 import useProjectStore from '../store/projectStore.js';
+
+/* ─── Subtle SVG Molecular Lattice Background for Console ──────────── */
+function MolecularLatticeBg() {
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-20 transition-opacity duration-500 group-hover:opacity-30"
+      viewBox="0 0 420 320"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#0BDFA0" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#0BDFA0" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="bondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#0BDFA0" stopOpacity="0.4" />
+          <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#8B8CF8" stopOpacity="0.4" />
+        </linearGradient>
+      </defs>
+
+      {/* Hexagonal Lattice Bonds */}
+      <path
+        d="M 60 70 L 110 40 L 160 70 L 160 130 L 110 160 L 60 130 Z"
+        stroke="url(#bondGrad)"
+        strokeWidth="1.2"
+        strokeDasharray="3 3"
+      />
+      <path
+        d="M 160 70 L 210 40 L 260 70 L 260 130 L 210 160 L 160 130"
+        stroke="url(#bondGrad)"
+        strokeWidth="1.2"
+      />
+      <path
+        d="M 260 70 L 310 40 L 360 70 L 360 130 L 310 160 L 260 130"
+        stroke="url(#bondGrad)"
+        strokeWidth="1.2"
+        strokeDasharray="2 2"
+      />
+      <path
+        d="M 110 160 L 110 220 L 160 250 L 210 220 L 210 160"
+        stroke="url(#bondGrad)"
+        strokeWidth="1.2"
+      />
+      <path
+        d="M 210 220 L 260 250 L 310 220 L 310 160"
+        stroke="url(#bondGrad)"
+        strokeWidth="1.2"
+        strokeDasharray="4 2"
+      />
+
+      {/* Cross Trajectory Lines */}
+      <line x1="160" y1="70" x2="210" y2="220" stroke="#38BDF8" strokeWidth="0.8" strokeOpacity="0.25" />
+      <line x1="110" y1="160" x2="310" y2="160" stroke="#0BDFA0" strokeWidth="0.8" strokeOpacity="0.2" strokeDasharray="4 4" />
+
+      {/* Molecular Atoms / Nodes */}
+      <circle cx="60" cy="70" r="3.5" fill="#0BDFA0" />
+      <circle cx="110" cy="40" r="4" fill="#38BDF8" />
+      <circle cx="160" cy="70" r="4.5" fill="#0BDFA0" />
+      <circle cx="160" cy="130" r="3.5" fill="#8B8CF8" />
+      <circle cx="110" cy="160" r="4" fill="#0BDFA0" />
+      <circle cx="60" cy="130" r="3.5" fill="#F3B14D" />
+
+      <circle cx="210" cy="40" r="4" fill="#8B8CF8" />
+      <circle cx="260" cy="70" r="4.5" fill="#0BDFA0" />
+      <circle cx="260" cy="130" r="4" fill="#38BDF8" />
+      <circle cx="210" cy="160" r="5" fill="#0BDFA0" />
+
+      <circle cx="310" cy="40" r="3" fill="#38BDF8" />
+      <circle cx="360" cy="70" r="3.5" fill="#8B8CF8" />
+      <circle cx="360" cy="130" r="3" fill="#0BDFA0" />
+      <circle cx="310" cy="160" r="4" fill="#F3B14D" />
+
+      <circle cx="110" cy="220" r="3.5" fill="#38BDF8" />
+      <circle cx="160" cy="250" r="4.5" fill="#0BDFA0" />
+      <circle cx="210" cy="220" r="4" fill="#8B8CF8" />
+      <circle cx="260" cy="250" r="3.5" fill="#0BDFA0" />
+      <circle cx="310" cy="220" r="3.5" fill="#38BDF8" />
+
+      {/* Pulsing Target Core */}
+      <circle cx="210" cy="160" r="14" fill="url(#nodeGlow)" />
+    </svg>
+  );
+}
 
 export default function LandingPage() {
   const navigate = useNavigate();
   const user = useProjectStore((s) => s.user);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Interactive Demo State
   const [selectedDemoCompound, setSelectedDemoCompound] = useState('imidacloprid');
 
   const demoCompounds = useMemo(() => ({
     imidacloprid: {
-      name: 'Imidacloprid (Neonicotinoid)',
+      key: 'imidacloprid',
+      name: 'Imidacloprid',
+      classification: 'Neonicotinoid (Substituted Chloropyridinyl)',
       formula: 'C9H10ClN5O2',
       moa: 'IRAC Group 4A (nAChR Competitive Modulator)',
       smiles: 'C1CN(C(=N[N+](=O)[O-])N1)CC2=CN=C(C=C2)Cl',
       target: 'Nicotinic Acetylcholine Receptor (nAChR)',
-      pest: 'Myzus persicae (Green Peach Aphid)',
+      targetGene: 'nAChR α1/β2 subunit',
+      targetUniprot: 'Q96303',
+      pest: 'Myzus persicae',
+      pestCommon: 'Green Peach Aphid',
       predictedLog10RR: 0.24,
       durabilityScore: 86,
       conformal90: '[-0.15, +0.62]',
       domainStatus: 'IN_DOMAIN',
       tanimotoSim: 0.94,
-      riskLevel: 'LOW_RISK',
+      riskLevel: 'LOW RISK',
       riskColor: '#0BDFA0',
+      activeBits: '34 / 2048',
     },
     chlorantraniliprole: {
-      name: 'Chlorantraniliprole (Diamide)',
+      key: 'chlorantraniliprole',
+      name: 'Chlorantraniliprole',
+      classification: 'Anthranilic Diamide (Bis-Amide)',
       formula: 'C18H14BrCl2N5O2',
       moa: 'IRAC Group 28 (Ryanodine Receptor Modulator)',
       smiles: 'CC1=CC(=C(C(=C1)C(=O)NC2=CC(=CC=C2Cl)Br)NC(=O)C3=CC=NN3C4=CC=C(C=C4)Cl)Cl',
       target: 'Ryanodine Receptor (RyR)',
-      pest: 'Plutella xylostella (Diamondback Moth)',
+      targetGene: 'ryr-1 ion channel',
+      targetUniprot: 'A0A024E6T9',
+      pest: 'Plutella xylostella',
+      pestCommon: 'Diamondback Moth',
       predictedLog10RR: 0.18,
       durabilityScore: 91,
       conformal90: '[-0.20, +0.55]',
       domainStatus: 'IN_DOMAIN',
       tanimotoSim: 0.88,
-      riskLevel: 'LOW_RISK',
+      riskLevel: 'LOW RISK',
       riskColor: '#0BDFA0',
+      activeBits: '48 / 2048',
     },
     novel_isostere: {
-      name: 'Candidate Iso-Oxazole Bio-Isostere #402',
+      key: 'novel_isostere',
+      name: 'Iso-Oxazole Bio-Isostere #402',
+      classification: 'Novel Heterocyclic Candidate Scaffold',
       formula: 'C14H16ClN3O3',
       moa: 'Novel Substituted Agrochemical Scaffold',
       smiles: 'CC1=NC(=NO1)C2=CC=C(C=C2)CNC(=N[N+](=O)[O-])NCC3=CN=C(C=C3)Cl',
       target: 'Acetylcholinesterase-1 (AChE1)',
-      pest: 'Helicoverpa armigera (Cotton Bollworm)',
+      targetGene: 'ace-1 esterase',
+      targetUniprot: 'Q869C3',
+      pest: 'Helicoverpa armigera',
+      pestCommon: 'Cotton Bollworm',
       predictedLog10RR: 0.68,
       durabilityScore: 68,
       conformal90: '[+0.21, +1.15]',
       domainStatus: 'BORDERLINE_DOMAIN',
       tanimotoSim: 0.59,
-      riskLevel: 'MODERATE_RISK',
+      riskLevel: 'MODERATE RISK',
       riskColor: '#F3B14D',
+      activeBits: '29 / 2048',
     },
   }), []);
 
   const activeDemo = demoCompounds[selectedDemoCompound];
+
+  const handleOpenWorkspace = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#05070B] text-[#F1F5F9] font-sans antialiased overflow-x-hidden selection:bg-[#0BDFA0]/20 selection:text-[#0BDFA0]">
@@ -112,10 +228,10 @@ export default function LandingPage() {
         </nav>
 
         {/* Header CTAs */}
-        <div className="flex items-center gap-3">
+        <div className="hidden sm:flex items-center gap-3">
           {user ? (
             <button
-              onClick={() => navigate('/dashboard')}
+              onClick={handleOpenWorkspace}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-[13px] font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(11,223,160,0.25)] hover:shadow-[0_0_25px_rgba(11,223,160,0.4)]"
             >
               <span>Open Workspace</span>
@@ -129,174 +245,230 @@ export default function LandingPage() {
               >
                 Sign In
               </Link>
-              <Link
-                to="/login"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-[12.5px] font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(11,223,160,0.2)] hover:shadow-[0_0_25px_rgba(11,223,160,0.35)]"
+              <button
+                onClick={handleOpenWorkspace}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-[13px] font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(11,223,160,0.2)] hover:shadow-[0_0_25px_rgba(11,223,160,0.35)] cursor-pointer"
               >
-                <span>Launch Platform</span>
+                <span>Open Workspace</span>
                 <ArrowRight size={13} />
-              </Link>
+              </button>
             </>
           )}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden p-2 text-[#9AACBE] hover:text-white focus:outline-none"
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </header>
 
-      {/* ─── Hero Section ───────────────────────────────────────────── */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 px-4 sm:px-8 max-w-[1400px] mx-auto">
-        {/* Background glow flares */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-[#0BDFA0]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
-        <div className="absolute top-40 left-1/4 w-[400px] h-[250px] bg-[#8B8CF8]/10 blur-[110px] rounded-full pointer-events-none -z-10" />
-
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-14">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0BDFA0]/10 border border-[#0BDFA0]/25 text-[#0BDFA0] text-xs font-mono font-semibold tracking-wider uppercase mb-6 shadow-[0_0_12px_rgba(11,223,160,0.15)]">
-            <Sparkles size={13} className="text-[#0BDFA0]" />
-            <span>AI-Powered Scientific Intelligence · V2.0 Engine</span>
-          </div>
-
-          {/* Primary H1 */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12] mb-6">
-            Resistance<span className="text-[#0BDFA0]">IQ</span> – AI-Powered Pesticide Resistance Forecasting
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-[#9AACBE] max-w-2xl mx-auto leading-relaxed mb-8">
-            Scientific Intelligence Platform for computational hypothesis generation, pesticide durability forecasting, molecular target evaluation, and research reproducibility.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/login"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-sm font-bold tracking-wide transition-all duration-200 shadow-[0_0_20px_rgba(11,223,160,0.3)] hover:shadow-[0_0_30px_rgba(11,223,160,0.5)] transform hover:-translate-y-0.5"
-            >
-              <span>Access Research Platform</span>
-              <ArrowRight size={16} />
-            </Link>
-
-            <a
-              href="#interactive-demo"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-[#F1F5F9] text-sm font-semibold transition-all duration-200"
-            >
-              <span>Explore Live Forecast Preview</span>
-              <ChevronRight size={16} className="text-[#7C8A9A]" />
-            </a>
-          </div>
-
-          {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 w-full max-w-3xl pt-8 border-t border-white/[0.08]">
-            <div className="text-center p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-xl font-bold font-mono text-[#0BDFA0]">1,059-D</div>
-              <div className="text-[11px] text-[#7C8A9A] uppercase tracking-wider mt-0.5">Feature Dimensions</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-xl font-bold font-mono text-[#8B8CF8]">2,048-Bit</div>
-              <div className="text-[11px] text-[#7C8A9A] uppercase tracking-wider mt-0.5">ECFP4 Fingerprints</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-xl font-bold font-mono text-[#38BDF8]">90% Bounds</div>
-              <div className="text-[11px] text-[#7C8A9A] uppercase tracking-wider mt-0.5">Conformal Guarantees</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-xl font-bold font-mono text-[#F3B14D]">Tanimoto & Mahalanobis</div>
-              <div className="text-[11px] text-[#7C8A9A] uppercase tracking-wider mt-0.5">OOD Domain Gating</div>
-            </div>
+      {/* Mobile Navigation Dropdown */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-[#0B1017] border-b border-white/10 px-6 py-5 space-y-4 text-sm font-medium text-[#9AACBE]">
+          <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block hover:text-white">About</a>
+          <a href="#capabilities" onClick={() => setMobileMenuOpen(false)} className="block hover:text-white">Capabilities</a>
+          <a href="#ml-engine" onClick={() => setMobileMenuOpen(false)} className="block hover:text-white">ML Architecture</a>
+          <a href="#molecular" onClick={() => setMobileMenuOpen(false)} className="block hover:text-white">Cheminformatics</a>
+          <a href="#workflow" onClick={() => setMobileMenuOpen(false)} className="block hover:text-white">How It Works</a>
+          <a href="#governance" onClick={() => setMobileMenuOpen(false)} className="block hover:text-white">Governance</a>
+          <div className="pt-4 border-t border-white/10 flex flex-col gap-2.5">
+            <Link to="/login" className="text-center py-2 rounded-lg bg-white/5 text-white font-semibold">Sign In</Link>
+            <button onClick={handleOpenWorkspace} className="w-full py-2.5 rounded-lg bg-[#0BDFA0] text-[#020609] font-bold">Open Workspace →</button>
           </div>
         </div>
+      )}
 
-        {/* ─── Interactive Live Forecast Preview Component ────────────── */}
-        <div id="interactive-demo" className="mt-6 max-w-5xl mx-auto rounded-2xl border border-white/10 bg-[#0B1017]/95 shadow-[0_25px_60px_rgba(0,0,0,0.8)] backdrop-blur-2xl p-6 sm:p-8">
-          {/* Window header */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-white/[0.08] gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+      {/* ─── Section 1: Hero (Two-Column Desktop Layout) ─────────────── */}
+      <section className="relative pt-12 pb-16 md:pt-16 md:pb-24 px-4 sm:px-8 w-[94%] max-w-[1400px] mx-auto">
+        {/* Soft Scientific Glow Flares in Background */}
+        <div className="absolute top-8 left-1/4 w-[500px] h-[300px] bg-[#0BDFA0]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
+        <div className="absolute top-20 right-1/4 w-[550px] h-[320px] bg-[#8B8CF8]/10 blur-[140px] rounded-full pointer-events-none -z-10" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* ─── LEFT SIDE (~54% on desktop, lg:col-span-6 / xl:col-span-7) ─── */}
+          <div className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center">
+            {/* Small Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0BDFA0]/10 border border-[#0BDFA0]/25 text-[#0BDFA0] text-xs font-mono font-semibold tracking-wider uppercase mb-5 self-start shadow-[0_0_12px_rgba(11,223,160,0.15)]">
+              <Sparkles size={13} className="text-[#0BDFA0]" />
+              <span>SCIENTIFIC INTELLIGENCE PLATFORM · AI-POWERED RESISTANCE FORECASTING</span>
+            </div>
+
+            {/* SEO Main Heading */}
+            <h1 className="text-3xl sm:text-4xl xl:text-5xl font-extrabold tracking-tight text-white leading-[1.12] mb-5">
+              Resistance<span className="text-[#0BDFA0]">IQ</span> –<br className="hidden sm:inline" /> AI-Powered Pesticide Resistance Forecasting
+            </h1>
+
+            {/* Platform Positioning Description */}
+            <p className="text-base sm:text-lg text-[#9AACBE] leading-relaxed mb-6 max-w-2xl">
+              Scientific Intelligence Platform for computational hypothesis generation, pesticide durability forecasting, molecular target evaluation, and research reproducibility.
+            </p>
+
+            {/* Scientific Pipeline Flow Line */}
+            <div className="p-3 rounded-xl bg-[#0B1017]/80 border border-white/[0.08] mb-8 max-w-2xl backdrop-blur-sm">
+              <div className="text-[10px] font-mono font-bold text-[#7C8A9A] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <Workflow size={12} className="text-[#0BDFA0]" />
+                <span>INTEGRATED DISCOVERY TRAVERSAL PIPELINE</span>
               </div>
-              <div className="pl-3 border-l border-white/10">
-                <span className="text-xs font-mono text-[#7C8A9A]">CANDIDATE FORECAST DOSSIER // LIVE INFERENCE PREVIEW</span>
+              <div className="flex flex-wrap items-center gap-1.5 text-xs font-mono font-semibold">
+                <span className="px-2 py-0.5 rounded bg-white/[0.04] text-[#0BDFA0] border border-[#0BDFA0]/20">CROP</span>
+                <span className="text-[#7C8A9A]">→</span>
+                <span className="px-2 py-0.5 rounded bg-white/[0.04] text-[#38BDF8] border border-[#38BDF8]/20">THREAT</span>
+                <span className="text-[#7C8A9A]">→</span>
+                <span className="px-2 py-0.5 rounded bg-white/[0.04] text-[#8B8CF8] border border-[#8B8CF8]/20">TARGET</span>
+                <span className="text-[#7C8A9A]">→</span>
+                <span className="px-2 py-0.5 rounded bg-white/[0.04] text-violet-300 border border-violet-400/20">PROTEIN</span>
+                <span className="text-[#7C8A9A]">→</span>
+                <span className="px-2 py-0.5 rounded bg-white/[0.04] text-amber-300 border border-amber-400/20">MOLECULE</span>
+                <span className="text-[#7C8A9A]">→</span>
+                <span className="px-2 py-0.5 rounded bg-[#0BDFA0]/20 text-[#0BDFA0] font-bold border border-[#0BDFA0]/40">FORECAST</span>
               </div>
             </div>
 
-            {/* Compound Selector */}
-            <div className="flex items-center gap-2 bg-[#05070B] p-1 rounded-lg border border-white/10 text-xs">
-              <span className="text-[11px] text-[#7C8A9A] px-2 font-mono">Select Molecule:</span>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4 mb-10">
               <button
-                onClick={() => setSelectedDemoCompound('imidacloprid')}
-                className={`px-2.5 py-1 rounded font-medium transition-all ${
-                  selectedDemoCompound === 'imidacloprid'
-                    ? 'bg-[#0BDFA0]/20 text-[#0BDFA0] border border-[#0BDFA0]/30'
-                    : 'text-[#9AACBE] hover:text-white'
-                }`}
+                onClick={handleOpenWorkspace}
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-sm font-bold tracking-wide transition-all duration-200 shadow-[0_0_20px_rgba(11,223,160,0.3)] hover:shadow-[0_0_30px_rgba(11,223,160,0.5)] transform hover:-translate-y-0.5 cursor-pointer"
               >
-                Imidacloprid
+                <span>Open Workspace</span>
+                <ArrowRight size={16} />
               </button>
-              <button
-                onClick={() => setSelectedDemoCompound('chlorantraniliprole')}
-                className={`px-2.5 py-1 rounded font-medium transition-all ${
-                  selectedDemoCompound === 'chlorantraniliprole'
-                    ? 'bg-[#0BDFA0]/20 text-[#0BDFA0] border border-[#0BDFA0]/30'
-                    : 'text-[#9AACBE] hover:text-white'
-                }`}
+
+              <a
+                href="#capabilities"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-[#F1F5F9] text-sm font-semibold transition-all duration-200"
               >
-                Chlorantraniliprole
-              </button>
-              <button
-                onClick={() => setSelectedDemoCompound('novel_isostere')}
-                className={`px-2.5 py-1 rounded font-medium transition-all ${
-                  selectedDemoCompound === 'novel_isostere'
-                    ? 'bg-[#0BDFA0]/20 text-[#0BDFA0] border border-[#0BDFA0]/30'
-                    : 'text-[#9AACBE] hover:text-white'
-                }`}
-              >
-                Iso-Oxazole #402
-              </button>
+                <span>Explore Forecast Intelligence</span>
+                <ChevronRight size={16} className="text-[#7C8A9A]" />
+              </a>
+            </div>
+
+            {/* Technical Instrumentation Stats Row (4 technical metric boxes) */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/[0.08]">
+              <div className="p-3 rounded-lg bg-[#0B1017] border border-white/[0.06]">
+                <div className="text-lg font-bold font-mono text-[#0BDFA0]">1,059-D</div>
+                <div className="text-[10px] text-[#7C8A9A] font-mono uppercase tracking-wider mt-0.5">FEATURE DIMENSIONS</div>
+              </div>
+              <div className="p-3 rounded-lg bg-[#0B1017] border border-white/[0.06]">
+                <div className="text-lg font-bold font-mono text-[#8B8CF8]">2,048-BIT</div>
+                <div className="text-[10px] text-[#7C8A9A] font-mono uppercase tracking-wider mt-0.5">ECFP4 FINGERPRINTS</div>
+              </div>
+              <div className="p-3 rounded-lg bg-[#0B1017] border border-white/[0.06]">
+                <div className="text-lg font-bold font-mono text-[#38BDF8]">90% BOUNDS</div>
+                <div className="text-[10px] text-[#7C8A9A] font-mono uppercase tracking-wider mt-0.5">CONFORMAL COVERAGE</div>
+              </div>
+              <div className="p-3 rounded-lg bg-[#0B1017] border border-white/[0.06]">
+                <div className="text-lg font-bold font-mono text-[#F3B14D]">TANIMOTO</div>
+                <div className="text-[10px] text-[#7C8A9A] font-mono uppercase tracking-wider mt-0.5">MOLECULAR SIMILARITY</div>
+              </div>
             </div>
           </div>
 
-          {/* Dossier Body Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-            {/* Left Col: Chemical & Biological Context (7 cols) */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="p-4 rounded-xl bg-[#05070B] border border-white/[0.06]">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-mono text-[#0BDFA0] font-bold">CANDIDATE MOLECULE</span>
-                  <span className="text-[11px] font-mono text-[#7C8A9A]">{activeDemo.formula}</span>
+          {/* ─── RIGHT SIDE (~46% on desktop, lg:col-span-6 / xl:col-span-5) ─── */}
+          <div className="lg:col-span-6 xl:col-span-5 relative">
+            {/* Ambient console glow behind card */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-[#0BDFA0]/20 via-[#38BDF8]/15 to-[#8B8CF8]/20 rounded-3xl blur-xl opacity-75" />
+
+            {/* Scientific Intelligence Console Card */}
+            <div className="relative rounded-2xl border border-white/12 bg-[#0B1017] shadow-[0_25px_60px_rgba(0,0,0,0.85)] p-5 sm:p-6 overflow-hidden group">
+              {/* SVG Molecular Background Lattice */}
+              <MolecularLatticeBg />
+
+              {/* Console Top Header */}
+              <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#0BDFA0] shadow-[0_0_8px_#0BDFA0]" />
+                  <div className="font-mono text-xs font-bold text-white tracking-wider">
+                    RESISTANCEIQ <span className="text-[#0BDFA0]">LIVE INFERENCE CONSOLE</span>
+                  </div>
                 </div>
-                <h2 className="text-lg font-bold text-white mb-1">{activeDemo.name}</h2>
-                <div className="text-xs text-[#9AACBE] mb-3">{activeDemo.moa}</div>
-                <div className="p-2.5 rounded bg-black/40 border border-white/[0.04] font-mono text-[11px] text-[#7C8A9A] break-all">
+                <div className="flex items-center gap-2 text-[10px] font-mono text-[#7C8A9A]">
+                  <span className="text-[#0BDFA0] font-bold">● SYSTEM ONLINE</span>
+                </div>
+              </div>
+
+              {/* Molecule Selector Tabs */}
+              <div className="relative z-10 flex items-center gap-1.5 p-1 rounded-lg bg-[#05070B] border border-white/[0.06] mb-4 text-xs font-mono overflow-x-auto">
+                <button
+                  onClick={() => setSelectedDemoCompound('imidacloprid')}
+                  className={`px-2.5 py-1 rounded transition-all whitespace-nowrap cursor-pointer ${
+                    selectedDemoCompound === 'imidacloprid'
+                      ? 'bg-[#0BDFA0]/20 text-[#0BDFA0] border border-[#0BDFA0]/30 font-bold'
+                      : 'text-[#9AACBE] hover:text-white'
+                  }`}
+                >
+                  Imidacloprid
+                </button>
+                <button
+                  onClick={() => setSelectedDemoCompound('chlorantraniliprole')}
+                  className={`px-2.5 py-1 rounded transition-all whitespace-nowrap cursor-pointer ${
+                    selectedDemoCompound === 'chlorantraniliprole'
+                      ? 'bg-[#0BDFA0]/20 text-[#0BDFA0] border border-[#0BDFA0]/30 font-bold'
+                      : 'text-[#9AACBE] hover:text-white'
+                  }`}
+                >
+                  Chlorantraniliprole
+                </button>
+                <button
+                  onClick={() => setSelectedDemoCompound('novel_isostere')}
+                  className={`px-2.5 py-1 rounded transition-all whitespace-nowrap cursor-pointer ${
+                    selectedDemoCompound === 'novel_isostere'
+                      ? 'bg-[#0BDFA0]/20 text-[#0BDFA0] border border-[#0BDFA0]/30 font-bold'
+                      : 'text-[#9AACBE] hover:text-white'
+                  }`}
+                >
+                  Iso-Oxazole #402
+                </button>
+              </div>
+
+              {/* Candidate Molecule Display Box */}
+              <div className="relative z-10 p-3.5 rounded-xl bg-[#05070B]/90 border border-white/[0.06] mb-3 backdrop-blur-sm">
+                <div className="flex items-center justify-between mb-1 text-[11px] font-mono">
+                  <span className="text-[#0BDFA0] font-bold">CANDIDATE MOLECULE</span>
+                  <span className="text-[#7C8A9A]">{activeDemo.formula}</span>
+                </div>
+                <div className="text-base font-bold text-white mb-0.5">{activeDemo.name}</div>
+                <div className="text-xs text-[#9AACBE] mb-2">{activeDemo.classification}</div>
+                <div className="p-2 rounded bg-black/50 border border-white/[0.04] font-mono text-[10.5px] text-[#7C8A9A] break-all leading-tight">
                   <span className="text-[#38BDF8]">SMILES:</span> {activeDemo.smiles}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#8B8CF8] mb-1">
-                    <Atom size={14} />
+              {/* Target & Organism Compact Cards */}
+              <div className="relative z-10 grid grid-cols-2 gap-2.5 mb-3.5">
+                <div className="p-3 rounded-xl bg-[#05070B]/90 border border-white/[0.06]">
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#8B8CF8] font-bold mb-1">
+                    <Atom size={12} />
                     <span>TARGET RECEPTOR</span>
                   </div>
-                  <div className="text-sm font-semibold text-white">{activeDemo.target}</div>
+                  <div className="text-xs font-semibold text-white truncate" title={activeDemo.target}>
+                    {activeDemo.target}
+                  </div>
+                  <div className="text-[10px] font-mono text-[#7C8A9A] mt-0.5">{activeDemo.targetGene}</div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#F3B14D] mb-1">
-                    <Bug size={14} />
+                <div className="p-3 rounded-xl bg-[#05070B]/90 border border-white/[0.06]">
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#F3B14D] font-bold mb-1">
+                    <Bug size={12} />
                     <span>TARGET ORGANISM</span>
                   </div>
-                  <div className="text-sm font-semibold text-white">{activeDemo.pest}</div>
+                  <div className="text-xs font-semibold text-white italic truncate" title={activeDemo.pest}>
+                    {activeDemo.pest}
+                  </div>
+                  <div className="text-[10px] font-mono text-[#7C8A9A] mt-0.5">{activeDemo.pestCommon}</div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Col: Forecast Output & Uncertainty (5 cols) */}
-            <div className="lg:col-span-5 p-5 rounded-xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.08] flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono font-bold text-[#7C8A9A]">PREDICTIVE ML OUTPUT</span>
-                  <span
-                    className="text-[11px] font-mono font-bold px-2 py-0.5 rounded border"
+              {/* Forecast Output Panel */}
+              <div className="relative z-10 p-3.5 rounded-xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] mb-3.5">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-[10.5px] font-mono font-bold text-[#7C8A9A]">PREDICTIVE ML OUTPUT</div>
+                  <div
+                    className="text-[10.5px] font-mono font-bold px-2 py-0.5 rounded border"
                     style={{
                       color: activeDemo.riskColor,
                       borderColor: `${activeDemo.riskColor}40`,
@@ -304,49 +476,69 @@ export default function LandingPage() {
                     }}
                   >
                     {activeDemo.riskLevel}
-                  </span>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="p-3 rounded-lg bg-[#05070B] border border-white/[0.06]">
-                    <div className="text-[11px] text-[#7C8A9A] font-mono mb-1">LOG10 RR PREDICTION</div>
-                    <div className="text-2xl font-bold font-mono text-white">
+                <div className="grid grid-cols-2 gap-2.5 mb-3">
+                  <div className="p-2.5 rounded-lg bg-[#05070B] border border-white/[0.05]">
+                    <div className="text-[10px] text-[#7C8A9A] font-mono">RESISTANCE INDEX</div>
+                    <div className="text-xl font-bold font-mono text-white mt-0.5">
                       +{activeDemo.predictedLog10RR}
                     </div>
-                    <div className="text-[10px] text-[#7C8A9A] mt-0.5">Fold resistance index</div>
+                    <div className="text-[9.5px] text-[#7C8A9A]">Log10 RR Fold Shift</div>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-[#05070B] border border-white/[0.06]">
-                    <div className="text-[11px] text-[#7C8A9A] font-mono mb-1">DURABILITY SCORE</div>
-                    <div className="text-2xl font-bold font-mono text-[#0BDFA0]">
-                      {activeDemo.durabilityScore}/100
+                  <div className="p-2.5 rounded-lg bg-[#05070B] border border-white/[0.05]">
+                    <div className="text-[10px] text-[#7C8A9A] font-mono">DURABILITY SCORE</div>
+                    <div className="text-xl font-bold font-mono text-[#0BDFA0] mt-0.5">
+                      {activeDemo.durabilityScore}<span className="text-xs text-[#7C8A9A]">/100</span>
                     </div>
-                    <div className="text-[10px] text-[#7C8A9A] mt-0.5">High operational durability</div>
+                    <div className="text-[9.5px] text-[#7C8A9A]">Field Efficacy Horizon</div>
                   </div>
                 </div>
 
-                <div className="space-y-2 text-xs font-mono text-[#9AACBE] p-3 rounded-lg bg-[#05070B]/70 border border-white/[0.04]">
+                <div className="space-y-1.5 text-[11px] font-mono text-[#9AACBE] p-2.5 rounded-lg bg-[#05070B]/80 border border-white/[0.04]">
                   <div className="flex justify-between">
                     <span>90% Conformal Interval:</span>
                     <span className="text-white font-semibold">{activeDemo.conformal90}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Domain Status:</span>
-                    <span className="text-[#0BDFA0] font-semibold">{activeDemo.domainStatus}</span>
-                  </div>
-                  <div className="flex justify-between">
                     <span>Tanimoto Max Similarity:</span>
-                    <span className="text-white font-semibold">{activeDemo.tanimotoSim}</span>
+                    <span className="text-white font-semibold">{activeDemo.tanimotoSim} ({activeDemo.domainStatus})</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#7C8A9A]">
-                <span>MODEL: v2.0.0-gbrt-ecfp4</span>
-                <Link to="/login" className="text-[#0BDFA0] hover:underline flex items-center gap-1 font-semibold">
-                  <span>Run Custom Forecast</span>
-                  <ArrowRight size={11} />
-                </Link>
+              {/* Scientific Signals Bar */}
+              <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[9.5px] font-mono text-[#7C8A9A] mb-3">
+                <div className="p-1.5 rounded bg-white/[0.02] border border-white/[0.04] text-center">
+                  <div className="text-white font-bold">ECFP4</div>
+                  <div className="text-[#0BDFA0]">{activeDemo.activeBits}</div>
+                </div>
+                <div className="p-1.5 rounded bg-white/[0.02] border border-white/[0.04] text-center">
+                  <div className="text-white font-bold">TANIMOTO</div>
+                  <div className="text-[#38BDF8]">{activeDemo.tanimotoSim}</div>
+                </div>
+                <div className="p-1.5 rounded bg-white/[0.02] border border-white/[0.04] text-center">
+                  <div className="text-white font-bold">CONFORMAL</div>
+                  <div className="text-[#8B8CF8]">90% Coverage</div>
+                </div>
+                <div className="p-1.5 rounded bg-white/[0.02] border border-white/[0.04] text-center">
+                  <div className="text-white font-bold">OOD GATING</div>
+                  <div className="text-[#F3B14D]">Active</div>
+                </div>
+              </div>
+
+              {/* Console Footer */}
+              <div className="relative z-10 pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-[#7C8A9A]">
+                <span>MODEL: v2.0.0-gbrt-ecfp4 · <span className="text-white/60">ILLUSTRATIVE FORECAST PREVIEW</span></span>
+                <button
+                  onClick={handleOpenWorkspace}
+                  className="text-[#0BDFA0] hover:underline flex items-center gap-1 font-semibold cursor-pointer"
+                >
+                  <span>Evaluate Chemistry</span>
+                  <ArrowRight size={10} />
+                </button>
               </div>
             </div>
           </div>
@@ -355,7 +547,7 @@ export default function LandingPage() {
 
       {/* ─── Section 2: About ResistanceIQ ──────────────────────────── */}
       <section id="about" className="py-20 border-t border-white/[0.06] bg-[#070B10] px-4 sm:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-mono font-bold text-[#0BDFA0] uppercase tracking-wider">About ResistanceIQ</span>
             <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mt-2 mb-4">
@@ -367,247 +559,286 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#0BDFA0]/30 transition-all">
-              <div className="w-10 h-10 rounded-lg bg-[#0BDFA0]/10 text-[#0BDFA0] flex items-center justify-center mb-4">
+            <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#0BDFA0]/30 transition-all group">
+              <div className="w-10 h-10 rounded-lg bg-[#0BDFA0]/10 text-[#0BDFA0] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                 <Database size={20} />
               </div>
-              <h3 className="text-base font-bold text-white mb-2">Unified Scientific Knowledge</h3>
+              <h3 className="text-base font-bold text-white mb-2">UNIFIED SCIENTIFIC KNOWLEDGE</h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed">
                 Connects agricultural ontologies (FAO ICC, IRAC MoA), protein sequences (UniProt), coordinate structures (AlphaFold/PDB), and decades of toxicological bioassays (APRD, ChEMBL).
               </p>
             </div>
 
-            <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#8B8CF8]/30 transition-all">
-              <div className="w-10 h-10 rounded-lg bg-[#8B8CF8]/10 text-[#8B8CF8] flex items-center justify-center mb-4">
+            <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#8B8CF8]/30 transition-all group">
+              <div className="w-10 h-10 rounded-lg bg-[#8B8CF8]/10 text-[#8B8CF8] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                 <Cpu size={20} />
               </div>
-              <h3 className="text-base font-bold text-white mb-2">Machine-Learning Inference</h3>
+              <h3 className="text-base font-bold text-white mb-2">MACHINE-LEARNING INFERENCE</h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed">
-                Gradient Boosted Regression Trees and Random Forest ensembles trained on 1,059-dimensional feature vectors containing Morgan/ECFP4 fingerprints and physicochemical descriptors.
+                Gradient Boosted Regression Trees and Random Forest ensembles trained on 1,059-dimensional feature vectors containing Morgan/ECFP4 circular fingerprints and physicochemical descriptors.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#38BDF8]/30 transition-all">
-              <div className="w-10 h-10 rounded-lg bg-[#38BDF8]/10 text-[#38BDF8] flex items-center justify-center mb-4">
+            <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#38BDF8]/30 transition-all group">
+              <div className="w-10 h-10 rounded-lg bg-[#38BDF8]/10 text-[#38BDF8] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                 <ShieldCheck size={20} />
               </div>
-              <h3 className="text-base font-bold text-white mb-2">Conformal Error Bounds</h3>
+              <h3 className="text-base font-bold text-white mb-2">CONFORMAL ERROR BOUNDS</h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed">
-                Distribution-free uncertainty estimation providing mathematically guaranteed 80%, 90%, and 95% confidence intervals, paired with Tanimoto manifold distance checks.
+                Distribution-free uncertainty estimation providing mathematically guaranteed 80%, 90%, and 95% confidence intervals, paired with Tanimoto training-manifold distance checks.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Section 3 & 4: Problem & Solution ──────────────────────── */}
-      <section className="py-20 border-t border-white/[0.06] bg-[#05070B] px-4 sm:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* The Problem */}
-            <div>
-              <span className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider">The Agricultural Challenge</span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-2 mb-6">
-                Reactive Resistance Monitoring Causes Multi-Billion Dollar Control Failures
-              </h2>
-              <div className="space-y-4 text-sm text-[#9AACBE]">
-                <div className="flex items-start gap-3 p-3.5 rounded-lg bg-rose-500/[0.04] border border-rose-500/20">
-                  <AlertCircle size={18} className="text-rose-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-white">Late-Stage Field Discovery:</span> Traditional bioassays only confirm resistance after crop damage and field control failures have already occurred.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3.5 rounded-lg bg-rose-500/[0.04] border border-rose-500/20">
-                  <AlertCircle size={18} className="text-rose-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-white">Cross-Resistance Cascades:</span> Single target point mutations (e.g. AChE1-F331W, VGSC-kdr) simultaneously neutralize entire classes of chemical modes of action.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3.5 rounded-lg bg-rose-500/[0.04] border border-rose-500/20">
-                  <AlertCircle size={18} className="text-rose-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-white">Wet-Lab Screening Bottlenecks:</span> Synthesizing and bioassaying candidate chemistries takes months per iteration without prior in-silico screening.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* The Solution */}
-            <div>
-              <span className="text-xs font-mono font-bold text-[#0BDFA0] uppercase tracking-wider">The ResistanceIQ Solution</span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-2 mb-6">
-                Proactive In-Silico Resistance Screening & Hypothesis Prioritization
-              </h2>
-              <div className="space-y-4 text-sm text-[#9AACBE]">
-                <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#0BDFA0]/[0.04] border border-[#0BDFA0]/20">
-                  <CheckCircle2 size={18} className="text-[#0BDFA0] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-white">Pre-Deployment Forecasting:</span> Estimate Log10 Resistance Ratios and multi-generation durability curves before committing to chemical synthesis.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#0BDFA0]/[0.04] border border-[#0BDFA0]/20">
-                  <CheckCircle2 size={18} className="text-[#0BDFA0] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-white">Ontological Traversal:</span> Traverse seamlessly from Crop Commodity → Pest Species → Biological Receptor → 3D Coordinate Structure → Chemical Candidate.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#0BDFA0]/[0.04] border border-[#0BDFA0]/20">
-                  <CheckCircle2 size={18} className="text-[#0BDFA0] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-white">Gated Out-of-Distribution Screening:</span> Detect novel chemical scaffolds outside the training manifold using Tanimoto maximum similarity gating.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Section 5: Key Platform Features ───────────────────────── */}
-      <section id="capabilities" className="py-20 border-t border-white/[0.06] bg-[#070B10] px-4 sm:px-8">
+      {/* ─── Section 3: Platform Capabilities ───────────────────────── */}
+      <section id="capabilities" className="py-20 border-t border-white/[0.06] bg-[#05070B] px-4 sm:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold text-[#0BDFA0] uppercase tracking-wider">Core Capabilities</span>
+            <span className="text-xs font-mono font-bold text-[#0BDFA0] uppercase tracking-wider">Modular Platform</span>
             <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mt-2 mb-4">
-              Scientific Intelligence Features
+              Scientific Intelligence Modules
             </h2>
             <p className="text-[#9AACBE] text-base leading-relaxed">
-              Six modular, integrated capabilities providing end-to-end scientific hypothesis generation, molecular screening, and research validation.
+              Six core computational modules supporting hypothesis generation, cheminformatics validation, and regulatory reproducibility.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#0BDFA0]/40 transition-all group">
-              <div className="w-10 h-10 rounded-lg bg-[#0BDFA0]/10 text-[#0BDFA0] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <BarChart3 size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">Temporal Resistance Forecasting</h3>
+              <div className="text-xs font-mono font-bold text-[#0BDFA0] mb-2">01</div>
+              <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <BarChart3 size={18} className="text-[#0BDFA0]" />
+                <span>Resistance Forecasting</span>
+              </h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed mb-3">
                 Predicts Resistance Ratio (Log10 RR) and durability scores calibrated across 40+ years of toxicological bioassays using temporal train/test splits.
               </p>
-              <span className="text-[11px] font-mono text-[#0BDFA0] font-semibold">GBRT + Random Forest Ensemble</span>
+              <span className="text-[11px] font-mono text-[#0BDFA0]">GBRT + Random Forest Ensemble</span>
             </div>
 
             <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#8B8CF8]/40 transition-all group">
-              <div className="w-10 h-10 rounded-lg bg-[#8B8CF8]/10 text-[#8B8CF8] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <ShieldCheck size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">Conformal Uncertainty Bounds</h3>
+              <div className="text-xs font-mono font-bold text-[#8B8CF8] mb-2">02</div>
+              <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <Atom size={18} className="text-[#8B8CF8]" />
+                <span>Molecular Intelligence</span>
+              </h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed mb-3">
-                Calculates distribution-free 80%, 90%, and 95% confidence intervals on predicted resistance metrics with guaranteed coverage rates under exchangeability.
+                Parses SMILES/SDF, executes valence checks, generates 2048-bit ECFP4 circular fingerprints, computes RDKit descriptors, and supports 2D molecular sketching.
               </p>
-              <span className="text-[11px] font-mono text-[#8B8CF8] font-semibold">Inductive Conformal Prediction</span>
+              <span className="text-[11px] font-mono text-[#8B8CF8]">2048-Bit Morgan / ECFP4</span>
             </div>
 
             <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#38BDF8]/40 transition-all group">
-              <div className="w-10 h-10 rounded-lg bg-[#38BDF8]/10 text-[#38BDF8] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <Compass size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">Applicability Domain & OOD Gating</h3>
+              <div className="text-xs font-mono font-bold text-[#38BDF8] mb-2">03</div>
+              <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <Microscope size={18} className="text-[#38BDF8]" />
+                <span>Target & Protein Intelligence</span>
+              </h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed mb-3">
-                Evaluates distance-to-training-manifold using Tanimoto maximum similarity and Mahalanobis feature distance to detect novel scaffolds.
+                Ontological traversal connecting arthropod pests to UniProt receptor sequences, AlphaFold 3D coordinates, and IRAC biochemical modes of action.
               </p>
-              <span className="text-[11px] font-mono text-[#38BDF8] font-semibold">Tanimoto Manifold Filtering</span>
+              <span className="text-[11px] font-mono text-[#38BDF8]">UniProt & AlphaFold Traversal</span>
             </div>
 
             <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#F3B14D]/40 transition-all group">
-              <div className="w-10 h-10 rounded-lg bg-[#F3B14D]/10 text-[#F3B14D] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <GitBranch size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">Scientific Knowledge Graph</h3>
+              <div className="text-xs font-mono font-bold text-[#F3B14D] mb-2">04</div>
+              <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <GitBranch size={18} className="text-[#F3B14D]" />
+                <span>Scientific Provenance</span>
+              </h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed mb-3">
-                Traversal connecting crops (FAO ICC), arthropod pests, IRAC Modes of Action, UniProt protein sequences, and AlphaFold/PDB coordinate structures.
+                Cryptographic model verification with SHA-256 artifact hashes, dataset manifests, and deterministic seed logging for audit traceability.
               </p>
-              <span className="text-[11px] font-mono text-[#F3B14D] font-semibold">Ontological Graph Traversal</span>
+              <span className="text-[11px] font-mono text-[#F3B14D]">SHA-256 Model Checksums</span>
             </div>
 
             <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#0BDFA0]/40 transition-all group">
-              <div className="w-10 h-10 rounded-lg bg-[#0BDFA0]/10 text-[#0BDFA0] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <FlaskConical size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">Automated Cheminformatics</h3>
+              <div className="text-xs font-mono font-bold text-[#0BDFA0] mb-2">05</div>
+              <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <FileText size={18} className="text-[#0BDFA0]" />
+                <span>Research Reproducibility</span>
+              </h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed mb-3">
-                Parses SMILES/SDF, executes valence checks, generates 2048-bit ECFP4 fingerprints, computes RDKit descriptors, and supports 2D molecular sketching.
+                Generates deterministic PDF, CSV, and JSON dossiers containing complete feature breakdowns, conformal intervals, and audit histories.
               </p>
-              <span className="text-[11px] font-mono text-[#0BDFA0] font-semibold">RDKit & 2D Canvas Engine</span>
+              <span className="text-[11px] font-mono text-[#0BDFA0]">Audit-Ready Dossier Exports</span>
             </div>
 
             <div className="p-6 rounded-xl bg-[#0B1017] border border-white/[0.07] hover:border-[#8B8CF8]/40 transition-all group">
-              <div className="w-10 h-10 rounded-lg bg-[#8B8CF8]/10 text-[#8B8CF8] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <FileText size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">Provenance & Research Dossiers</h3>
+              <div className="text-xs font-mono font-bold text-[#8B8CF8] mb-2">06</div>
+              <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                <FlaskConical size={18} className="text-[#8B8CF8]" />
+                <span>Candidate Evaluation</span>
+              </h3>
               <p className="text-xs text-[#9AACBE] leading-relaxed mb-3">
-                Generates deterministic PDF, CSV, and JSON dossiers with SHA-256 model checksums, feature breakdowns, and reproducible audit logs.
+                Multi-criteria candidate prioritization ranking efficacy against target mutations while screening out-of-distribution scaffolds via Tanimoto distance.
               </p>
-              <span className="text-[11px] font-mono text-[#8B8CF8] font-semibold">Cryptographic Audit Trails</span>
+              <span className="text-[11px] font-mono text-[#8B8CF8]">Tanimoto Manifold Gating</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Section 6: AI/ML Architecture ─────────────────────────── */}
+      {/* ─── Section 4: How It Works (7-Stage Workflow) ─────────────── */}
+      <section id="workflow" className="py-20 border-t border-white/[0.06] bg-[#070B10] px-4 sm:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-mono font-bold text-[#38BDF8] uppercase tracking-wider">Scientific Workflow</span>
+            <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mt-2 mb-4">
+              7-Stage Discovery Traversal Pipeline
+            </h2>
+            <p className="text-[#9AACBE] text-base leading-relaxed">
+              Seamlessly connects agricultural crop taxonomy down to molecular coordinate structures and conformal durability forecasts.
+            </p>
+          </div>
+
+          {/* Desktop Horizontal Workflow / Mobile Vertical Stack */}
+          <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
+            <div className="p-4 rounded-xl bg-[#0B1017] border border-white/[0.07] text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#0BDFA0]/10 text-[#0BDFA0] font-mono font-bold text-xs flex items-center justify-center mb-2">
+                01
+              </div>
+              <Sprout size={16} className="text-[#0BDFA0] mb-1.5" />
+              <div className="text-xs font-bold text-white">CROP</div>
+              <div className="text-[10px] text-[#7C8A9A] mt-1">FAO ICC Commodity</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0B1017] border border-white/[0.07] text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#38BDF8]/10 text-[#38BDF8] font-mono font-bold text-xs flex items-center justify-center mb-2">
+                02
+              </div>
+              <Bug size={16} className="text-[#38BDF8] mb-1.5" />
+              <div className="text-xs font-bold text-white">THREAT</div>
+              <div className="text-[10px] text-[#7C8A9A] mt-1">Arthropod Pest Species</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0B1017] border border-white/[0.07] text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#8B8CF8]/10 text-[#8B8CF8] font-mono font-bold text-xs flex items-center justify-center mb-2">
+                03
+              </div>
+              <Atom size={16} className="text-[#8B8CF8] mb-1.5" />
+              <div className="text-xs font-bold text-white">TARGET</div>
+              <div className="text-[10px] text-[#7C8A9A] mt-1">IRAC MoA Receptor</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0B1017] border border-white/[0.07] text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-violet-400/10 text-violet-300 font-mono font-bold text-xs flex items-center justify-center mb-2">
+                04
+              </div>
+              <Dna size={16} className="text-violet-300 mb-1.5" />
+              <div className="text-xs font-bold text-white">PROTEIN</div>
+              <div className="text-[10px] text-[#7C8A9A] mt-1">UniProt & 3D Structure</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0B1017] border border-white/[0.07] text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-amber-400/10 text-amber-300 font-mono font-bold text-xs flex items-center justify-center mb-2">
+                05
+              </div>
+              <FlaskConical size={16} className="text-amber-300 mb-1.5" />
+              <div className="text-xs font-bold text-white">MOLECULE</div>
+              <div className="text-[10px] text-[#7C8A9A] mt-1">SMILES / SDF / Draw</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0B1017] border border-white/[0.07] text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-cyan-400/10 text-cyan-300 font-mono font-bold text-xs flex items-center justify-center mb-2">
+                06
+              </div>
+              <Compass size={16} className="text-cyan-300 mb-1.5" />
+              <div className="text-xs font-bold text-white">REVIEW</div>
+              <div className="text-[10px] text-[#7C8A9A] mt-1">Tanimoto OOD Gating</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0BDFA0]/10 border border-[#0BDFA0]/30 text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#0BDFA0] text-[#020609] font-mono font-bold text-xs flex items-center justify-center mb-2">
+                07
+              </div>
+              <BarChart3 size={16} className="text-[#0BDFA0] mb-1.5" />
+              <div className="text-xs font-bold text-[#0BDFA0]">FORECAST</div>
+              <div className="text-[10px] text-[#9AACBE] mt-1">Conformal Bounds</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Section 5: ML Architecture Pipeline ────────────────────── */}
       <section id="ml-engine" className="py-20 border-t border-white/[0.06] bg-[#05070B] px-4 sm:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold text-[#8B8CF8] uppercase tracking-wider">Predictive Modeling</span>
+            <span className="text-xs font-mono font-bold text-[#8B8CF8] uppercase tracking-wider">Inference Architecture</span>
             <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mt-2 mb-4">
-              AI/ML Architecture & Temporal Validation
+              Machine Learning Pipeline & Uncertainty Calibration
             </h2>
             <p className="text-[#9AACBE] text-base leading-relaxed">
-              Engineered with strict temporal validation splits to evaluate historical models against future resistance phenomena without data leakage.
+              Technical representation of the 1,059-D feature engineering, ensemble regression, and inductive conformal prediction flow.
             </p>
           </div>
 
           <div className="p-6 sm:p-8 rounded-2xl bg-[#0B1017] border border-white/10 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pb-6 border-b border-white/[0.08]">
-              <div className="p-4 rounded-lg bg-[#05070B] border border-white/[0.05]">
-                <div className="text-xs text-[#7C8A9A] font-mono">PRIMARY ESTIMATOR</div>
-                <div className="text-base font-bold text-white mt-1">GBRT Regressor</div>
-                <div className="text-xs text-[#9AACBE] mt-1">Gradient Boosted Trees (150 estimators, max depth 5)</div>
+            {/* Architecture Diagram */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
+              <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
+                <div className="text-[10px] font-mono text-[#0BDFA0] font-bold">STAGE 01</div>
+                <div className="text-xs font-bold text-white mt-1">Molecular Representation</div>
+                <div className="text-[10px] text-[#7C8A9A] mt-1">SMILES Canonicalization</div>
               </div>
-              <div className="p-4 rounded-lg bg-[#05070B] border border-white/[0.05]">
-                <div className="text-xs text-[#7C8A9A] font-mono">ENSEMBLE ESTIMATOR</div>
-                <div className="text-base font-bold text-white mt-1">Random Forest Ensemble</div>
-                <div className="text-xs text-[#9AACBE] mt-1">Variance reduction across dense fingerprint bits</div>
+
+              <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
+                <div className="text-[10px] font-mono text-[#38BDF8] font-bold">STAGE 02</div>
+                <div className="text-xs font-bold text-white mt-1">ECFP4 Fingerprint</div>
+                <div className="text-[10px] text-[#7C8A9A] mt-1">2048-Bit Morgan Radius 2</div>
               </div>
-              <div className="p-4 rounded-lg bg-[#05070B] border border-white/[0.05]">
-                <div className="text-xs text-[#7C8A9A] font-mono">UNCERTAINTY CALIBRATOR</div>
-                <div className="text-base font-bold text-white mt-1">Inductive Conformal</div>
-                <div className="text-xs text-[#9AACBE] mt-1">Non-conformity score quantile intervals (80%/90%/95%)</div>
+
+              <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
+                <div className="text-[10px] font-mono text-[#8B8CF8] font-bold">STAGE 03</div>
+                <div className="text-xs font-bold text-white mt-1">Feature Processing</div>
+                <div className="text-[10px] text-[#7C8A9A] mt-1">1059-D Feature Matrix</div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
+                <div className="text-[10px] font-mono text-violet-300 font-bold">STAGE 04</div>
+                <div className="text-xs font-bold text-white mt-1">ML Inference</div>
+                <div className="text-[10px] text-[#7C8A9A] mt-1">GBRT + Random Forest</div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#05070B] border border-white/[0.06]">
+                <div className="text-[10px] font-mono text-amber-300 font-bold">STAGE 05</div>
+                <div className="text-xs font-bold text-white mt-1">Conformal Bounds</div>
+                <div className="text-[10px] text-[#7C8A9A] mt-1">80%/90%/95% Quantiles</div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#0BDFA0]/10 border border-[#0BDFA0]/30">
+                <div className="text-[10px] font-mono text-[#0BDFA0] font-bold">STAGE 06</div>
+                <div className="text-xs font-bold text-[#0BDFA0] mt-1">Resistance Forecast</div>
+                <div className="text-[10px] text-[#9AACBE] mt-1">Log10 RR & Durability</div>
               </div>
             </div>
 
-            <div className="space-y-3">
-              <h3 className="text-sm font-mono font-bold text-white uppercase tracking-wider">13-Step Checkpointed Inference Pipeline</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs font-mono text-[#9AACBE]">
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">1. INPUT_VALIDATION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">2. ENTITY_RESOLUTION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">3. CHEMICAL_STANDARDIZATION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">4. FEATURE_GENERATION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">5. SCHEMA_VALIDATION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">6. MODEL_LOAD</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">7. INFERENCE_EXECUTION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">8. OOD_EVALUATION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">9. UNCERTAINTY_CALIBRATION</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">10. HEURISTIC_SCORING</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">11. PERSISTENCE_COMMIT</div>
-                <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">12. SERIALIZATION</div>
+            {/* Model Metadata */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-white/[0.06] text-xs font-mono text-[#9AACBE]">
+              <div className="p-3 rounded-lg bg-[#05070B] border border-white/[0.04]">
+                <div className="text-[#7C8A9A]">TEMPORAL BENCHMARK</div>
+                <div className="text-white font-semibold mt-1">Train: 1980–2012 | Test: 2018–2026</div>
+              </div>
+              <div className="p-3 rounded-lg bg-[#05070B] border border-white/[0.04]">
+                <div className="text-[#7C8A9A]">OOD MANIFOLD GATING</div>
+                <div className="text-white font-semibold mt-1">Tanimoto Max Similarity Filter</div>
+              </div>
+              <div className="p-3 rounded-lg bg-[#05070B] border border-white/[0.04]">
+                <div className="text-[#7C8A9A]">UNCERTAINTY METHOD</div>
+                <div className="text-white font-semibold mt-1">Inductive Conformal Prediction</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Section 7: Molecular Intelligence & Cheminformatics ───── */}
+      {/* ─── Section 6: Cheminformatics & Molecular Intelligence ───── */}
       <section id="molecular" className="py-20 border-t border-white/[0.06] bg-[#070B10] px-4 sm:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold text-[#0BDFA0] uppercase tracking-wider">Cheminformatics</span>
+            <span className="text-xs font-mono font-bold text-[#0BDFA0] uppercase tracking-wider">Cheminformatics Core</span>
             <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mt-2 mb-4">
               Molecular Intelligence & Chemical Resolution
             </h2>
@@ -677,67 +908,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Section 8: Step-by-Step Workflow ───────────────────────── */}
-      <section id="workflow" className="py-20 border-t border-white/[0.06] bg-[#05070B] px-4 sm:px-8">
+      {/* ─── Section 7: Governance & Research Reproducibility ────────── */}
+      <section id="governance" className="py-20 border-t border-white/[0.06] bg-[#05070B] px-4 sm:px-8">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold text-[#38BDF8] uppercase tracking-wider">Operational Workflow</span>
-            <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mt-2 mb-4">
-              How ResistanceIQ Works
-            </h2>
-            <p className="text-[#9AACBE] text-base leading-relaxed">
-              A 4-stage traversal taking researchers from crop commodity to validated durability forecast in seconds.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-5 rounded-xl bg-[#0B1017] border border-white/[0.07] relative">
-              <div className="w-8 h-8 rounded-full bg-[#0BDFA0]/10 text-[#0BDFA0] font-mono font-bold text-sm flex items-center justify-center mb-3">
-                01
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1.5">Select Agronomic Context</h3>
-              <p className="text-xs text-[#9AACBE] leading-relaxed">
-                Choose crop commodity (FAO ICC taxonomy) and target arthropod pest species.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-xl bg-[#0B1017] border border-white/[0.07] relative">
-              <div className="w-8 h-8 rounded-full bg-[#8B8CF8]/10 text-[#8B8CF8] font-mono font-bold text-sm flex items-center justify-center mb-3">
-                02
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1.5">Target Biology</h3>
-              <p className="text-xs text-[#9AACBE] leading-relaxed">
-                Resolve receptor protein, UniProt accession, IRAC Mode of Action, and 3D PDB structure.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-xl bg-[#0B1017] border border-white/[0.07] relative">
-              <div className="w-8 h-8 rounded-full bg-[#38BDF8]/10 text-[#38BDF8] font-mono font-bold text-sm flex items-center justify-center mb-3">
-                03
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1.5">Candidate Molecule</h3>
-              <p className="text-xs text-[#9AACBE] leading-relaxed">
-                Input candidate chemistry via PubChem name search, SMILES entry, SDF upload, or 2D drawer.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-xl bg-[#0B1017] border border-white/[0.07] relative">
-              <div className="w-8 h-8 rounded-full bg-[#F3B14D]/10 text-[#F3B14D] font-mono font-bold text-sm flex items-center justify-center mb-3">
-                04
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1.5">Generate Forecast</h3>
-              <p className="text-xs text-[#9AACBE] leading-relaxed">
-                Calculate Log10 RR, conformal confidence bounds, OOD check, and export research dossier.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Section 9: Governance & Technology Stack ───────────────── */}
-      <section id="governance" className="py-20 border-t border-white/[0.06] bg-[#070B10] px-4 sm:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {/* Scientific Governance */}
             <div className="p-6 sm:p-8 rounded-2xl bg-[#0B1017] border border-white/10">
               <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">Scientific Governance</span>
@@ -800,17 +974,17 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Section 10: Call To Action (CTA) ───────────────────────── */}
-      <section className="py-20 border-t border-white/[0.06] bg-[#05070B] px-4 sm:px-8 text-center relative overflow-hidden">
+      {/* ─── Section 8: Final CTA ───────────────────────────────────── */}
+      <section className="py-20 border-t border-white/[0.06] bg-[#070B10] px-4 sm:px-8 text-center relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0BDFA0]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
 
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0BDFA0]/10 border border-[#0BDFA0]/20 text-[#0BDFA0] text-xs font-mono font-semibold tracking-wider uppercase">
-            <span>RESEARCHER ACCESS</span>
+            <span>ENTER THE RESISTANCEIQ INTELLIGENCE LAYER</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Accelerate Your Resistance Risk Screening
+            Explore resistance forecasting, molecular intelligence, and research workflows in the ResistanceIQ workspace.
           </h2>
 
           <p className="text-[#9AACBE] text-base leading-relaxed max-w-xl mx-auto">
@@ -818,13 +992,13 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Link
-              to="/login"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-sm font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(11,223,160,0.3)] hover:shadow-[0_0_30px_rgba(11,223,160,0.5)]"
+            <button
+              onClick={handleOpenWorkspace}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#0BDFA0] hover:bg-[#09c78e] text-[#020609] text-sm font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(11,223,160,0.3)] hover:shadow-[0_0_30px_rgba(11,223,160,0.5)] cursor-pointer"
             >
-              <span>Launch ResistanceIQ Workspace</span>
+              <span>Open Workspace</span>
               <ArrowRight size={16} />
-            </Link>
+            </button>
 
             <Link
               to="/register"
