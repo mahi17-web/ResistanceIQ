@@ -68,7 +68,7 @@ export default function App() {
             setAuthStatus('unauthenticated');
           }
         }
-      } catch (err) {
+      } catch {
         if (isMounted) {
           setAuthStatus('unauthenticated');
         }

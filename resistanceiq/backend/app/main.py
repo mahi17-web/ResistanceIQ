@@ -194,3 +194,9 @@ def health_ready(response: Response, db = Depends(get_db)):
     from app.api.v1.system import readiness_check
     return readiness_check(response=response, db=db)
 
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+

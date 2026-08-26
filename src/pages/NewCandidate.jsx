@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Sprout,
@@ -21,12 +21,8 @@ import {
   ExternalLink,
   Layers,
   Check,
-  X,
   FileText,
   Download,
-  HelpCircle,
-  ChevronDown,
-  ChevronUp,
   Loader2,
 } from 'lucide-react';
 import {
@@ -298,7 +294,6 @@ export default function NewCandidate() {
 
   // Step 1: Crop State
   const [cropList, setCropList] = useState([]);
-  const [retryingSearch, setRetryingSearch] = useState(false);
   const [exportingReport, setExportingReport] = useState(false);
 
   async function handleExportReport() {
@@ -336,7 +331,7 @@ export default function NewCandidate() {
   // Step 4: Protein & Structure State
   const [proteinRecord, setProteinRecord] = useState(null);
   const [structuresList, setStructuresList] = useState([]);
-  const [loadingProtein, setLoadingProtein] = useState(false);
+  const [_loadingProtein, setLoadingProtein] = useState(false);
 
   // ─── Step 5: Candidate Molecule Automated State ──────────────────────────
   // Four input modes: 'search' (default), 'upload', 'draw', 'advanced'
@@ -364,7 +359,7 @@ export default function NewCandidate() {
   const [isResolvingAdvanced, setIsResolvingAdvanced] = useState(false);
 
   // Step 6: Review & Pre-check
-  const [applicabilityDomain, setApplicabilityDomain] = useState(null);
+  const [_applicabilityDomain, setApplicabilityDomain] = useState(null);
 
   // ─── Step 1: Crop Loader & Search ──────────────────────────────────────────
   useEffect(() => {

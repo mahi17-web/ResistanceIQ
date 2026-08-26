@@ -40,14 +40,16 @@ export default function ForgotPassword() {
   const [resendCooldown, setResendCooldown] = useState(0);
 
   // References for OTP 6-box input
-  const digitRefs = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+  const digit0Ref = useRef(null);
+  const digit1Ref = useRef(null);
+  const digit2Ref = useRef(null);
+  const digit3Ref = useRef(null);
+  const digit4Ref = useRef(null);
+  const digit5Ref = useRef(null);
+  const digitRefs = useMemo(
+    () => [digit0Ref, digit1Ref, digit2Ref, digit3Ref, digit4Ref, digit5Ref],
+    []
+  );
 
   // Resend countdown effect
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function ForgotPassword() {
         digitRefs[0].current?.focus();
       }, 100);
     }
-  }, [step]);
+  }, [step, digitRefs]);
 
   // Password Complexity Validation Rules
   const hasMinLength = newPassword.length >= 8;

@@ -5,7 +5,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, ReferenceLine,
 } from 'recharts';
-import { getProjects, getForecasts, ensureAuthenticated } from '../api/client.js';
+import { getProjects, getForecasts } from '../api/client.js';
 
 /* ─── Molecular network SVG decoration ──────────────────────────── */
 function MolecularViz() {

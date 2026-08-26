@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import {
   Sparkles,
   RotateCcw,
@@ -9,10 +9,8 @@ import {
   Minus,
   CheckCircle2,
   AlertCircle,
-  Layers,
   Move,
   Eraser,
-  HelpCircle,
 } from 'lucide-react';
 
 const ELEMENTS = [
@@ -393,7 +391,6 @@ export default function MolecularDrawer({ onStructureGenerated }) {
 
       const neighbors = adj[u] || [];
       const unvisited = [];
-      const backEdges = [];
 
       neighbors.forEach(({ target, order }) => {
         if (target === parent) return;

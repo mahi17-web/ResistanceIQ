@@ -325,21 +325,29 @@ def create_forecast_job(
     molecule = None
     if payload.molecule_id:
         molecule = db.query(Molecule).filter(Molecule.id == payload.molecule_id).first()
-    if not molecule:
+        if not molecule:
+            raise make_pipeline_error(
+                error_code="MOLECULE_NOT_FOUND",
+                stage="ENTITY_RESOLUTION",
+                request_id=req_id,
+                message=f"Candidate molecule '{payload.molecule_id}' is unavailable or not found.",
+                status_code=status.HTTP_404_NOT_FOUND,
+            )
+    else:
         molecule = db.query(Molecule).order_by(Molecule.id.desc()).first()
-    if not molecule:
-        molecule = Molecule(
-            id=payload.molecule_id or f"mol_{uuid.uuid4().hex[:8]}",
-            chemical_name="Imidacloprid",
-            smiles="C1CN(C(=N[N+](=O)[O-])N1)CC2=CN=C(C=C2)Cl",
-            molecular_weight=255.66,
-            logp=0.57,
-            pubchem_cid=86287518,
-            provenance_source="PUBCHEM",
-            standardization_status="STANDARDIZED",
-        )
-        db.add(molecule)
-        db.flush()
+        if not molecule:
+            molecule = Molecule(
+                id=f"mol_{uuid.uuid4().hex[:8]}",
+                chemical_name="Imidacloprid",
+                smiles="C1CN(C(=N[N+](=O)[O-])N1)CC2=CN=C(C=C2)Cl",
+                molecular_weight=255.66,
+                logp=0.57,
+                pubchem_cid=86287518,
+                provenance_source="PUBCHEM",
+                standardization_status="STANDARDIZED",
+            )
+            db.add(molecule)
+            db.flush()
 
     # Resolve Biological Target
     target = None
@@ -349,23 +357,29 @@ def create_forecast_job(
             target = db.query(Target).filter(Target.uniprot_id == payload.target_id).first()
         if not target:
             target = db.query(Target).filter(Target.name.ilike(f"%{payload.target_id}%")).first()
-
-    if not target:
+        if not target:
+            raise make_pipeline_error(
+                error_code="TARGET_NOT_FOUND",
+                stage="ENTITY_RESOLUTION",
+                request_id=req_id,
+                message=f"Biological target '{payload.target_id}' is unavailable or not found.",
+                status_code=status.HTTP_404_NOT_FOUND,
+            )
+    else:
         target = db.query(Target).first()
-
-    if not target:
-        target = Target(
-            id=payload.target_id or "tgt_ache1_pest_01",
-            name="Acetylcholinesterase-1 (AChE1)",
-            gene_name="ace-1",
-            uniprot_id="Q96303",
-            organism="Myzus persicae",
-            organism_id="pst_aphid_01",
-            irac_moa_group="1A/1B",
-            moa_group="1A/1B",
-        )
-        db.add(target)
-        db.flush()
+        if not target:
+            target = Target(
+                id="tgt_ache1_pest_01",
+                name="Acetylcholinesterase-1 (AChE1)",
+                gene_name="ace-1",
+                uniprot_id="Q96303",
+                organism="Myzus persicae",
+                organism_id="pst_aphid_01",
+                irac_moa_group="1A/1B",
+                moa_group="1A/1B",
+            )
+            db.add(target)
+            db.flush()
 
     # Resolve Pest Organism
     pest = None
@@ -381,21 +395,27 @@ def create_forecast_job(
             ).first()
             if ct:
                 pest = db.query(Pest).filter(Pest.species_name.ilike(ct.organism_name)).first()
-
-    if not pest:
+        if not pest:
+            raise make_pipeline_error(
+                error_code="PEST_NOT_FOUND",
+                stage="ENTITY_RESOLUTION",
+                request_id=req_id,
+                message=f"Pest organism '{payload.pest_id}' is unavailable or not found.",
+                status_code=status.HTTP_404_NOT_FOUND,
+            )
+    else:
         pest = db.query(Pest).first()
-
-    if not pest:
-        pest = Pest(
-            id=payload.pest_id or "pst_aphid_01",
-            common_name="Green Peach Aphid",
-            species_name="Myzus persicae",
-            generation_time_days=10,
-            typical_population_size=50000000,
-            baseline_mutation_rate=2.5e-8,
-        )
-        db.add(pest)
-        db.flush()
+        if not pest:
+            pest = Pest(
+                id="pst_aphid_01",
+                common_name="Green Peach Aphid",
+                species_name="Myzus persicae",
+                generation_time_days=10,
+                typical_population_size=50000000,
+                baseline_mutation_rate=2.5e-8,
+            )
+            db.add(pest)
+            db.flush()
 
     # Determine Dynamic Biological & Agronomic Parameters
     moa_group = target.irac_moa_group or "4A"

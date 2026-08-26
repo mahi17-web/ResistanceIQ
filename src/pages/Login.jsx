@@ -94,7 +94,7 @@ export default function Login() {
     try {
       const res = await forgotPassword(forgotEmail.trim());
       setForgotSuccess(res?.message || 'Password reset instructions dispatched.');
-    } catch (err) {
+    } catch {
       setForgotSuccess('If an active account exists, password reset instructions have been dispatched.');
     } finally {
       setForgotLoading(false);
